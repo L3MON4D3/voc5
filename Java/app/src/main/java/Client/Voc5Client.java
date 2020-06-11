@@ -1,6 +1,8 @@
+package com.L3MON4D3.voc5;
+
 import okhttp3.Request;
 
-public class Client {
+public class Voc5Client {
     private String servername;
     private String email;
     private String password;
@@ -11,7 +13,7 @@ public class Client {
      * @param email E-Mail of registered user.
      * @param password Users Password.
      */
-    public Client(String servername, String email, String password) {
+    public Voc5Client(String servername, String email, String password) {
         this.servername = servername;
         this.email = email ;
         this.password = password;
@@ -22,7 +24,7 @@ public class Client {
      * @param email E-Mail of registered user.
      * @param password Users Password.
      */
-    public Client(String email, String password) {
+    public Voc5Client(String email, String password) {
         this("https://api.voc5.org", email, password);
     }
 
