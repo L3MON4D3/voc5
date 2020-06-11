@@ -23,14 +23,6 @@ public class LoginActivity extends AppCompatActivity {
     private EditText emailET;
     private EditText pwdET;
 
-    private View.OnClickListener loginListener = new View.OnClickListener() {
-        public void onClick(View v) {
-            vClient = new Voc5Client(
-                emailET.getText().toString(), pwdET.getText().toString());
-            okClient.newCall(vClient.loginRqst()).enqueue(loginCallback);
-        }
-    };
-
     private Callback loginCallback = new Callback() {
         public void onFailure(Call call, IOException e) {
             Log.e("voc5:", "not successful:"+e.getMessage());
@@ -49,6 +41,21 @@ public class LoginActivity extends AppCompatActivity {
         emailET = findViewById(R.id.usr_et);
         pwdET = findViewById(R.id.pwd_et);
 
-        findViewById(R.id.login_btn).setOnClickListener(loginListener);
+        findViewById(R.id.login_btn).setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                logIn();
+            }
+        });
+    }
+
+    /**
+     * Attempts to log in User using Credentials from EditTexts usr_et, pwd_et.
+     */
+    public void logIn() {
+        vClient = new Voc5Client(
+            emailET.getText().toString(),
+            pwdET.getText().toString() );
+
+        okClient.newCall(vClient.loginRqst()).enqueue(loginCallback);
     }
 }
