@@ -42,5 +42,11 @@
             android:text="Login" 
             android:layout_gravity="center" />
         
+        <CheckBox
+            android:id="@+id/rmbr_cbx"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Remember me" />
+
     </LinearLayout>
 </GridLayout>

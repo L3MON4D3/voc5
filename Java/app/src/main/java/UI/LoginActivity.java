@@ -9,9 +9,12 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import android.util.Log;
+import android.content.SharedPreferences;
+import android.content.Context;
 
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.CheckBox;
 import android.view.View;
 
 import java.io.IOException;
@@ -22,6 +25,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText emailET;
     private EditText pwdET;
+    private CheckBox rememberBox;
 
     private Callback loginCallback = new Callback() {
         public void onFailure(Call call, IOException e) {
@@ -40,6 +44,9 @@ public class LoginActivity extends AppCompatActivity {
 
         emailET = findViewById(R.id.usr_et);
         pwdET = findViewById(R.id.pwd_et);
+        rememberBox = findViewById(R.id.rmbr_cbx);
+
+        loadPreferences();
 
         findViewById(R.id.login_btn).setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -57,5 +64,56 @@ public class LoginActivity extends AppCompatActivity {
             pwdET.getText().toString() );
 
         okClient.newCall(vClient.loginRqst()).enqueue(loginCallback);
+        saveLogin();
+    }
+
+    /**
+     * Load Preferences from Disk.
+     */
+    public void loadPreferences() {
+        SharedPreferences prefs = this.getPreferences(Context.MODE_PRIVATE);
+        boolean checked = prefs.getBoolean("rememberBox", false);
+        rememberBox.setChecked(checked);
+        if (checked) {
+            //if values are not found, use empty String.
+            emailET.setText(prefs.getString("email", ""));
+            pwdET.setText(prefs.getString("password", ""));
+        }
+    }
+
+    /**
+     * Save Login-data to Disk if "Remember Me"-Button is checked.
+     */
+    public void saveLogin() {
+        SharedPreferences prefs = this.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor ed = prefs.edit();
+        boolean checked = rememberBox.isChecked();
+        if (checked) {
+            ed.putString("email", emailET.getText().toString());
+            ed.putString("password", pwdET.getText().toString());
+        } else {
+            ed.remove("email");
+            ed.remove("password");
+        }
+        ed.apply();
+    }
+
+    /**
+     * Write Status of "Remember Me"-Button in Preferences.
+     */
+    public void saveRememberStatus() {
+        SharedPreferences prefs = this.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor ed = prefs.edit();
+        boolean checked = rememberBox.isChecked();
+        ed.putBoolean("rememberBox", checked);
+        ed.apply();
+    }
+
+    /**
+     * Save whether "Remember Me"-Button is checked.
+     */
+    public void onStop() {
+        saveRememberStatus();
+        super.onStop();
     }
 }
