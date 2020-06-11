@@ -17,13 +17,13 @@ import android.view.View;
 import java.io.IOException;
 
 public class Login extends AppCompatActivity {
-    Voc5Client vClient;
-    OkHttpClient okClient = new OkHttpClient();
+    private Voc5Client vClient;
+    private OkHttpClient okClient = new OkHttpClient();
 
-    EditText emailET;
-    EditText pwdET;
+    private EditText emailET;
+    private EditText pwdET;
 
-    View.OnClickListener loginListener = new View.OnClickListener() {
+    private View.OnClickListener loginListener = new View.OnClickListener() {
         public void onClick(View v) {
             vClient = new Voc5Client(
                 emailET.getText().toString(), pwdET.getText().toString());
@@ -31,7 +31,7 @@ public class Login extends AppCompatActivity {
         }
     };
 
-    Callback loginCallback = new Callback() {
+    private Callback loginCallback = new Callback() {
         public void onFailure(Call call, IOException e) {
             Log.e("voc5:", "not successful:"+e.getMessage());
         }
