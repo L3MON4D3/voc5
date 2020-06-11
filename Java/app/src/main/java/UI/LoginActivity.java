@@ -16,7 +16,7 @@ import android.view.View;
 
 import java.io.IOException;
 
-public class Login extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
     private Voc5Client vClient;
     private OkHttpClient okClient = new OkHttpClient();
 
