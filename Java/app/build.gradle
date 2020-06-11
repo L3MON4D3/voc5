@@ -32,6 +32,7 @@ dependencies {
     def appcompat_version = "1.1.0"
     implementation "androidx.appcompat:appcompat:$appcompat_version"
     implementation "androidx.appcompat:appcompat-resources:$appcompat_version"
+    implementation("com.squareup.okhttp3:okhttp:4.7.2")
 }
 
 task run(type: Exec) {
