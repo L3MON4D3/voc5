@@ -12,7 +12,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="User" >
+            android:hint="E-Mail" >
 
             <EditText
                 android:id="@+id/usr_et"
@@ -34,5 +34,13 @@
                 android:layout_height="wrap_content" />
 
         </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/login_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Login" 
+            android:layout_gravity="center" />
+        
     </LinearLayout>
 </GridLayout>
