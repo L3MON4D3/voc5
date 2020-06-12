@@ -25,6 +25,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText emailET;
     private EditText pwdET;
+    private EditText serverET;
     private CheckBox rememberBox;
 
     private Callback loginCallback = new Callback() {
@@ -44,6 +45,7 @@ public class LoginActivity extends AppCompatActivity {
 
         emailET = findViewById(R.id.usr_et);
         pwdET = findViewById(R.id.pwd_et);
+        serverET = findViewById(R.id.server_et);
         rememberBox = findViewById(R.id.rmbr_cbx);
 
         loadPreferences();
@@ -60,6 +62,7 @@ public class LoginActivity extends AppCompatActivity {
      */
     public void logIn() {
         vClient = new Voc5Client(
+            serverET.getText().toString(),
             emailET.getText().toString(),
             pwdET.getText().toString() );
 
@@ -78,11 +81,12 @@ public class LoginActivity extends AppCompatActivity {
             //if values are not found, use empty String.
             emailET.setText(prefs.getString("email", ""));
             pwdET.setText(prefs.getString("password", ""));
+            serverET.setText(prefs.getString("server", "https://api.voc5.org"));
         }
     }
 
     /**
-     * Save Login-data to Disk if "Remember Me"-Button is checked.
+     * Save Login-data and Server to Disk if "Remember Me"-Button is checked.
      */
     public void saveLogin() {
         SharedPreferences prefs = this.getPreferences(Context.MODE_PRIVATE);
@@ -91,9 +95,11 @@ public class LoginActivity extends AppCompatActivity {
         if (checked) {
             ed.putString("email", emailET.getText().toString());
             ed.putString("password", pwdET.getText().toString());
+            ed.putString("server", serverET.getText().toString());
         } else {
             ed.remove("email");
             ed.remove("password");
+            ed.remove("server");
         }
         ed.apply();
     }
