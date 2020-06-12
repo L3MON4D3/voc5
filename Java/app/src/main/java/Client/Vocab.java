@@ -1,3 +1,5 @@
+package com.L3MON4D3.voc5;
+
 public class Vocab {
     private int id;
     private String answer;
@@ -10,4 +12,7 @@ public class Vocab {
      * newVocabRqst in Voc5Client, as id's are only assigned by the Server.
      */
     public Vocab() { }
+
+
+    public int getId() { return id; }
 }

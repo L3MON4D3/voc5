@@ -4,8 +4,16 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.MediaType;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 public class Voc5Client {
     private static final MediaType JSON = MediaType.get("application/json; charset=utf-8");
+
+    private static Gson gson = new GsonBuilder()
+    .serializeNulls()
+    .setPrettyPrinting().create();
+
 
     private String servername;
     private String email;
@@ -79,6 +87,19 @@ public class Voc5Client {
 
         return newRqstBdr("/vocab")
             .post(body)
+            .build();
+    }
+
+    /**
+     * Send Changed Vocab to Server.
+     * @param voc Vocab with changed fields.
+     * @return Request to execute.
+     */
+    public Request updateVocRqst(Vocab voc) {
+        RequestBody body = RequestBody.create(gson.toJson(voc), JSON);
+
+        return newRqstBdr("/voc/"+voc.getId())
+            .patch(body)
             .build();
     }
 }
