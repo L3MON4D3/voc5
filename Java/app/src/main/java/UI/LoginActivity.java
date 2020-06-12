@@ -15,6 +15,7 @@ import android.content.Context;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.CheckBox;
+import android.widget.Toast;
 import android.view.View;
 
 import java.io.IOException;
@@ -28,6 +29,9 @@ public class LoginActivity extends AppCompatActivity {
     private EditText serverET;
     private CheckBox rememberBox;
 
+    private Toast registerSuccessToast;
+    private Toast registerFailToast;
+
     private Callback loginCallback = new Callback() {
         public void onFailure(Call call, IOException e) {
             Log.e("voc5:", "not successful:"+e.getMessage());
@@ -35,6 +39,19 @@ public class LoginActivity extends AppCompatActivity {
 
         public void onResponse(Call call, Response res) throws IOException {
             Log.e("voc5:", res.body().string());
+        }
+    };
+
+    private Callback registerCallback = new Callback() {
+        public void onFailure(Call call, IOException e) {
+            Log.e("voc5:", "not successful:"+e.getMessage());
+        }
+
+        public void onResponse(Call call, Response res) throws IOException {
+            if (!res.isSuccessful())
+                registerFailToast.show();
+            else
+                registerSuccessToast.show();
         }
     };
 
@@ -48,26 +65,49 @@ public class LoginActivity extends AppCompatActivity {
         serverET = findViewById(R.id.server_et);
         rememberBox = findViewById(R.id.rmbr_cbx);
 
+        registerSuccessToast = Toast.makeText(this, "Register Successful", Toast.LENGTH_SHORT);
+        registerFailToast = Toast.makeText(this, "Couldn't register!", Toast.LENGTH_LONG);
+
         loadPreferences();
 
         findViewById(R.id.login_btn).setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                logIn();
+                logIn(false);
+            }
+        });
+
+        findViewById(R.id.register_btn).setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                logIn(true);
             }
         });
     }
 
     /**
-     * Attempts to log in User using Credentials from EditTexts usr_et, pwd_et.
+     * As LogIn and Register do essentially the same thing, this method does both
+     * and functionality can be switched using bool register.
+     * @param register if true, attempts to register user, if false logs in user.
      */
-    public void logIn() {
+    public void logIn(boolean register) {
         vClient = new Voc5Client(
             serverET.getText().toString(),
             emailET.getText().toString(),
             pwdET.getText().toString() );
 
-        okClient.newCall(vClient.loginRqst()).enqueue(loginCallback);
+        if (!register) {
+            okClient.newCall(vClient.loginRqst()).enqueue(loginCallback);
+        } else {
+            okClient.newCall(vClient.registerRqst()).enqueue(registerCallback);
+        }
         saveLogin();
+        openMainMenu();
+    }
+
+    /**
+     * Open Main Menu once user is logged in. CURRENTLY DOES NOTHING!!
+     */
+    public void openMainMenu() {
+         
     }
 
     /**
@@ -118,7 +158,7 @@ public class LoginActivity extends AppCompatActivity {
     /**
      * Save whether "Remember Me"-Button is checked.
      */
-    public void onStop() {
+    protected void onStop() {
         saveRememberStatus();
         super.onStop();
     }

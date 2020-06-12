@@ -1,3 +1,4 @@
 build/
 .gradle/
 .vProj.vim
+tags

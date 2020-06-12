@@ -1,8 +1,12 @@
 package com.L3MON4D3.voc5;
 
 import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.MediaType;
 
 public class Voc5Client {
+    private static final MediaType JSON = MediaType.get("application/json; charset=utf-8");
+
     private String servername;
     private String email;
     private String password;
@@ -47,5 +51,18 @@ public class Voc5Client {
      */
     public Request loginRqst() {
         return newRqstBdr("/login").build();
+    }
+
+    /**
+     * Build Register-Request.
+     * @return Register-Request.
+     */
+    public Request registerRqst() {
+        RequestBody body = RequestBody.create(
+            "{\"email\":\""+email+"\", \"password\":\""+password+"\"}", JSON);
+
+        return newRqstBdr("/register")
+            .post(body)
+            .build();
     }
 }
