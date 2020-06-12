@@ -65,4 +65,20 @@ public class Voc5Client {
             .post(body)
             .build();
     }
+
+    /**
+     * Build Request to create a new Vocabulary.
+     * @param question Word in language A.
+     * @param answer Translation to language B.
+     * @param lang Name/Code of language B (EN,GER,...).
+     * @return Request that can be executed.
+     */
+    public Request newVocabRqst(String question, String answer, String lang) {
+        RequestBody body = RequestBody.create(
+            "{\"question\":\""+question+"\", \"answer\":\""+answer+"\", \"language\":\""+lang+"\"}", JSON);
+
+        return newRqstBdr("/vocab")
+            .post(body)
+            .build();
+    }
 }
