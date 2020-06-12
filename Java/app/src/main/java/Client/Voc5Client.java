@@ -83,7 +83,9 @@ public class Voc5Client {
      */
     public Request newVocabRqst(String question, String answer, String lang) {
         RequestBody body = RequestBody.create(
-            "{\"question\":\""+question+"\", \"answer\":\""+answer+"\", \"language\":\""+lang+"\"}", JSON);
+            "{\"question\":\""+question+"\", "
+            +"\"answer\":\""+answer+"\", "
+            +"\"language\":\""+lang+"\"}", JSON);
 
         return newRqstBdr("/vocab")
             .post(body)
