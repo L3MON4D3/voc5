@@ -22,7 +22,7 @@ import java.io.IOException;
 
 public class LoginActivity extends AppCompatActivity {
     private Voc5Client vClient;
-    private OkHttpClient okClient = new OkHttpClient();
+    private OkHttpClient okClient;
 
     private EditText emailET;
     private EditText pwdET;
@@ -93,6 +93,8 @@ public class LoginActivity extends AppCompatActivity {
             serverET.getText().toString(),
             emailET.getText().toString(),
             pwdET.getText().toString() );
+
+        okClient = vClient.getOkClient();
 
         if (!register) {
             okClient.newCall(vClient.loginRqst()).enqueue(loginCallback);
