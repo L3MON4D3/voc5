@@ -4,9 +4,17 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
+import okhttp3.Callback;
+import okhttp3.Call;
+import okhttp3.Response;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+import java.lang.reflect.Type;
+
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class Voc5Client {
     private static final MediaType JSON = MediaType.get("application/json; charset=utf-8");
@@ -15,10 +23,13 @@ public class Voc5Client {
     private static Gson gson = new GsonBuilder()
     .serializeNulls()
     .setPrettyPrinting().create();
+    private static final Type vocListType = new TypeToken<ArrayList<Vocab>>(){}.getType();
 
     private String servername;
     private String email;
     private String password;
+
+    private ArrayList<Vocab> vocabs;
 
     /**
      * Construct new Client using supplied login-Credentials.
@@ -106,5 +117,31 @@ public class Voc5Client {
         return newRqstBdr("/voc/"+voc.getId())
             .patch(body)
             .build();
+    }
+
+    /**
+     * Get Request to get all Vocabs as JSON from Server.
+     * @return Request to "download" all Vocabs.
+     */
+    public Request getVocsRqst() {
+        return newRqstBdr("/voc").build();
+    }
+
+    /**
+     * Download Vocab from Server and save them in vocabs. Execute rnble after
+     * successfully Downloading Vocabs.
+     * @param rnble Runnable, will be executed after vocabs has been populated.
+     * Can be null, in that case nothing will be executed.
+     */
+    public void getVocs(Runnable rnble) {
+        okClient.newCall(getVocsRqst()).enqueue(new Callback() {
+            public void onFailure(Call call, IOException e) { }
+
+            public void onResponse(Call call, Response res) throws IOException {
+                vocabs = gson.fromJson(res.body().string(), vocListType);
+                if (rnble != null)
+                    rnble.run();
+            }
+        });
     }
 }
