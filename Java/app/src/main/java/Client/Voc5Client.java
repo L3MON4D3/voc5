@@ -3,9 +3,11 @@ package com.L3MON4D3.voc5;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
 
 public class Voc5Client {
     private static final MediaType JSON = MediaType.get("application/json; charset=utf-8");
+    public static final OkHttpClient okClient = new OkHttpClient();
 
     private String servername;
     private String email;
@@ -22,6 +24,8 @@ public class Voc5Client {
         this.email = email ;
         this.password = password;
     }
+
+    public OkHttpClient getOkClient() { return okClient; }
 
     /**
      * Construct new Client using supplied login-Credentials.
