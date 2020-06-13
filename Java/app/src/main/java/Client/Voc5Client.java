@@ -3,7 +3,7 @@ package com.L3MON4D3.voc5;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.MediaType;
-import okhttp3.Client;
+import okhttp3.OkHttpClient;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -15,7 +15,6 @@ public class Voc5Client {
     private static Gson gson = new GsonBuilder()
     .serializeNulls()
     .setPrettyPrinting().create();
-
 
     private String servername;
     private String email;
