@@ -21,8 +21,9 @@ public class Voc5Client {
     public static final OkHttpClient okClient = new OkHttpClient();
 
     private static Gson gson = new GsonBuilder()
-    .serializeNulls()
-    .setPrettyPrinting().create();
+        .serializeNulls()
+        .setPrettyPrinting().create();
+
     private static final Type vocListType = new TypeToken<ArrayList<Vocab>>(){}.getType();
 
     private String servername;
