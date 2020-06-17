@@ -1,11 +1,13 @@
 package com.L3MON4D3.voc5;
 
+import android.os.Parcelable;
+import android.os.Parcel;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 
-public class Voc5Client {
+public class Voc5Client implements Parcelable {
     private static final MediaType JSON = MediaType.get("application/json; charset=utf-8");
     public static final OkHttpClient okClient = new OkHttpClient();
 
@@ -69,4 +71,43 @@ public class Voc5Client {
             .post(body)
             .build();
     }
+
+    //Begin Parcelable implementation.
+        /**
+         * Dummy function.
+         * @return 0, always.
+         */
+        public int describeContents() {
+            return 0;   
+        }
+
+        /**
+         * Write user, email and server to Parcel.
+         * @param out Parcel.
+         * @param Flags Flags, doesnt do anything right now.
+         */
+        public void writeToParcel(Parcel out, int Flags) {
+            out.writeString(servername);
+            out.writeString(email);
+            out.writeString(password);
+        }
+
+        public static final Parcelable.Creator<Voc5Client> CREATOR = 
+            new Parcelable.Creator<Voc5Client>() {
+
+                public Voc5Client createFromParcel(Parcel in) {
+                    return new Voc5Client(in);  
+                }
+
+                public Voc5Client[] newArray(int size) {
+                    return new Voc5Client[size];
+                }
+            };
+
+        private Voc5Client(Parcel in) {
+            servername = in.readString();
+            email = in.readString();
+            password = in.readString();
+        }
+    //End Parcelable implementation.
 }
