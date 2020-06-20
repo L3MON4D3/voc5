@@ -35,10 +35,9 @@ dependencies {
     implementation "androidx.cardview:cardview:1.0.0"
     implementation("com.squareup.okhttp3:okhttp:4.7.2")
     implementation 'com.google.android.material:material:1.2.0-beta01'
+    implementation 'com.google.code.gson:gson:2.8.6'
 }
 
 task run(type: Exec) {
-    if (!project.hasProperty('RUN_ACTIVITY'))
-        RUN_ACTIVITY=DEFAULT_ACTIVITY
     commandLine 'adb', 'shell', 'am' ,'start', ANDROID_APP_ID + '/' + RUN_ACTIVITY
 }
