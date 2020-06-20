@@ -32,12 +32,13 @@ dependencies {
     def appcompat_version = "1.1.0"
     implementation "androidx.appcompat:appcompat:$appcompat_version"
     implementation "androidx.appcompat:appcompat-resources:$appcompat_version"
+    implementation "androidx.cardview:cardview:1.0.0"
     implementation("com.squareup.okhttp3:okhttp:4.7.2")
     implementation 'com.google.android.material:material:1.2.0-beta01'
 }
 
 task run(type: Exec) {
-    if (project.hasProperty('RUN_ACTIVITY'))
+    if (!project.hasProperty('RUN_ACTIVITY'))
         RUN_ACTIVITY=DEFAULT_ACTIVITY
     commandLine 'adb', 'shell', 'am' ,'start', ANDROID_APP_ID + '/' + RUN_ACTIVITY
 }
