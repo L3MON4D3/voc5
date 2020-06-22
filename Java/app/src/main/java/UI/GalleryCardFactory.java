@@ -25,7 +25,9 @@ public class GalleryCardFactory {
      */
     public GalleryCard newCard(Vocab voc) {
         GalleryCard gc = (GalleryCard) inf.inflate(R.layout.gallery_card, parent, false);
-        ((TextView) gc.getChildAt(0)).setText("meintext");
+        gc.setVoc(voc);
+        ((TextView) gc.getChildAt(0)).setText(voc.getQuestion());
+        ((TextView) gc.getChildAt(1)).setText(voc.getLanguage());
         return gc;
     }
 }

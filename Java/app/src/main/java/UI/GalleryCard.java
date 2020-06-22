@@ -12,4 +12,6 @@ public class GalleryCard extends CardView {
     public GalleryCard(Context con, AttributeSet attrs) {
         super(con, attrs);
     }
+
+    public void setVoc(Vocab voc) { this.voc = voc ; }
 }
