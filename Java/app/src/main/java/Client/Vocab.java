@@ -25,6 +25,8 @@ public class Vocab {
         this.language = language;
     }
 
-
     public int getId() { return id; }
+    public String getAnswer() { return answer; }
+    public String getQuestion() { return question; }
+    public String getLanguage() { return language; }
 }
