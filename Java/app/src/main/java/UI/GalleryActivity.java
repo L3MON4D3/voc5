@@ -13,9 +13,9 @@ public class GalleryActivity extends VocActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gallery);
-        GalleryCard.inf = getLayoutInflater();
 
         gl = findViewById(R.id.gall_lt);
-        gl.addView(GalleryCard.newCard(new Vocab("Apple", "Apfel", "EN")), 0);
+        GalleryCardFactory gcf = new GalleryCardFactory(getLayoutInflater(), gl);
+        gl.addView(gcf.newCard(new Vocab("Apple", "Apfel", "EN")), 0);
     }
 }
