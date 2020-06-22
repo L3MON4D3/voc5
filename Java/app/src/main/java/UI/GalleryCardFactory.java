@@ -4,18 +4,22 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import android.util.Log;
+
 public class GalleryCardFactory {
     private LayoutInflater inf;
     private ViewGroup parent;
+    private int cardWidth;
 
     /**
      * Creates new GalleryCardFactory.
      * @param inf LayoutInflater, get with getLayoutInflater().
      * @param parent ViewGroup the Card will be added to.
      */
-    public GalleryCardFactory(LayoutInflater inf, ViewGroup parent) {
+    public GalleryCardFactory(LayoutInflater inf, ViewGroup parent, int cardWidth) {
         this.inf = inf;
         this.parent = parent;
+        this.cardWidth = cardWidth;
     }
 
     /**
@@ -26,6 +30,7 @@ public class GalleryCardFactory {
     public GalleryCard newCard(Vocab voc) {
         GalleryCard gc = (GalleryCard) inf.inflate(R.layout.gallery_card, parent, false);
         gc.setVoc(voc);
+        gc.getLayoutParams().width = cardWidth;
         ((TextView) gc.getChildAt(0)).setText(voc.getQuestion());
         ((TextView) gc.getChildAt(1)).setText(voc.getLanguage());
         return gc;

@@ -15,8 +15,8 @@ public class VocActivity extends AppCompatActivity {
         if (ex != null) {
             client = ex.getParcelable("client");
             if (client == null)
-                client = new Voc5Client("https://api.voc5.org","test1@example.com","foo");
+                client = new Voc5Client("https://api.voc5.org","l3mon@4d3.org","foo");
         } else
-            client = new Voc5Client("https://api.voc5.org","test1@example.com","foo");
+            client = new Voc5Client("https://api.voc5.org","l3mon@4d3.org","foo");
     }
 }
