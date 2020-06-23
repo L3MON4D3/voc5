@@ -46,6 +46,12 @@ public class Voc5Client implements Parcelable {
         this.password = password;
     }
 
+    /**
+     * Returns only username of email address(foobar@example returns only foobar)
+     * @return String User
+     */
+    public String getUser(){ return this.email.split("@")[0]; }
+
     public OkHttpClient getOkClient() { return okClient; }
     public ArrayList<Vocab> getVocabs() { return vocabs; }
 

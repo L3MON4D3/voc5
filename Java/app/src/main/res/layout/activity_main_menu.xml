@@ -5,9 +5,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
     android:layout_gravity="center"
-    >
+    android:orientation="vertical">
+
     <TextView
         android:id="@+id/introText"
         android:layout_width="wrap_content"
@@ -18,50 +18,37 @@
         />
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_gravity="center"
+        android:orientation="vertical">
 
-        >
-
-            <Button
-            android:id="@+id/button1"
-            android:layout_width="wrap_content"
+        <Button
+            android:id="@+id/learnBtn"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="80dp"
-            android:text="Button1"
-            android:textSize="30dp"
-            />
+            android:text="learnBtn"
+            android:textAllCaps="false"
+            android:textSize="30dp" />
 
         <Button
-            android:id="@+id/button2"
-            android:layout_width="wrap_content"
+            android:id="@+id/galleryBtn"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
-            android:text="Button2"
-            android:textSize="30dp"
-            />
+            android:text="galleryBtn"
+            android:textAllCaps="false"
+            android:textSize="30dp" />
 
         <Button
-            android:id="@+id/button3"
-            android:layout_width="wrap_content"
+            android:id="@+id/newVocBtn"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
-            android:text="Button2"
-            android:textSize="30dp"
-           />
-
-        <Button
-            android:id="@+id/button4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:text="Button4"
-            android:textSize="30dp"
-            />
-
-
+            android:text="newVoc"
+            android:textAllCaps="false"
+            android:textSize="30dp" />
 
     </LinearLayout>
 </LinearLayout>
