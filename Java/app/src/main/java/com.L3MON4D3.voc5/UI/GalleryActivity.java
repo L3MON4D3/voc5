@@ -1,4 +1,4 @@
-package com.L3MON4D3.voc5;
+package com.L3MON4D3.voc5.UI;
 
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +11,10 @@ import android.view.ViewGroup;
 import android.widget.GridLayout;
 
 import java.util.ArrayList;
+
+import com.L3MON4D3.voc5.Client.*;
+import com.L3MON4D3.voc5.R;
+
 
 public class GalleryActivity extends VocActivity {
     private GridLayout gallery;

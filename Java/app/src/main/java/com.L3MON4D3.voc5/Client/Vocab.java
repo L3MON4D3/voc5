@@ -1,4 +1,4 @@
-package com.L3MON4D3.voc5;
+package com.L3MON4D3.voc5.Client;
 
 public class Vocab {
     private int id;

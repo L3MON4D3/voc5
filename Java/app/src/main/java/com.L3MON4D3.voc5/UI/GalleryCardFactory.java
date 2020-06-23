@@ -1,10 +1,13 @@
-package com.L3MON4D3.voc5;
+package com.L3MON4D3.voc5.UI;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import android.util.Log;
+
+import com.L3MON4D3.voc5.Client.Vocab;
+import com.L3MON4D3.voc5.R;
 
 public class GalleryCardFactory {
     private LayoutInflater inf;

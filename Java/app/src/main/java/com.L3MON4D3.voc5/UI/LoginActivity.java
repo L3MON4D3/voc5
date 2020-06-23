@@ -1,4 +1,4 @@
-package com.L3MON4D3.voc5;
+package com.L3MON4D3.voc5.UI;
 
 
 import okhttp3.OkHttpClient;
@@ -21,6 +21,8 @@ import android.widget.Toast;
 import android.view.View;
 
 
+import com.L3MON4D3.voc5.Client.Voc5Client;
+import com.L3MON4D3.voc5.R;
 
 import java.io.IOException;
 
@@ -114,7 +116,7 @@ public class LoginActivity extends AppCompatActivity {
      */
     public void openMainMenu() {
          Intent menuIntent = new Intent(getApplicationContext(), MainMenuActivity.class);
-         menuIntent.putExtra("com.L3MON4D3.voc5.USER",emailET.toString());
+         menuIntent.putExtra("com.L3MON4D3.voc.UI.USER",emailET.toString());
          startActivity(menuIntent);
     }
 
