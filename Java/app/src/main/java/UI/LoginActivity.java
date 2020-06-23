@@ -1,10 +1,12 @@
-package com.L3MON4D3.voc5;
+package com.lemonade.voc5;
 
+import UI.MainMenuActivity;
 import okhttp3.OkHttpClient;
 import okhttp3.Callback;
 import okhttp3.Call;
 import okhttp3.Response;
 
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -18,10 +20,12 @@ import android.widget.CheckBox;
 import android.widget.Toast;
 import android.view.View;
 
+import com.lemonade.voc5.R;
+
 import java.io.IOException;
 
 public class LoginActivity extends AppCompatActivity {
-    private Voc5Client vClient;
+    private com.lemonade.voc5.Voc5Client vClient;
     private OkHttpClient okClient;
 
     private EditText emailET;
@@ -89,7 +93,7 @@ public class LoginActivity extends AppCompatActivity {
      * @param register if true, attempts to register user, if false logs in user.
      */
     public void logIn(boolean register) {
-        vClient = new Voc5Client(
+        vClient = new com.lemonade.voc5.Voc5Client(
             serverET.getText().toString(),
             emailET.getText().toString(),
             pwdET.getText().toString() );
@@ -109,7 +113,9 @@ public class LoginActivity extends AppCompatActivity {
      * Open Main Menu once user is logged in. CURRENTLY DOES NOTHING!!
      */
     public void openMainMenu() {
-         
+         Intent menuIntent = new Intent(getApplicationContext(), MainMenuActivity.class);
+         menuIntent.putExtra("com.L3MON4D3.voc5.USER",emailET.toString());
+         startActivity(menuIntent);
     }
 
     /**
