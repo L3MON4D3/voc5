@@ -47,6 +47,7 @@ public class Voc5Client implements Parcelable {
     }
 
     public OkHttpClient getOkClient() { return okClient; }
+    public ArrayList<Vocab> getVocabs() { return vocabs; }
 
     /**
      * Construct new Client using supplied login-Credentials.
@@ -175,7 +176,7 @@ public class Voc5Client implements Parcelable {
      * @param rnble Runnable, will be executed after vocabs has been populated.
      * Can be null, in that case nothing will be executed.
      */
-    public void getVocs(Runnable rnble) {
+    public void loadVocs(Runnable rnble) {
         okClient.newCall(getVocsRqst()).enqueue(new Callback() {
             public void onFailure(Call call, IOException e) { }
 

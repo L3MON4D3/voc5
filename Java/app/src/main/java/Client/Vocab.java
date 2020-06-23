@@ -13,6 +13,29 @@ public class Vocab {
      */
     public Vocab() { }
 
+    /**
+     * Create new Vocab, ONLY USE FOR TESTING.
+     * @param answer 
+     * @param question 
+     * @param language 
+     */
+    public Vocab(String answer, String question, String language) {
+        this.answer = answer;
+        this.question = question;
+        this.language = language;
+    }
 
     public int getId() { return id; }
+    public String getAnswer() { return answer; }
+    public String getQuestion() { return question; }
+    public String getLanguage() { return language; }
+
+    /**
+     * Get Object as String.
+     * @return String as follows: "id:__\nanswer:__\nquestion:__\nlanguage:__\n"
+     */
+    public String toString() {
+        return String.format("id: %s%nanswer: %s%nquestion: %s%nlanguage: %s%n",
+            id, answer, question, language);
+    }
 }

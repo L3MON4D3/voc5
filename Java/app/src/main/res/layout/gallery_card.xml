@@ -1,0 +1,27 @@
+<com.L3MON4D3.voc5.GalleryCard
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="175dp"
+    android:layout_height="80dp"
+    android:layout_margin="5dp" >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center | center"
+        android:textSize="16dp"
+        android:typeface="serif"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="20dp"
+        android:gravity="center" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="8dp"
+        android:layout_gravity="bottom | right"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="5dp" />
+
+</com.L3MON4D3.voc5.GalleryCard>
