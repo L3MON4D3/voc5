@@ -1,6 +1,6 @@
-package com.lemonade.voc5;
+package com.L3MON4D3.voc5;
 
-import UI.MainMenuActivity;
+
 import okhttp3.OkHttpClient;
 import okhttp3.Callback;
 import okhttp3.Call;
@@ -9,23 +9,23 @@ import okhttp3.Response;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
+
 import android.util.Log;
 import android.content.SharedPreferences;
 import android.content.Context;
 
-import android.widget.Button;
+
 import android.widget.EditText;
 import android.widget.CheckBox;
 import android.widget.Toast;
 import android.view.View;
 
-import com.lemonade.voc5.R;
+
 
 import java.io.IOException;
 
 public class LoginActivity extends AppCompatActivity {
-    private com.lemonade.voc5.Voc5Client vClient;
+    private Voc5Client vClient;
     private OkHttpClient okClient;
 
     private EditText emailET;
@@ -93,7 +93,7 @@ public class LoginActivity extends AppCompatActivity {
      * @param register if true, attempts to register user, if false logs in user.
      */
     public void logIn(boolean register) {
-        vClient = new com.lemonade.voc5.Voc5Client(
+        vClient = new Voc5Client(
             serverET.getText().toString(),
             emailET.getText().toString(),
             pwdET.getText().toString() );

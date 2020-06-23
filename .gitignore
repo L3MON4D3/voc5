@@ -2,3 +2,7 @@ build/
 .gradle/
 .vProj.vim
 tags
+.idea/
+Java.iml
+app.iml
+local.properties

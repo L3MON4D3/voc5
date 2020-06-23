@@ -1,13 +1,14 @@
-package UI;
+package com.L3MON4D3.voc5;
 
-import androidx.appcompat.app.AppCompatActivity;
+
 
 import android.os.Bundle;
 import android.widget.TextView;
 
-import com.lemonade.voc5.R;
 
-public class MainMenuActivity extends AppCompatActivity {
+
+
+public class MainMenuActivity extends com.L3MON4D3.voc5.VocActivity {
     TextView intro;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
