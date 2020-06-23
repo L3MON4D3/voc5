@@ -1,7 +1,6 @@
 package com.L3MON4D3.voc5.UI;
 
 import android.content.Context;
-import android.app.Activity;
 import android.util.AttributeSet;
 
 import androidx.cardview.widget.CardView;

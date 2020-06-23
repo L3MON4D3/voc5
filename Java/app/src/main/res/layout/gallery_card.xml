@@ -1,4 +1,4 @@
-<com.L3MON4D3.voc5.GalleryCard
+<com.L3MON4D3.voc5.UI.GalleryCard
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -24,4 +24,4 @@
         android:layout_marginRight="8dp"
         android:layout_marginBottom="5dp" />
 
-</com.L3MON4D3.voc5.GalleryCard>
+</com.L3MON4D3.voc5.UI.GalleryCard>
