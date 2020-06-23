@@ -50,5 +50,14 @@
             android:textAllCaps="false"
             android:textSize="30dp" />
 
+        <Button
+            android:id="@+id/editVocBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="editVoc"
+            android:textAllCaps="false"
+            android:textSize="30dp" />
+
     </LinearLayout>
 </LinearLayout>

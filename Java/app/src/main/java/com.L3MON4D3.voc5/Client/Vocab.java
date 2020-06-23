@@ -30,6 +30,9 @@ public class Vocab {
     public String getQuestion() { return question; }
     public String getLanguage() { return language; }
 
+    public void setPhase(int newPhase){this.phase = newPhase;}//needed to edit Vocab
+    public void setId(int newId){this.id = newId;}
+
     /**
      * Get Object as String.
      * @return String as follows: "id:__\nanswer:__\nquestion:__\nlanguage:__\n"

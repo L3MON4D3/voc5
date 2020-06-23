@@ -43,11 +43,20 @@ public class VocActivity extends AppCompatActivity {
     }
 
     /**
-     * Starts newVoc activity and passes proper Intent()
+     * Starts newVoc activity and passes proper Intent
       */
     public void startNewVoc(){
         Intent startIntent = new Intent(getApplicationContext(),MainMenuActivity.class);//todo add activity for creating new Voc
         //todo: add proper extra to Intent
+        startActivity(startIntent);
+    }
+
+    /**
+     * Starts editVoc activity and passes ID of Vocabulary meant to be edited
+     */
+    public void startEditVoc(int vocId){
+        Intent startIntent = new Intent(getApplicationContext(),EditActivity.class);
+        startIntent.putExtra("com.L3MON4D3.voc5",vocId);
         startActivity(startIntent);
     }
 }

@@ -12,6 +12,7 @@ public class MainMenuActivity extends VocActivity {
     Button learnBtn;
     Button galleryBtn;
     Button newVocBtn;
+    Button editVocBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +44,12 @@ public class MainMenuActivity extends VocActivity {
             public void onClick(View view) {
                 startNewVoc();
             }
+        });
+
+        editVocBtn = findViewById(R.id.editVocBtn);
+        editVocBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) { startEditVoc(2);}//todo change 2 to proper voc or move button to galleryActivity
         });
 
     }
