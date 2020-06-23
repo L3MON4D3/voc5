@@ -9,9 +9,9 @@
     <application
         android:label="voc5"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainMenuActivity"
+        <activity android:name=".UI.MainMenuActivity"
             android:exported="true" />
-        <activity android:name=".LoginActivity">
+        <activity android:name=".UI.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".GalleryActivity"
+            android:name=".UI.GalleryActivity"
             android:exported="true" />
     </application>
 
