@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <zoom_level>8</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>344</y>
+      <w>376</w>
+      <h>320</h>
+    </coordinates>
+    <panel_attributes>com.L3MON4D3.voc5::LoginActivity
+--
+-vClient: Voc5Client
+-okClient: OkHttpClient
+-emailET: EditText
+-pwdET: EditText
+-serverET: EditText
+-rememberBox: CheckBox
+-registerSuccessToast: Toast
+-registerFailToast: Toast
+-loginCallback : Callback
+-registerCallback : Callback
+--
+#onCreate(Bundle savedInstanceState): void
++logIn(boolean register): void
++openMainMenu(): void
++loadPreferences(): void
++saveLogin(): void
++saveRememberStatus(): void
+#onStop(): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>472</x>
+      <y>408</y>
+      <w>392</w>
+      <h>464</h>
+    </coordinates>
+    <panel_attributes>com.L3MON4D3.voc5::Voc5Client
+--
+-JSON : MediaType
++okClient : OkHttpClient
+-gson : Gson
+-vocListType : Type
+-servername: String
+-email: String
+-password: String
+-vocabs: ArrayList&lt;Vocab&gt;
++CREATOR : Parcelable.Creator&lt;Voc5Client&gt;
+--
++Voc5Client(String servername, String email, String password): ctor
++Voc5Client(String email, String password): ctor
+-Voc5Client(Parcel in): ctor
++getOkClient(): OkHttpClient
++getVocabs(): ArrayList&lt;Vocab&gt;
++getUser(): String
++newRqstBdr(String path): Request.Builder
++loginRqst(): Request
++registerRqst(): Request
++describeContents(): int
++writeToParcel(Parcel out, int Flags): void
++newVocabRqst(String question, String answer, String lang): Request
++updateVocRqst(Vocab voc): Request
++getVocsRqst(): Request
++loadVocs(Runnable rnble): void
+--
+Saves User, email and Password. Requests can be built using newRqstBdr.
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>968</x>
+      <y>328</y>
+      <w>320</w>
+      <h>256</h>
+    </coordinates>
+    <panel_attributes>com.L3MON4D3.voc5::Vocab
+--
+-id: int
+-answer: String
+-question: String
+-language: String
+-phase: int
+--
++Vocab(): ctor
++Vocab(String answer, String question, String language): ctor
++getId(): int
++getAnswer(): String
++getQuestion(): String
++getLanguage(): String
++setId(): void
+todo: rest of set methods
++setPhase(): void
++toString(): String
++ansDiffs(String userAnswer) : boolean[]
++isExactMatch(String userAnswer): boolean
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>40</x>
+      <y>856</y>
+      <w>328</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>com.L3MON4D3.voc5::GalleryCardFactory
+--
+-inf: LayoutInflater
+-parent: ViewGroup
+--
++GalleryCardFactory(LayoutInflater inf, ViewGroup parent): ctor
++newCard(Vocab voc): GalleryCard
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1240</x>
+      <y>728</y>
+      <w>240</w>
+      <h>184</h>
+    </coordinates>
+    <panel_attributes>com.L3MON4D3.voc5::GalleryActivity
+--
+-gallery: ViewGroup
+-gcf: GalleryCardFactory
+TODO: alot of buttons
+--
+#onCreate(Bundle savedInstanceState): void
+#startLearn(): void
++populateGallery(): void
+--
+TODO: add Button to add vocab.
+TODO: select vocab to learn.
+TODO: startLearn to override, 
+learn selected set</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>272</x>
+      <y>1016</y>
+      <w>264</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>com.L3MON4D3.voc5::GalleryCard
+--
+-voc: Vocab
+--
++GalleryCard(Context con, AttributeSet attrs): ctor
++setVoc(Vocab voc): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>920</x>
+      <y>712</y>
+      <w>264</w>
+      <h>208</h>
+    </coordinates>
+    <panel_attributes>com.L3MON4D3.voc5::VocActivity
+--
+#client : Voc5Client
+--
+#onCreate(Bundle savedInstanceState): void
++startLearn(): void
++startGallery(): void
++startNewVoc(): void
++startEditVoc(): void
+--
+Receives Intent-Extra "client", if not uses
+default-user.
+When it receives result with code 10 it will 
+update the Vocab with Object from "vocab" 
+extra (remove and add on ArrayList).
+When it receives result with Code 11 it will
+update Phases as needed.</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1176</x>
+      <y>768</y>
+      <w>80</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>80.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>576</x>
+      <y>960</y>
+      <w>256</w>
+      <h>168</h>
+    </coordinates>
+    <panel_attributes>bg=red
+com.L3MON4D3.voc5::MainMenuActivity
+--
+-learnBtn : Button
+-galleryBtn : Button
+-newVocBtn : Button
+-editVocBtn: Button
+--
+#onCreate(Bundle savedInstanceState): void
+-startVocActivity(java.lang.Class activity)
+--
+Starts different Activities, passes client received
+from loginActivity.</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>760</x>
+      <y>832</y>
+      <w>176</w>
+      <h>144</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;160.0;200.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>864</x>
+      <y>1008</y>
+      <w>304</w>
+      <h>208</h>
+    </coordinates>
+    <panel_attributes>bg=red
+com.L3MON4D3.voc5::LearnActivity
+--
+-questionTv : TextView
+-languageTv : TextView
+-answerEt : EditText
+-confirmBtn : Button
+--
+#onCreate(Bundle savedInstanceState): void
+--
+Should display Pop-Up upon pressing confirmBtn
+(see lernActivity.png).
+Receives ArrayList of Vocab as "learnSet"
+Result (Code 11) has same extra, Vocabs have
+different Pases and should be updated.
+
+Updates phase after every learned voc, also on server
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>952</x>
+      <y>912</y>
+      <w>96</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;120.0;100.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1232</x>
+      <y>960</y>
+      <w>280</w>
+      <h>272</h>
+    </coordinates>
+    <panel_attributes>bg=red
+com.L3MON4D3.voc5::EditActivity
+--
+-newQuestionEt : EditText
+-newLanuageEt : EditText
+-newAnswerEt : EditText
+-newPhaseEt : EditText
+-commitChangeBtn : Button
+--
+#onCreate(Bundle savedInstanceState): void
+-vocBuilder():Vocab
+-createPhase(): int
+--
+Edit Vocabulary.
+Intent must contain Extra "vocab", Result (Code 10)
+will also contain "answer","question","language","phase" 
+extra.
+
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1152</x>
+      <y>912</y>
+      <w>120</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>130.0;60.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>912</x>
+      <y>0</y>
+      <w>352</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>bg=red
+com.L3MON4D3.voc5::AnswerComparator extends Comparator
+--
+-ascending : static boolean
+--
++AnswerCompapator(boolean ascending) : ctor
++compareTo(Vocab first, Vocab second)
+--
+Compares based on Answer, ascending or descending.</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>912</x>
+      <y>112</y>
+      <w>352</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>bg=red
+com.L3MON4D3.voc5::QuestionComparator extends Comparator
+--
+-ascending : static boolean
+--
++QuestionCompapator(boolean ascending) : ctor
++compareTo(Vocab first, Vocab second)
+--
+Compares based on Question, ascending or descending.</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>912</x>
+      <y>224</y>
+      <w>352</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>bg=red
+com.L3MON4D3.voc5::PhaseComparator extends Comparator
+--
+-ascending : static boolean
+--
++PhaseCompapator(boolean ascending) : ctor
++compareTo(Vocab first, Vocab second)
+--
+Compares based on Phase, ascending or descending.</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1288</x>
+      <y>112</y>
+      <w>240</w>
+      <h>184</h>
+    </coordinates>
+    <panel_attributes>bg=red
+com.L3MON4D3.voc5::SubsetCreater
+--
+
+--
++SubsetCreater() : ctor
++answerContains(String s) : ArrayList&lt;Vocab&gt;
++questionContains(String s) : ArrayList&lt;Vocab&gt;
++phaseIs(int p) : ArrayList&lt;Vocab&gt;
++languageIs(String lang) : ArrayList&lt;Vocab&gt;
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
