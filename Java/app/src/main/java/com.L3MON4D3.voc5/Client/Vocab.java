@@ -1,6 +1,9 @@
 package com.L3MON4D3.voc5.Client;
 
-public class Vocab {
+import android.os.Parcelable;
+import android.os.Parcel;
+
+public class Vocab implements Parcelable {
     private int id;
     private String answer;
     private String question;
@@ -41,4 +44,46 @@ public class Vocab {
         return String.format("id: %s%nanswer: %s%nquestion: %s%nlanguage: %s%n",
             id, answer, question, language);
     }
+    //Begin Parcelable implementation.
+        /**
+         * Dummy function.
+         * @return 0, always.
+         */
+        public int describeContents() {
+            return 0;   
+        }
+
+        /**
+         * Write user, email and server to Parcel.
+         * @param out Parcel.
+         * @param Flags Flags, doesnt do anything right now.
+         */
+        public void writeToParcel(Parcel out, int Flags) {
+            out.writeString(question);
+            out.writeString(language);
+            out.writeString(answer);
+            out.writeInt(phase);
+            out.writeInt(id);
+        }
+
+        public static final Parcelable.Creator<Vocab> CREATOR = 
+            new Parcelable.Creator<Vocab>() {
+
+                public Vocab createFromParcel(Parcel in) {
+                    return new Vocab(in);  
+                }
+
+                public Vocab[] newArray(int size) {
+                    return new Vocab[size];
+                }
+            };
+
+        private Vocab(Parcel in) {
+            this.question = in.readString();
+            this.language = in.readString();
+            this.answer = in.readString();
+            this.phase = in.readInt();
+            this.id = in.readInt();
+        }
+    //End Parcelable implementation.
 }
