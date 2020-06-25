@@ -17,12 +17,16 @@ public class VocActivity extends AppCompatActivity {
         setContentView(R.layout.login);
 
         Bundle ex = getIntent().getExtras();
-        if (ex != null) {
-            client = ex.getParcelable("client");
-            if (client == null)
+        if (savedInstanceState == null) {
+            if (ex != null) {
+                client = ex.getParcelable("client");
+                if (client == null)
+                    client = new Voc5Client("https://api.voc5.org","l3mon@4d3.org","foo");
+            } else
                 client = new Voc5Client("https://api.voc5.org","l3mon@4d3.org","foo");
-        } else
-            client = new Voc5Client("https://api.voc5.org","l3mon@4d3.org","foo");
+        } else {
+            client = savedInstanceState.getParcelable("client");
+        }
     }
 
     /**
@@ -58,5 +62,13 @@ public class VocActivity extends AppCompatActivity {
         Intent startIntent = new Intent(getApplicationContext(),EditActivity.class);
         startIntent.putExtra("com.L3MON4D3.voc5",vocId);
         startActivity(startIntent);
+    }
+
+    /**
+     * Save client for next Instance.
+     */
+    public void onSaveInstanceState(Bundle sis) {
+        sis.putParcelable("client", client);
+        super.onSaveInstanceState(sis);
     }
 }

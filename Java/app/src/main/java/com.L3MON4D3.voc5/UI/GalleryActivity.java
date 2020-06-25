@@ -28,28 +28,33 @@ public class GalleryActivity extends VocActivity {
         setContentView(R.layout.gallery);
 
         gallery = findViewById(R.id.gall_lt);
+
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         density = displayMetrics.density;
-
+        
         //margin of GridLayout gallery * 2 in pixels.
         int ltBorderPx = (int)(40 * density);
-
+        
         int width = displayMetrics.widthPixels - ltBorderPx;
-
+        
         //approximate number of Cards that fit beside each other(cardWidth+marginLeft+marginRight).
         int colCount = (int)(width/(185*density));
-
+        
         gallery.setColumnCount(colCount);
         gcf = new GalleryCardFactory(getLayoutInflater(), gallery, width/colCount-(int)(10*density));
-
-        if (client.hasVocabs())
-            client.loadVocs(() -> {
-                ArrayList<Vocab> currentVocs = client.getVocabs();
-                runOnUiThread(() -> setGalleryContent(currentVocs));
-            });
-        else
-           setGalleryContent(client.getVocabs());
+            
+        if (savedInstanceState == null) {
+            if (client.hasVocabs())
+                client.loadVocs(() -> {
+                    ArrayList<Vocab> currentVocs = client.getVocabs();
+                    runOnUiThread(() -> setGalleryContent(currentVocs));
+                });
+            else
+               setGalleryContent(client.getVocabs());
+       } else {
+           setGalleryContent(savedInstanceState.getParcelableArrayList("currentVocs"));
+       }
     }
 
     /**
@@ -61,5 +66,13 @@ public class GalleryActivity extends VocActivity {
         int i = 0;
         for (Vocab v : currentVocs)
             gallery.addView(gcf.newCard(v), i++);
+    }
+
+    /**
+     * Save currentVocs for next Instance.
+     */
+    public void onSaveInstanceState(Bundle sis) {
+        sis.putParcelableArrayList("currentVocs", currentVocs);
+        super.onSaveInstanceState(sis);
     }
 }
