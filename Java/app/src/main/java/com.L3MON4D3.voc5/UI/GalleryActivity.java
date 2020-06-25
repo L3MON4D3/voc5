@@ -19,7 +19,7 @@ import com.L3MON4D3.voc5.R;
 public class GalleryActivity extends VocActivity {
     private GridLayout gallery;
     private GalleryCardFactory gcf;
-    private ArrayList<Vocab> vocs;
+    private ArrayList<Vocab> currentVocs;
     private float density;
 
     @Override
@@ -43,21 +43,23 @@ public class GalleryActivity extends VocActivity {
         gallery.setColumnCount(colCount);
         gcf = new GalleryCardFactory(getLayoutInflater(), gallery, width/colCount-(int)(10*density));
 
-        client.loadVocs(() -> {
-            ArrayList<Vocab> vocs = client.getVocabs();
-            runOnUiThread(() -> populateGallery(vocs));
-        });
+        if (client.hasVocabs())
+            client.loadVocs(() -> {
+                ArrayList<Vocab> currentVocs = client.getVocabs();
+                runOnUiThread(() -> setGalleryContent(currentVocs));
+            });
+        else
+           setGalleryContent(client.getVocabs());
     }
 
     /**
      * Adds Vocabs to gallery.
-     * @param vocs Vocabulary to be added to Gallery.
+     * @param currentVocs Vocabulary to be added to Gallery.
      */
-    public void populateGallery(ArrayList<Vocab> vocs) {
-        this.vocs = vocs;
+    public void setGalleryContent(ArrayList<Vocab> currentVocs) {
+        this.currentVocs = currentVocs;
         int i = 0;
-        for (Vocab v : vocs) {
+        for (Vocab v : currentVocs)
             gallery.addView(gcf.newCard(v), i++);
-        }
     }
 }

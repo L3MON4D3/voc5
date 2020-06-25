@@ -1,6 +1,5 @@
 package com.L3MON4D3.voc5.UI;
 
-
 import okhttp3.OkHttpClient;
 import okhttp3.Callback;
 import okhttp3.Call;
@@ -115,9 +114,9 @@ public class LoginActivity extends AppCompatActivity {
      * Open Main Menu once user is logged in. CURRENTLY DOES NOTHING!!
      */
     public void openMainMenu() {
-         Intent menuIntent = new Intent(getApplicationContext(), MainMenuActivity.class);
-         menuIntent.putExtra("com.L3MON4D3.voc.UI.USER",emailET.toString());
-         startActivity(menuIntent);
+        Intent menuIntent = new Intent(getApplicationContext(), MainMenuActivity.class);
+        menuIntent.putExtra("com.L3MON4D3.voc.UI.USER",emailET.toString());
+        startActivity(menuIntent);
     }
 
     /**

@@ -52,6 +52,14 @@ public class Voc5Client implements Parcelable {
      */
     public String getUser(){ return this.email.split("@")[0]; }
 
+    /**
+     * Find out whether Vocabs were downloaded from server.
+     * @return true if there are vocabs, false otherwise.
+     */
+    public boolean hasVocabs() {
+        return vocabs == null;
+    }
+
     public OkHttpClient getOkClient() { return okClient; }
     public ArrayList<Vocab> getVocabs() { return vocabs; }
 
