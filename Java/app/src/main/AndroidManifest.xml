@@ -15,6 +15,13 @@
         <activity
             android:name=".UI.EditActivity"
             android:exported="true" />
+        <activity
+            android:name=".UI.LernActivity"
+            android:exported="true" />
+        <activity
+            android:name=".UI.Pop"
+            android:theme="@style/AppTheme.CustomTheme"
+            android:exported="true" />
         <activity android:name=".UI.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
