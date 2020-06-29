@@ -16,6 +16,8 @@ public class GalleryCard extends CardView {
     private boolean displaysAnswer = false;
     private boolean selected = false;
     private static GalleryActivity ga;
+    //Position in Parent Layout, needed for savong selected Cards.
+    //DO NOT CHANGE.
     public int parentPos;
 
     private float defaultElevation;
@@ -48,6 +50,7 @@ public class GalleryCard extends CardView {
     public static void setGa(GalleryActivity ga) { GalleryCard.ga = ga; }
     public void setVoc(Vocab voc) { this.voc = voc ; }
     public boolean getSelected() { return selected; }
+    public void setSelected(boolean selected) { this.selected = selected; }
 
     /**
      * Process motion Event.
@@ -63,13 +66,10 @@ public class GalleryCard extends CardView {
      */
     public void selectToggle() {
         if (selected) {
-            setElevation(defaultElevation);
             ga.deselect(this);
         } else {
-           setElevation(30f);
             ga.select(this);
         }
-        selected = !selected;
     }
 
     /**
@@ -81,5 +81,19 @@ public class GalleryCard extends CardView {
         else
             ((TextView) getChildAt(0)).setText(voc.getAnswer());
         displaysAnswer = !displaysAnswer;
+    }
+
+    /**
+     * Raise Card to highlight it.
+     */
+    public void elevate() {
+        setElevation(30f);
+    }
+
+    /**
+     * Lower Card to un-highlight.
+     */
+    public void resetElevation() {
+        setElevation(defaultElevation);
     }
 }

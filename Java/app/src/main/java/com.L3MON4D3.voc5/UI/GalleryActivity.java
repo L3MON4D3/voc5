@@ -71,6 +71,8 @@ public class GalleryActivity extends VocActivity {
      */
     public void select(GalleryCard gc) {
         selected.add(gc);
+        gc.elevate();
+        gc.setSelected(true);
         selCount++;
     }
 
@@ -80,6 +82,8 @@ public class GalleryActivity extends VocActivity {
      */
     public void deselect(GalleryCard gc) {
         selected.remove(gc);
+        gc.resetElevation();
+        gc.setSelected(false);
         selCount--;
     }
 
@@ -107,7 +111,6 @@ public class GalleryActivity extends VocActivity {
                 GalleryCard gc = gcf.newCard(currentVocs.get(i), i);
                 if (selectedArrInd < selectedPos.length && i == selectedPos[selectedArrInd]) {
                     select(gc);
-                    gc.selectToggle();
                     selectedArrInd++;
                 }
                 gallery.addView(gc, i);
