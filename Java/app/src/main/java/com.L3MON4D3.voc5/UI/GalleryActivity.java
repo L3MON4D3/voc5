@@ -103,7 +103,7 @@ public class GalleryActivity extends VocActivity {
      */
     public void setGalleryContent(ArrayList<Vocab> currentVocs, int[] selectedPos) {
         if (selectedPos.length == 0) {
-            setGalleryContent(currentVocs);
+            selectedPos = new int[] {-1};
         } else {
             this.currentVocs = currentVocs;
             int selectedArrInd = 0;
