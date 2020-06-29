@@ -15,7 +15,8 @@ public class GalleryCard extends CardView {
     private Vocab voc;
     private boolean displaysAnswer = false;
     private boolean selected = false;
-    private static int selectCount = 0;
+    private static GalleryActivity ga;
+    public int parentPos;
 
     private float defaultElevation;
     private GestureDetector gestDect = new GestureDetector(
@@ -26,7 +27,7 @@ public class GalleryCard extends CardView {
 
             public boolean onSingleTapUp(MotionEvent me) {
                 //if a Card has been selected already, select on tap.
-                if (selectCount > 0)
+                if (ga.getSelCount() > 0)
                     selectToggle();
                 else
                    textToggle();
@@ -44,7 +45,9 @@ public class GalleryCard extends CardView {
         defaultElevation = getElevation();
     }
 
+    public static void setGa(GalleryActivity ga) { GalleryCard.ga = ga; }
     public void setVoc(Vocab voc) { this.voc = voc ; }
+    public boolean getSelected() { return selected; }
 
     /**
      * Process motion Event.
@@ -61,10 +64,10 @@ public class GalleryCard extends CardView {
     public void selectToggle() {
         if (selected) {
             setElevation(defaultElevation);
-            selectCount--;
+            ga.deselect(this);
         } else {
            setElevation(30f);
-            selectCount++;
+            ga.select(this);
         }
         selected = !selected;
     }

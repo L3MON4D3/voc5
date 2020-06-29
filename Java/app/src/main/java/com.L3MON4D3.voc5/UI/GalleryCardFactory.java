@@ -19,10 +19,11 @@ public class GalleryCardFactory {
      * @param inf LayoutInflater, get with getLayoutInflater().
      * @param parent ViewGroup the Card will be added to.
      */
-    public GalleryCardFactory(LayoutInflater inf, ViewGroup parent, int cardWidth) {
+    public GalleryCardFactory(LayoutInflater inf, ViewGroup parent, int cardWidth, GalleryActivity ga) {
         this.inf = inf;
         this.parent = parent;
         this.cardWidth = cardWidth;
+        GalleryCard.setGa(ga);
     }
 
     /**
@@ -30,12 +31,13 @@ public class GalleryCardFactory {
      * @param voc Vocab associated with Card.
      * @return GalleryCard-Object.
      */
-    public GalleryCard newCard(Vocab voc) {
+    public GalleryCard newCard(Vocab voc, int pos) {
         GalleryCard gc = (GalleryCard) inf.inflate(R.layout.gallery_card, parent, false);
         gc.setVoc(voc);
         gc.getLayoutParams().width = cardWidth;
         ((TextView) gc.getChildAt(0)).setText(voc.getQuestion());
         ((TextView) gc.getChildAt(1)).setText(voc.getLanguage());
+        gc.parentPos = pos;
         return gc;
     }
 }

@@ -20,7 +20,9 @@ public class GalleryActivity extends VocActivity {
     private GridLayout gallery;
     private GalleryCardFactory gcf;
     private ArrayList<Vocab> currentVocs;
+    private ArrayList<GalleryCard> selected;
     private float density;
+    private int selCount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,19 +44,43 @@ public class GalleryActivity extends VocActivity {
         int colCount = (int)(width/(185*density));
         
         gallery.setColumnCount(colCount);
-        gcf = new GalleryCardFactory(getLayoutInflater(), gallery, width/colCount-(int)(10*density));
-            
+        gcf = new GalleryCardFactory(getLayoutInflater(), gallery, width/colCount-(int)(10*density), this);
+
+        selected = new ArrayList<GalleryCard>();
         if (savedInstanceState == null) {
-            if (client.hasVocabs())
+            if (client.hasVocabs()) {
                 client.loadVocs(() -> {
                     ArrayList<Vocab> currentVocs = client.getVocabs();
                     runOnUiThread(() -> setGalleryContent(currentVocs));
                 });
-            else
-               setGalleryContent(client.getVocabs());
-       } else {
-           setGalleryContent(savedInstanceState.getParcelableArrayList("currentVocs"));
-       }
+            } else {
+                setGalleryContent(client.getVocabs());
+            }
+        } else {
+            setGalleryContent(
+                savedInstanceState.getParcelableArrayList("currentVocs"),
+                savedInstanceState.getIntArray("selectedPos"));
+        }
+    }
+
+    public int getSelCount() { return selCount; }
+
+    /**
+     * Add Card to selected, increase counter.
+     * @param gc Card to select.
+     */
+    public void select(GalleryCard gc) {
+        selected.add(gc);
+        selCount++;
+    }
+
+    /**
+     * Remove Card from selected, decrease counter.
+     * @param gc Card to select.
+     */
+    public void deselect(GalleryCard gc) {
+        selected.remove(gc);
+        selCount--;
     }
 
     /**
@@ -62,10 +88,31 @@ public class GalleryActivity extends VocActivity {
      * @param currentVocs Vocabulary to be added to Gallery.
      */
     public void setGalleryContent(ArrayList<Vocab> currentVocs) {
-        this.currentVocs = currentVocs;
-        int i = 0;
-        for (Vocab v : currentVocs)
-            gallery.addView(gcf.newCard(v), i++);
+        //no Cards are selected <-> Card with index -1 is selected.
+        setGalleryContent(currentVocs, new int[] {-1});
+    }
+
+    /**
+     * Adds Vocabs to gallery.
+     * @param currentVocs Vocabulary to be added to Gallery.
+     * @param selectedPos indizes of Cards that are selected.
+     */
+    public void setGalleryContent(ArrayList<Vocab> currentVocs, int[] selectedPos) {
+        if (selectedPos.length == 0) {
+            setGalleryContent(currentVocs);
+        } else {
+            this.currentVocs = currentVocs;
+            int selectedArrInd = 0;
+            for (int i = 0; i != currentVocs.size(); i++) {
+                GalleryCard gc = gcf.newCard(currentVocs.get(i), i);
+                if (selectedArrInd < selectedPos.length && i == selectedPos[selectedArrInd]) {
+                    select(gc);
+                    gc.selectToggle();
+                    selectedArrInd++;
+                }
+                gallery.addView(gc, i);
+            }
+        }
     }
 
     /**
@@ -73,6 +120,10 @@ public class GalleryActivity extends VocActivity {
      */
     public void onSaveInstanceState(Bundle sis) {
         sis.putParcelableArrayList("currentVocs", currentVocs);
+        int[] selectedArr = new int[selCount];
+        for (int i = 0; i != selCount; i++)
+            selectedArr[i] = selected.get(i).parentPos;
+        sis.putIntArray("selectedPos", selectedArr);
         super.onSaveInstanceState(sis);
     }
 }
