@@ -38,14 +38,6 @@ public class MainMenuActivity extends VocActivity {
             }
         });
 
-        newVocBtn = findViewById(R.id.newVocBtn);
-        newVocBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startNewVoc();
-            }
-        });
-
         editVocBtn = findViewById(R.id.editVocBtn);
         editVocBtn.setOnClickListener(new View.OnClickListener() {
             @Override

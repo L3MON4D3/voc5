@@ -1,13 +1,9 @@
 package com.L3MON4D3.voc5.UI;
 
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
 
-import android.util.Log;
 import android.util.DisplayMetrics;
 
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.GridLayout;
 
 import java.util.ArrayList;
