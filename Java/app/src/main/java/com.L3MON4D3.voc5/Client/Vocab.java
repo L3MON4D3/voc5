@@ -27,6 +27,7 @@ public class Vocab extends Object implements Parcelable {
         this.answer = answer;
         this.question = question;
         this.language = language;
+        this.phase = 0;
     }
 
     public int getId() { return id; }
@@ -39,6 +40,7 @@ public class Vocab extends Object implements Parcelable {
     public void setAnswer(String newAnswer) { this.answer = newAnswer; }
     public void setLanguage(String newLanguage) { this.language = newLanguage; }
     public void setPhase(int newPhase){this.phase = newPhase;}//needed to edit Vocab
+    public int getPhase(){return phase;}
     public void setId(int newId){this.id = newId;}
 
     /**

@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="300dp"
     android:layout_height="400dp"
+    android:background="@color/yorange"
     android:layout_gravity="center">
 
     <TextView
@@ -10,6 +11,7 @@
         android:layout_height="wrap_content"
         android:text="UserAnswer"
         android:layout_marginTop="32dp"
+        android:textColor="@color/darkblue"
         android:layout_marginLeft="32dp"
         android:textSize="30sp"/>
 
@@ -20,6 +22,7 @@
         android:layout_marginLeft="32dp"
         android:layout_marginTop="132dp"
         android:text="Answer"
+        android:textColor="@color/darkblue"
         android:textSize="30sp" />
 
     <Button
@@ -28,6 +31,8 @@
         android:layout_height="wrap_content"
         android:text="right"
         android:textAllCaps="false"
+        android:textColor="@color/darkblue"
+        android:background="@color/orange"
         android:layout_marginTop="250dp"/>
 
     <Button
@@ -35,7 +40,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="wrong"
+        android:background="@color/orange"
         android:textAllCaps="false"
+        android:textColor="@color/darkblue"
         android:layout_marginTop="200dp"/>
 
 </RelativeLayout>

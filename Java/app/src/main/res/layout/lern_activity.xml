@@ -1,54 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
-
-    <TextView
-        android:id="@+id/textViewQuestion"
-        android:layout_width="158dp"
-        android:layout_height="69dp"
-        android:layout_marginTop="32dp"
-        android:text="question"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <EditText
-        android:id="@+id/editTextAnswer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:ems="10"
-        android:hint="Enter your answer"
-        android:inputType="text"
-        app:layout_constraintTop_toBottomOf="@+id/textViewQuestion"
-        tools:layout_editor_absoluteX="95dp">
-
-    </EditText>
-
-    <ImageButton
-        android:id="@+id/checkbtn"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        app:srcCompat="@android:drawable/checkbox_on_background"
-        tools:layout_editor_absoluteX="305dp"
-        tools:layout_editor_absoluteY="115dp" >
-
-    </ImageButton>
-
+    android:background="@color/darkblue"
+    android:orientation="vertical"
+    android:gravity="center"
+    >
     <TextView
         android:id="@+id/textViewLanguage"
-        android:layout_width="89dp"
-        android:layout_height="39dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="Language"
-        tools:layout_editor_absoluteX="41dp"
-        tools:layout_editor_absoluteY="231dp" />
+        android:layout_gravity="left"
+        android:textColor="@color/yorange" />
+    <TextView
+        android:id="@+id/textViewQuestion"
+        android:layout_width="167dp"
+        android:layout_height="59dp"
+        android:text="Question"
+        android:textColor="@color/yorange"
+        android:textSize="32sp" />
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content" >
+
+        <EditText
+            android:id="@+id/editTextAnswer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:hint="Enter your answer"
+            android:inputType="text"
+            android:textColor="@color/yorange">
+
+        </EditText>
+
+        <Button
+            android:id="@+id/checkbtn"
+            android:layout_width="48dp"
+            android:layout_height="30dp"
+            android:background="@color/orange"
+            android:text="OK"
+            android:textColor="@color/darkblue" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/finishbtn"
+        android:layout_width="48dp"
+        android:layout_height="30dp"
+        android:background="@color/purpleblue"
+        android:layout_gravity="right"
+        android:gravity="center"
+        android:text="finish"
+        android:textColor="@color/yorange" />
+
+
 </LinearLayout>

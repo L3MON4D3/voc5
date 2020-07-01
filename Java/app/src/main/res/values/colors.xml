@@ -1,2 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <color name="withe">#FFFFFF</color>
+    <color name="darkblue">#104E8B</color>
+    <color name="purpleblue">#27408B</color>
+    <color name="orange">#FF7F24</color>
+    <color name="yorange">#FFA500</color>
+
+</resources>

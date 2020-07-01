@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.content.Intent;
 
 import com.L3MON4D3.voc5.Client.Vocab;
 import com.L3MON4D3.voc5.R;
@@ -27,7 +28,8 @@ public class MainMenuActivity extends VocActivity {
         learnBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startLearn();
+                Intent startIntent = new Intent(getApplicationContext(),LernActivity.class);
+                startActivity(startIntent);
             }
         });
 
