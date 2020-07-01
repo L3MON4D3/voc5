@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.L3MON4D3.voc5.Client.Vocab;
 import com.L3MON4D3.voc5.R;
 
 public class MainMenuActivity extends VocActivity {
@@ -36,12 +37,6 @@ public class MainMenuActivity extends VocActivity {
             public void onClick(View view) {
                 startGallery();
             }
-        });
-
-        editVocBtn = findViewById(R.id.editVocBtn);
-        editVocBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) { startEditVoc(2);}//todo change 2 to proper voc or move button to galleryActivity
         });
 
     }

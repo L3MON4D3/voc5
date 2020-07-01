@@ -4,33 +4,64 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:paddingLeft="20dp"
-    android:paddingRight="20dp"
     android:paddingTop="5dp"
-    android:orientation="vertical" >
+    android:paddingRight="20dp">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-        
+        android:layout_height="wrap_content">
+
         <EditText
             android:id="@+id/search_ET"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Search" />
-        
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/galleryEditBtn"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="edit"
+            android:layout_gravity="fill_vertical" />
+
+        <Button
+            android:id="@+id/galleryLearnBtn"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="learn"
+            android:layout_gravity="fill_vertical" />
+
+        <Button
+            android:id="@+id/galleryDeleteBtn"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="löschen"
+            android:layout_gravity="fill_vertical"
+            android:enabled="false"/>
+
     </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
-    
-        <GridLayout 
+        android:layout_height="match_parent">
+
+        <GridLayout
+            android:id="@+id/gall_lt"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/gall_lt"
             android:columnCount="2" />
-    
+
     </ScrollView>
 </LinearLayout>
 

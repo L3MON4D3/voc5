@@ -3,13 +3,18 @@ package com.L3MON4D3.voc5.UI;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.L3MON4D3.voc5.Client.Voc5Client;
+import com.L3MON4D3.voc5.Client.Vocab;
 import com.L3MON4D3.voc5.R;
 
 public class VocActivity extends AppCompatActivity {
     protected Voc5Client client;
+    private static final int EDIT_RESULT = 21;
+    private Vocab editVoc;
+    private int editId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,10 +62,29 @@ public class VocActivity extends AppCompatActivity {
     /**
      * Starts editVoc activity and passes ID of Vocabulary meant to be edited
      */
-    public void startEditVoc(int vocId){
+    public void startEditVoc(Vocab voc){
+        editVoc = voc;
+        editId= client.getVocabs().indexOf(voc);
+        int index = client.getVocabs().indexOf(voc);
         Intent startIntent = new Intent(getApplicationContext(),EditActivity.class);
-        startIntent.putExtra("com.L3MON4D3.voc5",vocId);
-        startActivity(startIntent);
+        startIntent.putExtra("com.L3MON4D3.voc5.Voc", voc);
+        startActivityForResult(startIntent,EDIT_RESULT);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == EDIT_RESULT)
+            if (resultCode == RESULT_OK) {
+                Vocab tmp = data.getExtras().getParcelable("com.L3MON4D3.voc5.newVoc");
+                editVoc.setQuestion(tmp.getQuestion());
+                editVoc.setAnswer(tmp.getAnswer());
+                editVoc.setLanguage(tmp.getLanguage());
+                editVoc.setPhase(tmp.getPhase());
+                client.getVocabs().set(editId, editVoc);
+                client.updateVocRqst(editVoc);
+            }
+
     }
 
     /**

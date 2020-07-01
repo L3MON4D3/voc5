@@ -22,15 +22,17 @@ public class EditActivity extends VocActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_activity);
 
-        //retrieve the ID of voc that needs to be changed
-        int vocId = getIntent().getExtras().getInt("com.L3MON4D3.voc5");
-
         newQuestionEt = findViewById(R.id.newQuestionEt);
         newAnswerEt = findViewById(R.id.newAnswerEt);
         newLanguageEt = findViewById(R.id.newLanguageEt);
         newPhaseEt = findViewById(R.id.newPhaseEt);
 
-
+        //set Edit Texts to  content that should be edited
+        Vocab tmp = getIntent().getExtras().getParcelable("com.L3MON4D3.voc5.Voc");
+        newQuestionEt.setText(tmp.getQuestion());
+        newAnswerEt.setText(tmp.getAnswer());
+        newLanguageEt.setText(tmp.getLanguage());
+        newPhaseEt.setText(String.valueOf(tmp.getPhase()));
 
         commitChangesBtn = findViewById(R.id.commitChangeBtn);
         commitChangesBtn.setOnClickListener(new View.OnClickListener() {
@@ -44,18 +46,12 @@ public class EditActivity extends VocActivity{
                 if(!newPhaseEt.getText().toString().equals(""))
                     newPhase = Integer.parseInt(newPhaseEt.getText().toString());
 
-
-                Vocab newVoc = new Vocab(newQuestion, newAnswer, newLanguage);
+                Vocab newVoc = new Vocab(newQuestion,newAnswer,newLanguage);
+                Intent resultIntent = new Intent(getApplicationContext(),GalleryActivity.class);
                 newVoc.setPhase(newPhase);
-                newVoc.setId(vocId);
-                client.updateVocRqst(newVoc);
-
-                Intent startIntent = new Intent(getApplicationContext(),GalleryActivity.class);
-                startIntent.putExtra("com.L3MON4D3.voc5",newQuestion);//adds Question as Extra to Intent
-                startIntent.putExtra("com.L3MON4D3.voc5", newAnswer);//adds Answer as Extra to Intent
-                startIntent.putExtra("com.L3MON4D3.voc5", newLanguage);//adds Language as Extra to Intent
-                startIntent.putExtra("com.L3MON4D3.voc5", newPhase);//adds Phase as extra to Intent
-                startActivity(startIntent);
+                resultIntent.putExtra("com.L3MON4D3.voc5.newVoc", newVoc);
+                setResult(RESULT_OK, resultIntent);
+                finish();
             }
         });
     }

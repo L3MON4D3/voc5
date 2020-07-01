@@ -3,7 +3,8 @@ package com.L3MON4D3.voc5.Client;
 import android.os.Parcelable;
 import android.os.Parcel;
 
-public class Vocab implements Parcelable {
+
+public class Vocab extends Object implements Parcelable {
     private int id;
     private String answer;
     private String question;
@@ -32,7 +33,11 @@ public class Vocab implements Parcelable {
     public String getAnswer() { return answer; }
     public String getQuestion() { return question; }
     public String getLanguage() { return language; }
+    public int getPhase() { return phase; }
 
+    public void setQuestion(String newQuestion) { this.question = newQuestion; }
+    public void setAnswer(String newAnswer) { this.answer = newAnswer; }
+    public void setLanguage(String newLanguage) { this.language = newLanguage; }
     public void setPhase(int newPhase){this.phase = newPhase;}//needed to edit Vocab
     public void setId(int newId){this.id = newId;}
 
@@ -86,4 +91,14 @@ public class Vocab implements Parcelable {
             this.id = in.readInt();
         }
     //End Parcelable implementation.
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Vocab vocab = (Vocab) o;
+        return id == vocab.id;
+    }
+
 }

@@ -51,6 +51,8 @@ public class GalleryCard extends CardView {
     public void setVoc(Vocab voc) { this.voc = voc ; }
     public boolean getSelected() { return selected; }
     public void setSelected(boolean selected) { this.selected = selected; }
+    public Vocab getVoc() { return voc; }
+
 
     /**
      * Process motion Event.
