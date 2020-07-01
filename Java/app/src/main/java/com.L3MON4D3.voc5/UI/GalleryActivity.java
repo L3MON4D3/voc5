@@ -119,6 +119,26 @@ public class GalleryActivity extends VocActivity {
     }
 
     /**
+     * Select Cards between first and second.
+     * @param first GalleryCard, may be before or after second.
+     * @param second GalleryCard, may be before or after first.
+     */
+    public void selectRange(GalleryCard first, GalleryCard second) {
+        int pos1 = first.parentPos;
+        int pos2 = second.parentPos;
+        boolean goUp = pos1 < pos2;
+        while (pos1 != pos2) {
+            select((GalleryCard) gallery.getChildAt(pos1));
+            if (goUp)
+                pos1++;
+            else
+               pos1--;
+        }
+        select(second);
+        select(first);
+    }
+
+    /**
      * Save currentVocs for next Instance.
      */
     public void onSaveInstanceState(Bundle sis) {

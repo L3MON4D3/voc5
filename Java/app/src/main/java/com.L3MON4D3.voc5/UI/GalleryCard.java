@@ -16,7 +16,7 @@ public class GalleryCard extends CardView {
     private boolean displaysAnswer = false;
     private boolean selected = false;
     private static GalleryActivity ga;
-    //Position in Parent Layout, needed for savong selected Cards.
+    //Position in Parent Layout, needed for saving selected Cards.
     //DO NOT CHANGE.
     public int parentPos;
 
