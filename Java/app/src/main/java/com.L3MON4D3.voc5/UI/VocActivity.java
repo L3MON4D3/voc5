@@ -33,8 +33,7 @@ public class VocActivity extends AppCompatActivity {
      *
      */
     public void startLearn(){
-        Intent startIntent = new Intent(getApplicationContext(), MainMenuActivity.class);//todo add learn activity
-        //todo: add proper extra to Intent
+        Intent startIntent = new Intent(getApplicationContext(), LernActivity.class);
         startActivity(startIntent);
     }
 
