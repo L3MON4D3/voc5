@@ -5,13 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingLeft="20dp"
-    android:paddingTop="5dp"
-    android:paddingRight="20dp">
+    android:paddingTop="5dp" >
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp" >
+
 
         <EditText
             android:id="@+id/search_ET"
@@ -23,7 +24,10 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp" >
+
 
         <Button
             android:id="@+id/galleryEditBtn"
@@ -54,13 +58,16 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent" >
 
         <GridLayout
             android:id="@+id/gall_lt"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:columnCount="2" />
+            android:columnCount="2"
+            android:clipToPadding="false"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp" />
 
     </ScrollView>
 </LinearLayout>
