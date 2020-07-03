@@ -32,12 +32,15 @@ public class GalleryCard extends CardView {
                 if (ga.getSelCount() > 0)
                     selectToggle();
                 else
-                   textToggle();
+                    textToggle();
                 return true;
             }
 
             public void onLongPress(MotionEvent me) {
-                selectToggle();
+                if (ga.getSelCount() > 0)
+                    selectToThis();
+                else
+                    selectToggle();
             }
         }
     );
@@ -72,6 +75,13 @@ public class GalleryCard extends CardView {
         } else {
             ga.select(this);
         }
+    }
+
+    /**
+     * Select Cards between this and last selected Card.
+     */
+    public void selectToThis() {
+        ga.selectFromLast(this);
     }
 
     /**
