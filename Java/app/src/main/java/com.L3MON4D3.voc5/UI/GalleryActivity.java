@@ -88,6 +88,8 @@ public class GalleryActivity extends VocActivity {
      * @param gc Card to select.
      */
     public void select(GalleryCard gc) {
+        if (gc.getSelected())
+            return;
         selected.add(gc);
         gc.elevate();
         gc.setSelected(true);
@@ -99,6 +101,8 @@ public class GalleryActivity extends VocActivity {
      * @param gc Card to select.
      */
     public void deselect(GalleryCard gc) {
+        if (!gc.getSelected())
+            return;
         selected.remove(gc);
         gc.resetElevation();
         gc.setSelected(false);
@@ -145,6 +149,7 @@ public class GalleryActivity extends VocActivity {
         int pos1 = first.parentPos;
         int pos2 = second.parentPos;
         boolean goUp = pos1 < pos2;
+        select(first);
         while (pos1 != pos2) {
             select((GalleryCard) gallery.getChildAt(pos1));
             if (goUp)
@@ -153,7 +158,6 @@ public class GalleryActivity extends VocActivity {
                pos1--;
         }
         select(second);
-        select(first);
     }
 
     /**
