@@ -17,6 +17,7 @@ import com.L3MON4D3.voc5.R;
 public class GalleryActivity extends VocActivity {
     private GridLayout gallery;
     private GalleryCardFactory gcf;
+    //Contains references to Vocab in Voc5Client.
     private ArrayList<Vocab> currentVocs;
     private ArrayList<GalleryCard> selected;
     private Button galleryEditBtn;
@@ -49,18 +50,18 @@ public class GalleryActivity extends VocActivity {
         gcf = new GalleryCardFactory(getLayoutInflater(), gallery, width/colCount-(int)(10*density), this);
 
         selected = new ArrayList<GalleryCard>();
+        currentVocs = new ArrayList<Vocab>();
         if (savedInstanceState == null) {
             if (client.hasVocabs()) {
                 client.loadVocs(() -> {
-                    ArrayList<Vocab> currentVocs = client.getVocabs();
-                    runOnUiThread(() -> setGalleryContent(currentVocs));
+                    runOnUiThread(() -> setGalleryContent(client.getVocabs()));
                 });
             } else {
                 setGalleryContent(client.getVocabs());
             }
         } else {
             setGalleryContent(
-                savedInstanceState.getParcelableArrayList("currentVocs"),
+                savedInstanceState.getIntArray("currentVocs"),
                 savedInstanceState.getIntArray("selectedPos"));
         }
         galleryEditBtn = findViewById(R.id.galleryEditBtn);
@@ -114,33 +115,48 @@ public class GalleryActivity extends VocActivity {
     }
 
     /**
-     * Adds Vocabs to gallery.
-     * @param currentVocs Vocabulary to be added to Gallery.
+     * Adds all Vocabs to gallery, selects none.
+     * @param vocs Vocabulary to be added to Gallery.
      */
-    public void setGalleryContent(ArrayList<Vocab> currentVocs) {
-        //no Cards are selected <-> Card with index -1 is selected.
-        setGalleryContent(currentVocs, new int[] {-1});
+    public void setGalleryContent(ArrayList<Vocab> vocs) {
+        for (int i = 0; i != vocs.size(); i++) {
+            Vocab tmp = vocs.get(i);
+            currentVocs.add(tmp);
+            gallery.addView(gcf.newCard(tmp, i), i);
+        }
     }
 
     /**
      * Adds Vocabs to gallery.
-     * @param currentVocs Vocabulary to be added to Gallery.
+     * @param currentVocInd Vocabulary to be added to Gallery.
+     */
+    public void setGalleryContent(int[] currentVocInd) {
+        //no Cards are selected <-> Card with index -1 is selected.
+        setGalleryContent(currentVocInd, new int[] {-1});
+    }
+
+    /**
+     * Adds Vocabs to gallery.
+     * @param currentVocInd Vocabulary to be added to Gallery.
      * @param selectedPos indizes of Cards that are selected.
      */
-    public void setGalleryContent(ArrayList<Vocab> currentVocs, int[] selectedPos) {
-        if (selectedPos.length == 0) {
+    public void setGalleryContent(int[] currentVocInd, int[] selectedPos) {
+        if (selectedPos.length == 0)
             selectedPos = new int[] {-1};
-        } else {
-            this.currentVocs = currentVocs;
-            int selectedArrInd = 0;
-            for (int i = 0; i != currentVocs.size(); i++) {
-                GalleryCard gc = gcf.newCard(currentVocs.get(i), i);
-                if (selectedArrInd < selectedPos.length && i == selectedPos[selectedArrInd]) {
-                    select(gc);
-                    selectedArrInd++;
-                }
-                gallery.addView(gc, i);
+
+        int selectedArrInd = 0;
+        ArrayList<Vocab> clientVocs = client.getVocabs();
+
+        for (int i = 0; i != currentVocInd.length; i++) {
+            Vocab tmp = clientVocs.get(currentVocInd[i]);
+            currentVocs.add(tmp);
+            GalleryCard gc = gcf.newCard(tmp, i);
+
+            if (selectedArrInd < selectedPos.length && i == selectedPos[selectedArrInd]) {
+                select(gc);
+                selectedArrInd++;
             }
+            gallery.addView(gc, i);
         }
     }
 
@@ -180,11 +196,20 @@ public class GalleryActivity extends VocActivity {
      * Save currentVocs for next Instance.
      */
     public void onSaveInstanceState(Bundle sis) {
-        sis.putParcelableArrayList("currentVocs", currentVocs);
+        //Pass indizes of current Vocs in Voc5Client's list.
+        int[] currentArr = new int[currentVocs.size()];
+        ArrayList<Vocab> clientVocs = client.getVocabs();
+        for (int i = 0; i != currentArr.length; i++)
+            currentArr[i] = clientVocs.indexOf(currentVocs.get(i));
+                    
+        sis.putIntArray("currentVocs", currentArr);
+
+        //Pass indizes of selected Cards (in currentVocabs).
         int[] selectedArr = new int[selCount];
         for (int i = 0; i != selCount; i++)
             selectedArr[i] = selected.get(i).parentPos;
         sis.putIntArray("selectedPos", selectedArr);
+
         super.onSaveInstanceState(sis);
     }
 }
