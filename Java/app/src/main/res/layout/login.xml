@@ -16,6 +16,8 @@
 
             <EditText
                 android:id="@+id/usr_et"
+                android:maxLines="1"
+                android:inputType="text"
                 android:layout_width="170dp"
                 android:layout_height="wrap_content" />
 
@@ -30,6 +32,8 @@
 
             <EditText
                 android:id="@+id/pwd_et"
+                android:maxLines="1"
+                android:inputType="text"
                 android:layout_width="170dp"
                 android:layout_height="wrap_content" />
 

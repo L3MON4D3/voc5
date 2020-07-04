@@ -39,11 +39,12 @@ public class LoginActivity extends AppCompatActivity {
 
     private Callback loginCallback = new Callback() {
         public void onFailure(Call call, IOException e) {
-            Log.e("voc5:", "not successful:"+e.getMessage());
+            Log.e("voc5:", e.getMessage());
         }
 
         public void onResponse(Call call, Response res) throws IOException {
             Log.e("voc5:", res.body().string());
+            openMainMenu();
         }
     };
 
@@ -57,6 +58,7 @@ public class LoginActivity extends AppCompatActivity {
                 registerFailToast.show();
             else
                 registerSuccessToast.show();
+            openMainMenu();
         }
     };
 
@@ -107,15 +109,14 @@ public class LoginActivity extends AppCompatActivity {
             okClient.newCall(vClient.registerRqst()).enqueue(registerCallback);
         }
         saveLogin();
-        openMainMenu();
     }
 
     /**
      * Open Main Menu once user is logged in. CURRENTLY DOES NOTHING!!
      */
     public void openMainMenu() {
-        Intent menuIntent = new Intent(getApplicationContext(), MainMenuActivity.class);
-        menuIntent.putExtra("com.L3MON4D3.voc.UI.USER",emailET.toString());
+        Intent menuIntent = new Intent(getApplicationContext(), GalleryActivity.class);
+        menuIntent.putExtra("client", vClient);
         startActivity(menuIntent);
     }
 
