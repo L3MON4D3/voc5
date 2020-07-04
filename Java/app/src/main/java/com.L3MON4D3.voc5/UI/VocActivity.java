@@ -2,6 +2,7 @@ package com.L3MON4D3.voc5.UI;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,6 +10,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.L3MON4D3.voc5.Client.Voc5Client;
 import com.L3MON4D3.voc5.Client.Vocab;
 import com.L3MON4D3.voc5.R;
+
+import okhttp3.Callback;
+import okhttp3.Call;
+import okhttp3.Response;
+
+import java.io.IOException;
 
 public class VocActivity extends AppCompatActivity {
     protected Voc5Client client;
@@ -82,9 +89,16 @@ public class VocActivity extends AppCompatActivity {
                 editVoc.setLanguage(tmp.getLanguage());
                 editVoc.setPhase(tmp.getPhase());
                 client.getVocabs().set(editId, editVoc);
-                client.updateVocRqst(editVoc);
-            }
+                client.getOkClient().newCall(client.updateVocRqst(editVoc)).enqueue(new Callback() {
+                    public void onFailure(Call call, IOException e) {
+                        Log.e("voc5:", e.getMessage());
+                    }
 
+                    public void onResponse(Call call, Response res) throws IOException {
+                        Log.e("voc5:", res.body().string());
+                    }
+                });
+            }
     }
 
     /**

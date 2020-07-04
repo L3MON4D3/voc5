@@ -20,7 +20,7 @@ import java.util.ArrayList;
 
 public class Voc5Client implements Parcelable {
     private static final MediaType JSON = MediaType.get("application/json; charset=utf-8");
-    public static final OkHttpClient okClient = new OkHttpClient();
+    private static final OkHttpClient okClient = new OkHttpClient();
 
     private static Gson gson = new GsonBuilder()
         .serializeNulls()
