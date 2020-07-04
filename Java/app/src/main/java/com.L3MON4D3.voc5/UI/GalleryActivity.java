@@ -25,7 +25,6 @@ public class GalleryActivity extends VocActivity {
     private Button galleryDeleteBtn;
     private float density;
     private int selCount = 0;
-    private GalleryCard lastSelected;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +70,7 @@ public class GalleryActivity extends VocActivity {
         galleryEditBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startEditVoc(selected.get(0).getVoc());
+                startEditVoc(selected.get(selCount - 1).getVoc());
             }
         });
 
@@ -96,7 +95,6 @@ public class GalleryActivity extends VocActivity {
         gc.elevate();
         gc.setSelected(true);
         selCount++;
-        lastSelected = gc;
     }
 
     /**
@@ -110,8 +108,6 @@ public class GalleryActivity extends VocActivity {
         gc.resetElevation();
         gc.setSelected(false);
         selCount--;
-        if (selCount == 0)
-            lastSelected = null;
     }
 
     /**
@@ -186,10 +182,10 @@ public class GalleryActivity extends VocActivity {
      * @param gc GaleryCard.
      */
     public void selectFromLast(GalleryCard gc) {
-        if (lastSelected == null)
+        if (selCount == 0)
             select(gc);
         else
-           selectRange(lastSelected, gc);
+           selectRange(selected.get(selCount - 1), gc);
     }
 
     /**
