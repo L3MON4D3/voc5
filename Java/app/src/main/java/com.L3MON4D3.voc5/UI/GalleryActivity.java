@@ -5,14 +5,23 @@ import android.content.Intent;
 
 import android.util.DisplayMetrics;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridLayout;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import com.L3MON4D3.voc5.Client.*;
 import com.L3MON4D3.voc5.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import org.jetbrains.annotations.NotNull;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 import okhttp3.Callback;
 import okhttp3.Call;
@@ -33,11 +42,10 @@ public class GalleryActivity extends VocActivity {
     private Button galleryEditBtn;
     private Button galleryLearnBtn;
     private Button galleryDeleteBtn;
-
     private int srchSel;
     private int sortSel;
     private boolean sortAsc;
-
+    private FloatingActionButton fab;
     private int selCount = 0;
 
     @Override
@@ -81,6 +89,7 @@ public class GalleryActivity extends VocActivity {
         galleryEditBtn = findViewById(R.id.galleryEditBtn);
         galleryLearnBtn = findViewById(R.id.galleryLearnBtn);
         galleryDeleteBtn = findViewById(R.id.galleryDeleteBtn);
+        fab = findViewById(R.id.galleryFab);
 
         srchSel = 0;
         findViewById(R.id.srchSel_btn).setOnClickListener(new View.OnClickListener() {
@@ -152,6 +161,61 @@ public class GalleryActivity extends VocActivity {
                 startLearn();
             }
         });
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Vocab newVoc = new Vocab();
+                client.getOkClient().newCall(client.newVocabRqst(newVoc)).enqueue(new Callback() {
+                    @Override
+                    public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                        Log.e("voc5:", e.getMessage());
+                    }
+
+                    @Override
+                    public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                        Log.e("voc5:", response.body().string());
+                    }
+                });
+
+                startEditVoc(newVoc);
+            }
+        });
+
+        galleryDeleteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selected.sort(null);
+
+                int size = selected.size();
+                for(int i = 0; i != size; i++){
+                    GalleryCard tmp = selected.get(0);
+                    Vocab tmpVoc = tmp.getVoc();
+
+                    client.getVocabs().remove(tmpVoc);
+                    currentVocs.remove(tmpVoc);
+                    deselect(tmp);
+                    //Gallery cards replace deleted galley cards therefore shift index from parents.
+                    gallery.removeViewAt(tmp.parentPos-i);
+
+                    client.getOkClient().newCall(client.deleteVocRqst(tmpVoc)).enqueue(new Callback() {
+                        @Override
+                        public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                            Log.e("voc5:", e.getMessage());
+                        }
+
+                        @Override
+                        public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                            Log.e("voc5:", response.body().string());
+                        }
+                    });
+                }
+
+                for(int i = 0; i != gallery.getChildCount();i++) {
+                    ((GalleryCard)gallery.getChildAt(i)).parentPos = i;
+                }
+            }
+        });
     }
 
     public int getSelCount() { return selCount; }
@@ -192,6 +256,10 @@ public class GalleryActivity extends VocActivity {
             currentVocs.add(tmp);
             gallery.addView(gcf.newCard(tmp, i), i);
         }
+    }
+
+    public void clearGallery(){
+        gallery.removeAllViews();
     }
 
     /**

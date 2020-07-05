@@ -7,11 +7,21 @@
     android:layout_gravity="center"
     android:orientation="vertical">
 
+
+    <EditText
+        android:id="@+id/newAnswerEt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:hint="Enter new Answer"
+        android:textSize="20dp" />
+
     <EditText
         android:id="@+id/newQuestionEt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Enter new Questions"
+        android:layout_marginTop="20dp"
         android:textSize="20dp" />
 
     <EditText
@@ -20,14 +30,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:hint="Enter new Language"
-        android:textSize="20dp" />
-
-    <EditText
-        android:id="@+id/newAnswerEt"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:hint="Enter new Answer"
         android:textSize="20dp" />
 
     <EditText

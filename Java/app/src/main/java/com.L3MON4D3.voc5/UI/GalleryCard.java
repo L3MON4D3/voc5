@@ -12,7 +12,9 @@ import android.widget.TextView;
 
 import com.L3MON4D3.voc5.Client.Vocab;
 
-public class GalleryCard extends CardView {
+import org.jetbrains.annotations.NotNull;
+
+public class GalleryCard extends CardView implements Comparable<GalleryCard> {
     private Vocab voc;
     private boolean displaysAnswer = false;
     private boolean selected = false;
@@ -119,5 +121,9 @@ public class GalleryCard extends CardView {
             ((TextView) getChildAt(0)).setText(voc.getQuestion());
         }
         ((TextView) getChildAt(1)).setText(voc.getLanguage());
+    }
+    @Override
+    public int compareTo(GalleryCard other) {
+        return this.parentPos - other.parentPos;
     }
 }

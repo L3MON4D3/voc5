@@ -152,13 +152,13 @@ public class Voc5Client implements Parcelable {
      * @param lang Name/Code of language B (EN,GER,...).
      * @return Request that can be executed.
      */
-    public Request newVocabRqst(String question, String answer, String lang) {
+    public Request newVocabRqst(Vocab voc) {
         RequestBody body = RequestBody.create(
-            "{\"question\":\""+question+"\", "
-            +"\"answer\":\""+answer+"\", "
-            +"\"language\":\""+lang+"\"}", JSON);
+            "{\"question\":\""+voc.getQuestion()+"\", "
+            +"\"answer\":\""+voc.getAnswer()+"\", "
+            +"\"language\":\""+voc.getLanguage()+"\"}", JSON);
 
-        return newRqstBdr("/vocab")
+        return newRqstBdr("/voc")
             .post(body)
             .build();
     }
@@ -173,7 +173,16 @@ public class Voc5Client implements Parcelable {
 
         return newRqstBdr("/voc/"+voc.getId())
             .patch(body)
-            .build();
+                .build();
+    }
+
+    public Request deleteVocRqst(Vocab voc) {
+        RequestBody body = RequestBody.create(
+                "{\"email\":\""+email+"\", \"password\":\""+password+"\"}", JSON);
+
+        return newRqstBdr("/voc/"+voc.getId())
+                .delete(body)
+                .build();
     }
 
     /**
