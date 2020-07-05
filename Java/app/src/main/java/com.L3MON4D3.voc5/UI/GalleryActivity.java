@@ -1,6 +1,7 @@
 package com.L3MON4D3.voc5.UI;
 
 import android.os.Bundle;
+import android.content.Intent;
 
 import android.util.DisplayMetrics;
 
@@ -13,8 +14,15 @@ import java.util.ArrayList;
 import com.L3MON4D3.voc5.Client.*;
 import com.L3MON4D3.voc5.R;
 
+import okhttp3.Callback;
+import okhttp3.Call;
+import okhttp3.Response;
+
+import java.io.IOException;
 
 public class GalleryActivity extends VocActivity {
+    private static final int EDIT_RESULT = 21;
+
     private GridLayout gallery;
     private GalleryCardFactory gcf;
     //Contains references to Vocab in Voc5Client.
@@ -186,6 +194,41 @@ public class GalleryActivity extends VocActivity {
             select(gc);
         else
            selectRange(selected.get(selCount - 1), gc);
+    }
+
+    /**
+     * Starts editVoc activity and passes Vocabulary meant to be edited.
+     */
+    public void startEditVoc(Vocab voc){
+        Intent startIntent = new Intent(getApplicationContext(), EditActivity.class);
+        startIntent.putExtra("com.L3MON4D3.voc5.Voc", voc);
+        startActivityForResult(startIntent, EDIT_RESULT);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == EDIT_RESULT)
+            if (resultCode == RESULT_OK) {
+                Vocab newVoc = data.getExtras().getParcelable("com.L3MON4D3.voc5.newVoc");
+
+                GalleryCard oldVocCard = selected.get(selCount - 1);
+                Vocab oldVoc = oldVocCard.getVoc();
+                oldVoc.setAnswer(newVoc.getAnswer());
+                oldVoc.setQuestion(newVoc.getQuestion());
+                oldVoc.setLanguage(newVoc.getLanguage());
+                oldVoc.setPhase(newVoc.getPhase());
+
+                oldVocCard.refresh();
+
+                client.getOkClient().newCall(client.updateVocRqst(oldVoc)).enqueue(new Callback() {
+                    public void onFailure(Call call, IOException e) {
+                    }
+
+                    public void onResponse(Call call, Response res) throws IOException {
+                    }
+                });
+            }
     }
 
     /**

@@ -46,7 +46,7 @@ public class EditActivity extends VocActivity{
                 if(!newPhaseEt.getText().toString().equals(""))
                     newPhase = Integer.parseInt(newPhaseEt.getText().toString());
 
-                Vocab newVoc = new Vocab(newQuestion,newAnswer,newLanguage);
+                Vocab newVoc = new Vocab(newAnswer, newQuestion, newLanguage);
                 Intent resultIntent = new Intent(getApplicationContext(),GalleryActivity.class);
                 newVoc.setPhase(newPhase);
                 resultIntent.putExtra("com.L3MON4D3.voc5.newVoc", newVoc);

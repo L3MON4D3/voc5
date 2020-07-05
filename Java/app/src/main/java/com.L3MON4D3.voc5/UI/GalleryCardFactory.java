@@ -35,8 +35,7 @@ public class GalleryCardFactory {
         GalleryCard gc = (GalleryCard) inf.inflate(R.layout.gallery_card, parent, false);
         gc.setVoc(voc);
         gc.getLayoutParams().width = cardWidth;
-        ((TextView) gc.getChildAt(0)).setText(voc.getQuestion());
-        ((TextView) gc.getChildAt(1)).setText(voc.getLanguage());
+        gc.refresh();
         gc.parentPos = pos;
         return gc;
     }

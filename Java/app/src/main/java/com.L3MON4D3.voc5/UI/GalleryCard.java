@@ -2,6 +2,7 @@ package com.L3MON4D3.voc5.UI;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 
 import androidx.cardview.widget.CardView;
 import android.view.View;
@@ -52,10 +53,9 @@ public class GalleryCard extends CardView {
 
     public static void setGa(GalleryActivity ga) { GalleryCard.ga = ga; }
     public void setVoc(Vocab voc) { this.voc = voc ; }
-    public boolean getSelected() { return selected; }
-    public void setSelected(boolean selected) { this.selected = selected; }
     public Vocab getVoc() { return voc; }
-
+    public void setSelected(boolean selected) { this.selected = selected; }
+    public boolean getSelected() { return selected; }
 
     /**
      * Process motion Event.
@@ -107,5 +107,17 @@ public class GalleryCard extends CardView {
      */
     public void resetElevation() {
         setElevation(defaultElevation);
+    }
+
+    /**
+     * Update Textfields as voc might have changed.
+     */
+    public void refresh() {
+        if (displaysAnswer) {
+            ((TextView) getChildAt(0)).setText(voc.getAnswer());
+        } else {
+            ((TextView) getChildAt(0)).setText(voc.getQuestion());
+        }
+        ((TextView) getChildAt(1)).setText(voc.getLanguage());
     }
 }
