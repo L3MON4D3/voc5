@@ -25,13 +25,19 @@ public class GalleryActivity extends VocActivity {
 
     private GridLayout gallery;
     private GalleryCardFactory gcf;
+
     //Contains references to Vocab in Voc5Client.
     private ArrayList<Vocab> currentVocs;
     private ArrayList<GalleryCard> selected;
+
     private Button galleryEditBtn;
     private Button galleryLearnBtn;
     private Button galleryDeleteBtn;
-    private float density;
+
+    private int srchSel;
+    private int sortSel;
+    private boolean sortAsc;
+
     private int selCount = 0;
 
     @Override
@@ -43,7 +49,7 @@ public class GalleryActivity extends VocActivity {
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        density = displayMetrics.density;
+        float density = displayMetrics.density;
         
         //margin of GridLayout gallery * 2 in pixels.
         int ltBorderPx = (int)(40 * density);
@@ -71,9 +77,67 @@ public class GalleryActivity extends VocActivity {
                 savedInstanceState.getIntArray("currentVocs"),
                 savedInstanceState.getIntArray("selectedPos"));
         }
+
         galleryEditBtn = findViewById(R.id.galleryEditBtn);
         galleryLearnBtn = findViewById(R.id.galleryLearnBtn);
         galleryDeleteBtn = findViewById(R.id.galleryDeleteBtn);
+
+        srchSel = 0;
+        findViewById(R.id.srchSel_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Button tv = (Button) view;
+                switch(srchSel) {
+                    case(0) :
+                        srchSel = 1;
+                        tv.setText("Qes");
+                        break;
+                    case(1) :
+                        srchSel = 2;
+                        tv.setText("Lan");
+                        break;
+                    case(2) :
+                        srchSel = 0;
+                        tv.setText("Ans");
+                        break;
+                }
+            }
+        });
+
+        sortSel = 0;
+        findViewById(R.id.sortSel_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Button tv = (Button) view;
+                switch(sortSel) {
+                    case(0) :
+                        sortSel = 1;
+                        tv.setText("Qes");
+                        break;
+                    case(1) :
+                        sortSel = 2;
+                        tv.setText("Lan");
+                        break;
+                    case(2) :
+                        sortSel = 0;
+                        tv.setText("Ans");
+                        break;
+                }
+            }
+        });
+
+        sortAsc = true;
+        findViewById(R.id.sortDir_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Button tv = (Button) view;
+                if (sortAsc)
+                    tv.setText("Dsc");
+                else
+                   tv.setText("Asc");
+                sortAsc = !sortAsc;
+            }
+        });
 
         galleryEditBtn.setOnClickListener(new View.OnClickListener() {
             @Override
