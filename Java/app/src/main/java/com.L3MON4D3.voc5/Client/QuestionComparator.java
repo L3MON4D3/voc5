@@ -1,6 +1,4 @@
-package com.L3MON4D3.voc5.UI;
-
-import com.L3MON4D3.voc5.Client.Vocab;
+package com.L3MON4D3.voc5.Client;
 
 import java.util.Comparator;
 
