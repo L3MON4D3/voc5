@@ -3,12 +3,16 @@ package com.L3MON4D3.voc5.Client;
 import java.util.Comparator;
 
 public class QuestionComparator implements Comparator<Vocab> {
-    private static boolean ascending;
+    private static boolean ascending = true;
 
-    public QuestionComparator(boolean asc) { this.ascending = asc; }
+    public void setAscending(boolean asc) { this.ascending = asc; }
 
+    /**
+     * compares either ascending or descending
+     *
+     */
     @Override
     public int compare(Vocab a, Vocab b) {
-        return a.getQuestion().compareTo(b.getQuestion());
+        return ascending ? 1:-1* a.getQuestion().compareTo(b.getQuestion());
     }
 }
