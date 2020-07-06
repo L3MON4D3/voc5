@@ -16,7 +16,6 @@ import android.widget.EditText;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.function.Predicate;
 import java.util.Collections;
 import java.util.stream.Collectors;
 
@@ -51,6 +50,30 @@ public class GalleryActivity extends VocActivity {
     };
     private static final int EDIT_RESULT = 21;
     private static final int NEW_RESULT = 22;
+
+    private Thread updateThread = new Thread(() -> {
+        while(true) {
+            try {
+                //sleep for 2 minutes
+                Thread.sleep(120000);
+            }catch (Exception e) {
+                break;
+            }
+
+            ArrayList oldVocs = new ArrayList(client.getVocabs());
+            client.loadVocs(() -> {
+                for (Vocab voc : client.getVocabs()) {
+                    if(oldVocs.contains(voc))
+                        oldVocs.remove(voc);
+                    else
+                        oldVocs.add(voc);
+                }
+                runOnUiThread(() -> {
+                    addVocsToGallery(oldVocs);
+                });
+            });
+        }
+    });
 
     private GridLayout gallery;
     private GalleryCardFactory gcf;
@@ -150,6 +173,7 @@ public class GalleryActivity extends VocActivity {
 
         Button srchSelBtn = findViewById(R.id.srchSel_btn);
         srchSet(srchSelBtn);
+        searchGallery(allCards);
         srchSelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -162,6 +186,7 @@ public class GalleryActivity extends VocActivity {
 
         Button sortBtn = findViewById(R.id.sortSel_btn);
         sortSet(sortBtn);
+        sortGallery();
         sortBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -174,6 +199,8 @@ public class GalleryActivity extends VocActivity {
 
         Button sortDirBtn = findViewById(R.id.sortDir_btn);
         sortDirSet(sortDirBtn);
+        if(!sortAsc)
+            sortReverse();
         sortDirBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -240,6 +267,7 @@ public class GalleryActivity extends VocActivity {
                 }
             }
         });
+        updateThread.start();
     }
 
     /**
@@ -470,7 +498,7 @@ public class GalleryActivity extends VocActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == EDIT_RESULT) {
+        if (requestCode == EDIT_RESULT)
             if (resultCode == RESULT_OK) {
                 Vocab newVoc = data.getExtras().getParcelable("com.L3MON4D3.voc5.newVoc");
 
@@ -491,7 +519,7 @@ public class GalleryActivity extends VocActivity {
                     }
                 });
             }
-        } else if (requestCode == NEW_RESULT) {
+        else if (requestCode == NEW_RESULT)
             if(resultCode == RESULT_OK){
                 Vocab voc = data.getExtras().getParcelable("com.L3MON4D3.voc5.newVoc");
                 String newQuestion = voc.getQuestion();
@@ -508,9 +536,9 @@ public class GalleryActivity extends VocActivity {
                         client.loadVocs(() -> {
                             runOnUiThread(() -> {
                                 ArrayList<Vocab> vocs = client.getVocabs();
-                                int i = 0;
+                                int i = vocs.size() - 1;
                                 Vocab v = null;
-                                for (; i != vocs.size(); i++) {
+                                for (; i >= 0; i--) {
                                     v = vocs.get(i);
                                     if(v.getQuestion().equals(newQuestion)
                                             && v.getAnswer().equals(newAnswer)
@@ -521,16 +549,38 @@ public class GalleryActivity extends VocActivity {
                                 GalleryCard newCard = gcf.newCard(v, 0);
                                 allCards.add(i, newCard);
                                 searchGallery(allCards);
+                                sortGallery();
                                 Log.e("voc5", "editvoc");
                             });
-
                         });
                     }
                 });
-
-
             }
+    }
+
+    public void addVocsToGallery(ArrayList<Vocab> vocs){
+        if (vocs.size() != 0) {
+            ArrayList<Vocab> cVocs = client.getVocabs();
+            cVocs.sort(null);
+            for (Vocab v : vocs) {
+                int ind = cVocs.indexOf(v);
+                allCards.add(ind, gcf.newCard(v, 0));
+            }
+            searchGallery(allCards);
+            sortGallery();
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        updateThread.interrupt();
+        super.onDestroy();
     }
 
     /**
