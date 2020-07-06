@@ -122,8 +122,17 @@ public class GalleryCard extends CardView implements Comparable<GalleryCard> {
         }
         ((TextView) getChildAt(1)).setText(voc.getLanguage());
     }
+
     @Override
     public int compareTo(GalleryCard other) {
         return this.parentPos - other.parentPos;
+    }
+
+    /**
+     * Get String describing this.
+     * @return String, "parentPos:__, Voc:__"
+     */
+    public String toString() {
+        return "pos: "+parentPos+", Voc:"+voc.toString();
     }
 }

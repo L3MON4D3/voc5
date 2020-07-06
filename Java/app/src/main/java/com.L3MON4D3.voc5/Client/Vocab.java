@@ -44,10 +44,10 @@ public class Vocab extends Object implements Parcelable {
 
     /**
      * Get Object as String.
-     * @return String as follows: "id:__\nanswer:__\nquestion:__\nlanguage:__\n"
+     * @return String as follows: "id:__answer:__question:__language:__"
      */
     public String toString() {
-        return String.format("id: %s%nanswer: %s%nquestion: %s%nlanguage: %s%n",
+        return String.format("id: %sanswer: %squestion: %slanguage: %s",
             id, answer, question, language);
     }
     //Begin Parcelable implementation.
