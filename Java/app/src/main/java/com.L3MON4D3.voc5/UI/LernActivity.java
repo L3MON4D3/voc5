@@ -18,7 +18,8 @@ public class LernActivity  extends VocActivity {
     Button finishbtn;
     Random rad = new Random();
     int currentP;
-    private static final int g = 0;
+    Vocab currentVoc;
+
     ArrayList<Vocab> Vocs;
     TextView textViewQuestion;
     TextView textViewLanguage;
@@ -44,7 +45,7 @@ public class LernActivity  extends VocActivity {
                 });
             } else {
                 Vocs=client.getVocabs();
-                tolern();
+                currentVoc= tolern();
             }
 
         }
@@ -67,19 +68,30 @@ public class LernActivity  extends VocActivity {
             @Override
             public void onClick(View view) {
                 String currentAns = editTextAnswer.getText().toString();
-                startActivity(new Intent(LernActivity.this,Pop.class));
+                if(currentAns.equals(editTextAnswer)){
+                    currentP= currentVoc.getPhase()+1;
+                    currentVoc.setPhase(currentP);
+                    client.updateVocRqst(currentVoc);
+                    currentVoc=tolern();
+                }
+                Intent startIntent = new Intent(getApplicationContext(), Pop.class);
+                startIntent.putExtra("UserAnswer", editTextAnswer.getText().toString());
+                startIntent.putExtra("rightAnswer", currentVoc.getAnswer());
+                startIntent.putExtra("phase", currentVoc.getPhase());
+                startActivityForResult(startIntent, currentP);
+
             }
         });
 
 
 
     }
-    public void  tolern(){
-        Vocab currentVoc = new Vocab();
+    public Vocab  tolern(){
         int rn = rad.nextInt(Vocs.size());
         currentVoc = Vocs.get(rn);
         Vocs.remove(rn);
         window(currentVoc);
+        return currentVoc;
 
     }
     public void window(Vocab currentVoc){
@@ -90,6 +102,15 @@ public class LernActivity  extends VocActivity {
     public void onSaveInstanceState(Bundle sis) {
         sis.putParcelableArrayList("ArrayListLern", Vocs);
         super.onSaveInstanceState(sis);
+    }
+    public void onResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == currentP) {
+            if (resultCode == RESULT_OK) {
+                client.updateVocRqst(currentVoc);
+                currentVoc=tolern();
+
+            }
+        }
     }
 
 }
