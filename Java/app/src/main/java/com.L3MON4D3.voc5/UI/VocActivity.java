@@ -37,6 +37,7 @@ public class VocActivity extends AppCompatActivity {
      */
     public void startLearn(){
         Intent startIntent = new Intent(getApplicationContext(), LernActivity.class);
+        startIntent.putParcelableArrayListExtra("ArrayListLern",client.getVocabs());
         startActivity(startIntent);
     }
 

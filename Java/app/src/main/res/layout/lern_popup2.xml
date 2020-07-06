@@ -2,16 +2,14 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="300dp"
     android:layout_height="400dp"
-    android:background="@color/yorange"
     android:layout_gravity="center">
 
     <TextView
         android:id="@+id/textViewUserAnswer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/pop_userAnswer"
+        android:text="UserAnswer"
         android:layout_marginTop="32dp"
-        android:textColor="@color/darkblue"
         android:layout_marginLeft="32dp"
         android:textSize="30sp"/>
 
@@ -21,28 +19,23 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="32dp"
         android:layout_marginTop="132dp"
-        android:text="@string/pop_answer"
-        android:textColor="@color/darkblue"
+        android:text="Answer"
         android:textSize="30sp" />
 
     <Button
         android:id="@+id/rigthbtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/pop_rightBtn"
+        android:text="right"
         android:textAllCaps="false"
-        android:textColor="@color/darkblue"
-        android:background="@color/orange"
         android:layout_marginTop="250dp"/>
 
     <Button
         android:id="@+id/wrongbtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/pop_wrongBtn"
-        android:background="@color/orange"
+        android:text="wrong"
         android:textAllCaps="false"
-        android:textColor="@color/darkblue"
         android:layout_marginTop="200dp"/>
 
 </RelativeLayout>
