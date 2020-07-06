@@ -12,6 +12,8 @@ import android.widget.GridLayout;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Collections;
 
 import com.L3MON4D3.voc5.Client.*;
 import com.L3MON4D3.voc5.R;
@@ -30,6 +32,12 @@ import okhttp3.Response;
 import java.io.IOException;
 
 public class GalleryActivity extends VocActivity {
+    private static final VocabComparator[] sortComps = new VocabComparator[] {
+        new AnswerComparator(),
+        new QuestionComparator(),
+        new LanguageComparator(),
+        new PhaseComparator()
+    };
     private static final int EDIT_RESULT = 21;
 
     private GridLayout gallery;
@@ -42,16 +50,24 @@ public class GalleryActivity extends VocActivity {
     private Button galleryEditBtn;
     private Button galleryLearnBtn;
     private Button galleryDeleteBtn;
+    private FloatingActionButton fab;
+
     private int srchSel;
     private int sortSel;
     private boolean sortAsc;
-    private FloatingActionButton fab;
+
+    VocabComparator crtSortComp;
+
     private int selCount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gallery);
+
+        srchSel = 0;
+        sortSel = 0;
+        sortAsc = true;
 
         gallery = findViewById(R.id.gall_lt);
 
@@ -91,60 +107,36 @@ public class GalleryActivity extends VocActivity {
         galleryDeleteBtn = findViewById(R.id.galleryDeleteBtn);
         fab = findViewById(R.id.galleryFab);
 
-        srchSel = 0;
         findViewById(R.id.srchSel_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Button tv = (Button) view;
-                switch(srchSel) {
-                    case(0) :
-                        srchSel = 1;
-                        tv.setText("Qes");
-                        break;
-                    case(1) :
-                        srchSel = 2;
-                        tv.setText("Lan");
-                        break;
-                    case(2) :
-                        srchSel = 0;
-                        tv.setText("Ans");
-                        break;
-                }
+                srchSel = (srchSel + 1) % 4;
+                srchSet(tv);
             }
         });
 
-        sortSel = 0;
-        findViewById(R.id.sortSel_btn).setOnClickListener(new View.OnClickListener() {
+        Button sortBtn = findViewById(R.id.sortSel_btn);
+        sortSet(sortBtn);
+        sortBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Button tv = (Button) view;
-                switch(sortSel) {
-                    case(0) :
-                        sortSel = 1;
-                        tv.setText("Qes");
-                        break;
-                    case(1) :
-                        sortSel = 2;
-                        tv.setText("Lan");
-                        break;
-                    case(2) :
-                        sortSel = 0;
-                        tv.setText("Ans");
-                        break;
-                }
+                sortSel = (sortSel + 1) % 4;
+                sortSet(tv);
+                sortGallery();
             }
         });
 
-        sortAsc = true;
-        findViewById(R.id.sortDir_btn).setOnClickListener(new View.OnClickListener() {
+        Button sortDirBtn = findViewById(R.id.sortDir_btn);
+        sortDirSet(sortDirBtn);
+        sortDirBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Button tv = (Button) view;
-                if (sortAsc)
-                    tv.setText("Dsc");
-                else
-                   tv.setText("Asc");
                 sortAsc = !sortAsc;
+                sortDirSet(tv);
+                sortReverse();
             }
         });
 
@@ -244,6 +236,89 @@ public class GalleryActivity extends VocActivity {
         gc.resetElevation();
         gc.setSelected(false);
         selCount--;
+    }
+
+    /**
+     * Sets text and srchComp according to variable srchSel.
+     * @param srchBtn Button that displays current selection.
+     */
+    public void srchSet(Button srchBtn) {
+        switch(srchSel) {
+            case(0) :
+                srchBtn.setText("Ans");
+                break;
+            case(1) :
+                srchBtn.setText("Qes");
+                break;
+            case(2) :
+                srchBtn.setText("Lan");
+                break;
+            case(3) :
+                srchBtn.setText("Phs");
+                break;
+        }
+    }
+
+    /**
+     * Sets text and sortComp according to variable sortSel.
+     * @param sortBtn Button that displays current selection.
+     */
+    public void sortSet(Button sortBtn) {
+        switch(sortSel) {
+            case(0) :
+                sortBtn.setText("Ans");
+                break;
+            case(1) :
+                sortBtn.setText("Qes");
+                break;
+            case(2) :
+                sortBtn.setText("Lan");
+                break;
+            case(3) :
+                sortBtn.setText("Phs");
+                break;
+        }
+        crtSortComp = sortComps[sortSel];
+    }
+
+    /**
+     * Sets text and boolean ascending for VocabComparator.
+     * @param sortDirBtn Button that displays current sort Direction(Asc/Dsc)
+     */
+    public void sortDirSet(Button sortDirBtn) {
+        if (sortAsc)
+            sortDirBtn.setText("Asc");
+        else
+           sortDirBtn.setText("Dsc");
+        crtSortComp.setAscending(sortAsc);
+    }
+
+    /**
+     * Sorts Gallery using crtSortComp.
+     */
+    public void sortGallery() {
+        currentCards.sort(Comparator.comparing(GalleryCard::getVoc, crtSortComp));
+        setGalleryContent();
+    }
+
+    /**
+     * Sort Ascending insteaaad of Descending <=> reverse currentCards.
+     */
+    public void sortReverse() {
+        Collections.reverse(currentCards);
+        setGalleryContent();
+    }
+
+    /**
+     * Sets Gallery Content from currentCards.
+     */
+    public void setGalleryContent() {
+        clearGallery();
+        for (int i = 0; i != currentCards.size(); i++) {
+            GalleryCard gc = currentCards.get(i);
+            gallery.addView(gc, i);
+            gc.parentPos = i;
+        }
     }
 
     /**
