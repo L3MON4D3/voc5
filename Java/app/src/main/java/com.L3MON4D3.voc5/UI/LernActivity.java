@@ -31,20 +31,24 @@ public class LernActivity  extends VocActivity {
         super.onCreate(savedInstanceState);
 
         if (savedInstanceState != null) {
-            Vocs = savedInstanceState.getParcelableArrayList("ArrayListLern");
-        }else if(getIntent().hasExtra("ArrayListLern")) {
+            Vocs =savedInstanceState.getParcelableArrayList("ArrayListLern");
+        }else if (getIntent().hasExtra("ArrayListLern")) {
             Vocs = getIntent().getExtras().getParcelableArrayList("ArrayListLern");
         }
+
         if(Vocs==null){
             if (!client.hasVocabs()) {
                 client.loadVocs(() -> {
                     Vocs=client.getVocabs();
+                    tolern();
                 });
             } else {
                 Vocs=client.getVocabs();
+                tolern();
             }
-            Vocs = client.getVocabs();
+
         }
+
 
 
         setContentView(R.layout.lern_activity2);
@@ -66,14 +70,9 @@ public class LernActivity  extends VocActivity {
                 startActivity(new Intent(LernActivity.this,Pop.class));
             }
         });
-        tolern();
 
 
 
-    }
-    public void onSaveInstanceState(Bundle sis) {
-        sis.putParcelableArrayList("ArrayListLern", Vocs);
-        super.onSaveInstanceState(sis);
     }
     public void  tolern(){
         Vocab currentVoc = new Vocab();
@@ -87,6 +86,10 @@ public class LernActivity  extends VocActivity {
         textViewQuestion.setText(currentVoc.getQuestion());
         textViewLanguage.setText(currentVoc.getLanguage());
 
+    }
+    public void onSaveInstanceState(Bundle sis) {
+        sis.putParcelableArrayList("ArrayListLern", Vocs);
+        super.onSaveInstanceState(sis);
     }
 
 }
