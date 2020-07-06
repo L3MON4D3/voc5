@@ -36,7 +36,7 @@ public class GalleryActivity extends VocActivity {
     private GalleryCardFactory gcf;
 
     //Contains references to Vocab in Voc5Client.
-    private ArrayList<Vocab> currentVocs;
+    private ArrayList<GalleryCard> currentCards;
     private ArrayList<GalleryCard> selected;
 
     private Button galleryEditBtn;
@@ -71,7 +71,7 @@ public class GalleryActivity extends VocActivity {
         gcf = new GalleryCardFactory(getLayoutInflater(), gallery, width/colCount-(int)(10*density), this);
 
         selected = new ArrayList<GalleryCard>();
-        currentVocs = new ArrayList<Vocab>();
+        currentCards = new ArrayList<GalleryCard>();
         if (savedInstanceState == null) {
             if (client.hasVocabs()) {
                 client.loadVocs(() -> {
@@ -193,7 +193,7 @@ public class GalleryActivity extends VocActivity {
                     Vocab tmpVoc = tmp.getVoc();
 
                     client.getVocabs().remove(tmpVoc);
-                    currentVocs.remove(tmpVoc);
+                    currentCards.remove(tmp);
                     deselect(tmp);
                     //Gallery cards replace deleted galley cards therefore shift index from parents.
                     gallery.removeViewAt(tmp.parentPos-i);
@@ -252,9 +252,9 @@ public class GalleryActivity extends VocActivity {
      */
     public void setGalleryContent(ArrayList<Vocab> vocs) {
         for (int i = 0; i != vocs.size(); i++) {
-            Vocab tmp = vocs.get(i);
-            currentVocs.add(tmp);
-            gallery.addView(gcf.newCard(tmp, i), i);
+            GalleryCard gc = gcf.newCard(vocs.get(i), i);
+            currentCards.add(gc);
+            gallery.addView(gc, i);
         }
     }
 
@@ -285,8 +285,8 @@ public class GalleryActivity extends VocActivity {
 
         for (int i = 0; i != currentVocInd.length; i++) {
             Vocab tmp = clientVocs.get(currentVocInd[i]);
-            currentVocs.add(tmp);
             GalleryCard gc = gcf.newCard(tmp, i);
+            currentCards.add(gc);
 
             if (selectedArrInd < selectedPos.length && i == selectedPos[selectedArrInd]) {
                 select(gc);
@@ -368,15 +368,15 @@ public class GalleryActivity extends VocActivity {
      */
     public void onSaveInstanceState(Bundle sis) {
         //Pass indizes of current Vocs in Voc5Client's list.
-        int[] currentArr = new int[currentVocs.size()];
+        int[] currentArr = new int[currentCards.size()];
         ArrayList<Vocab> clientVocs = client.getVocabs();
         for (int i = 0; i != currentArr.length; i++)
-            currentArr[i] = clientVocs.indexOf(currentVocs.get(i));
-                    
+            currentArr[i] = clientVocs.indexOf(currentCards.get(i).getVoc());
         sis.putIntArray("currentVocs", currentArr);
-
+                    
         //Pass indizes of selected Cards (in currentVocabs).
         int[] selectedArr = new int[selCount];
+        selected.sort(null);
         for (int i = 0; i != selCount; i++)
             selectedArr[i] = selected.get(i).parentPos;
         sis.putIntArray("selectedPos", selectedArr);
