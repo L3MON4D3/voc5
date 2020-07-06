@@ -7,6 +7,6 @@ public class QuestionComparator extends VocabComparator {
      */
     @Override
     public int compare(Vocab a, Vocab b) {
-        return ascending ? 1:-1* a.getQuestion().compareTo(b.getQuestion());
+        return (ascending?1:-1)*a.getQuestion().compareTo(b.getQuestion());
     }
 }
