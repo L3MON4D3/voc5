@@ -505,28 +505,29 @@ public class GalleryActivity extends VocActivity {
                     @Override
                     public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
                         Log.e("voc5", response.body().string());
+                        client.loadVocs(() -> {
+                            runOnUiThread(() -> {
+                                ArrayList<Vocab> vocs = client.getVocabs();
+                                int i = 0;
+                                Vocab v = null;
+                                for (; i != vocs.size(); i++) {
+                                    v = vocs.get(i);
+                                    if(v.getQuestion().equals(newQuestion)
+                                            && v.getAnswer().equals(newAnswer)
+                                            && v.getLanguage().equals(newLang)) {
+                                        break;
+                                    }
+                                }
+                                GalleryCard newCard = gcf.newCard(v, 0);
+                                allCards.add(i, newCard);
+                                searchGallery(allCards);
+                                Log.e("voc5", "editvoc");
+                            });
+
+                        });
                     }
                 });
-                client.loadVocs(() -> {
-                    runOnUiThread(() -> {
-                        ArrayList<Vocab> vocs = client.getVocabs();
-                        int i = 0;
-                        Vocab v = null;
-                        for (; i != vocs.size(); i++) {
-                            v = vocs.get(i);
-                            if(v.getQuestion().equals(newQuestion)
-                                    && v.getAnswer().equals(newAnswer)
-                                    && v.getLanguage().equals(newLang)) {
-                                break;
-                            }
-                        }
-                        GalleryCard newCard = gcf.newCard(v, 0);
-                        allCards.add(i, newCard);
-                        searchGallery(allCards);
-                        Log.e("voc5", "editvoc");
-                    });
 
-                });
 
             }
         }
