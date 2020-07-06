@@ -50,6 +50,7 @@ public class GalleryActivity extends VocActivity {
         new VocPredicate(Vocab::getPhaseString)
     };
     private static final int EDIT_RESULT = 21;
+    private static final int NEW_RESULT = 22;
 
     private GridLayout gallery;
     private GalleryCardFactory gcf;
@@ -200,20 +201,8 @@ public class GalleryActivity extends VocActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Vocab newVoc = new Vocab();
-                client.getOkClient().newCall(client.newVocabRqst(newVoc)).enqueue(new Callback() {
-                    @Override
-                    public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                        Log.e("voc5:", e.getMessage());
-                    }
-
-                    @Override
-                    public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-                        Log.e("voc5:", response.body().string());
-                    }
-                });
-
-                startEditVoc(newVoc);
+                Intent startIntent = new Intent(getApplicationContext(), EditActivity.class);
+                startActivityForResult(startIntent,NEW_RESULT);
             }
         });
 
@@ -481,7 +470,7 @@ public class GalleryActivity extends VocActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == EDIT_RESULT)
+        if (requestCode == EDIT_RESULT) {
             if (resultCode == RESULT_OK) {
                 Vocab newVoc = data.getExtras().getParcelable("com.L3MON4D3.voc5.newVoc");
 
@@ -502,6 +491,45 @@ public class GalleryActivity extends VocActivity {
                     }
                 });
             }
+        } else if (requestCode == NEW_RESULT) {
+            if(resultCode == RESULT_OK){
+                Vocab voc = data.getExtras().getParcelable("com.L3MON4D3.voc5.newVoc");
+                String newQuestion = voc.getQuestion();
+                String newAnswer = voc.getAnswer();
+                String newLang = voc.getLanguage();
+                client.getOkClient().newCall(client.newVocabRqst(voc)).enqueue(new Callback() {
+                    @Override
+                    public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                    }
+
+                    @Override
+                    public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                        Log.e("voc5", response.body().string());
+                    }
+                });
+                client.loadVocs(() -> {
+                    runOnUiThread(() -> {
+                        ArrayList<Vocab> vocs = client.getVocabs();
+                        int i = 0;
+                        Vocab v = null;
+                        for (; i != vocs.size(); i++) {
+                            v = vocs.get(i);
+                            if(v.getQuestion().equals(newQuestion)
+                                    && v.getAnswer().equals(newAnswer)
+                                    && v.getLanguage().equals(newLang)) {
+                                break;
+                            }
+                        }
+                        GalleryCard newCard = gcf.newCard(v, 0);
+                        allCards.add(i, newCard);
+                        searchGallery(allCards);
+                        Log.e("voc5", "editvoc");
+                    });
+
+                });
+
+            }
+        }
     }
 
     /**

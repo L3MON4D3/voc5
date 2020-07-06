@@ -28,11 +28,13 @@ public class EditActivity extends VocActivity{
         newPhaseEt = findViewById(R.id.newPhaseEt);
 
         //set Edit Texts to  content that should be edited
-        Vocab tmp = getIntent().getExtras().getParcelable("com.L3MON4D3.voc5.Voc");
-        newQuestionEt.setText(tmp.getQuestion());
-        newAnswerEt.setText(tmp.getAnswer());
-        newLanguageEt.setText(tmp.getLanguage());
-        newPhaseEt.setText(String.valueOf(tmp.getPhase()));
+        if(getIntent().hasExtra("com.L3MON4D3.voc5.Voc")) {
+            Vocab tmp = getIntent().getExtras().getParcelable("com.L3MON4D3.voc5.Voc");
+            newQuestionEt.setText(tmp.getQuestion());
+            newAnswerEt.setText(tmp.getAnswer());
+            newLanguageEt.setText(tmp.getLanguage());
+            newPhaseEt.setText(String.valueOf(tmp.getPhase()));
+        }
 
         commitChangesBtn = findViewById(R.id.commitChangeBtn);
         commitChangesBtn.setOnClickListener(new View.OnClickListener() {
