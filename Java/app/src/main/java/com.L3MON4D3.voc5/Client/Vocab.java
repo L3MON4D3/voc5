@@ -35,6 +35,7 @@ public class Vocab extends Object implements Parcelable, Comparable<Vocab> {
     public String getQuestion() { return question; }
     public String getLanguage() { return language; }
     public int getPhase() { return phase; }
+    public String getPhaseString() { return String.valueOf(phase); }
 
     public void setQuestion(String newQuestion) { this.question = newQuestion; }
     public void setAnswer(String newAnswer) { this.answer = newAnswer; }

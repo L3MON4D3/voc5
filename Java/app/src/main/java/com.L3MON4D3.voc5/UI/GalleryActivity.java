@@ -4,16 +4,21 @@ import android.os.Bundle;
 import android.content.Intent;
 
 import android.util.DisplayMetrics;
+import android.text.TextWatcher;
+import android.text.Editable;
 
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridLayout;
+import android.widget.EditText;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.function.Predicate;
 import java.util.Collections;
+import java.util.stream.Collectors;
 
 import com.L3MON4D3.voc5.Client.*;
 import com.L3MON4D3.voc5.R;
@@ -38,6 +43,12 @@ public class GalleryActivity extends VocActivity {
         new LanguageComparator(),
         new PhaseComparator()
     };
+    private static final VocPredicate[] srchPreds = new VocPredicate[] {
+        new VocPredicate(Vocab::getAnswer),
+        new VocPredicate(Vocab::getQuestion),
+        new VocPredicate(Vocab::getLanguage),
+        new VocPredicate(Vocab::getPhaseString)
+    };
     private static final int EDIT_RESULT = 21;
 
     private GridLayout gallery;
@@ -52,12 +63,14 @@ public class GalleryActivity extends VocActivity {
     private Button galleryLearnBtn;
     private Button galleryDeleteBtn;
     private FloatingActionButton fab;
+    private EditText searchET;
 
     private int srchSel;
     private int sortSel;
     private boolean sortAsc;
 
     VocabComparator crtSortComp;
+    VocPredicate crtSrchPred;
 
     private int selCount = 0;
 
@@ -113,13 +126,36 @@ public class GalleryActivity extends VocActivity {
         galleryLearnBtn = findViewById(R.id.galleryLearnBtn);
         galleryDeleteBtn = findViewById(R.id.galleryDeleteBtn);
         fab = findViewById(R.id.galleryFab);
+        searchET = findViewById(R.id.search_et);
 
-        findViewById(R.id.srchSel_btn).setOnClickListener(new View.OnClickListener() {
+        searchET.addTextChangedListener(new TextWatcher(){
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                crtSrchPred.setSearchString(String.valueOf(s));
+                //if Text was changed somewhere not at the end, search allCards
+                if (start != s.length()-1)
+                    searchGallery(allCards);
+                //if a char was added, search current Cards (search got more specific)
+                else if (before < count)
+                    searchGallery(currentCards);
+                else
+                    searchGallery(allCards);
+            }
+
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            public void afterTextChanged(Editable e) { }
+        });
+
+        Button srchSelBtn = findViewById(R.id.srchSel_btn);
+        srchSet(srchSelBtn);
+        srchSelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Button tv = (Button) view;
                 srchSel = (srchSel + 1) % 4;
                 srchSet(tv);
+                searchGallery(allCards);
             }
         });
 
@@ -288,6 +324,8 @@ public class GalleryActivity extends VocActivity {
                 srchBtn.setText("Phs");
                 break;
         }
+        crtSrchPred = srchPreds[srchSel];
+        crtSrchPred.setSearchString(searchET.getText().toString());
     }
 
     /**
@@ -337,6 +375,17 @@ public class GalleryActivity extends VocActivity {
      */
     public void sortReverse() {
         Collections.reverse(currentCards);
+        setGalleryContentFromCurrent();
+    }
+
+    /**
+     * Filter Cards based on crtSrchPred.
+     * @param cards search this ArrayList, useful for more/less specific searches.
+     */
+    public void searchGallery(ArrayList<GalleryCard> cards) {
+        currentCards = (ArrayList<GalleryCard>) cards.stream()
+            .filter(gc -> crtSrchPred.test(gc.getVoc()))
+            .collect(Collectors.toList());
         setGalleryContentFromCurrent();
     }
 

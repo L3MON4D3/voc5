@@ -40,7 +40,7 @@
                 android:textSize="12dp" />
 
             <EditText
-                android:id="@+id/search_ET"
+                android:id="@+id/search_et"
                 android:layout_width="0px"
                 android:layout_height="wrap_content"
                 android:layout_gravity="fill_vertical"
