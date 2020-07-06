@@ -4,7 +4,7 @@ import android.os.Parcelable;
 import android.os.Parcel;
 
 
-public class Vocab extends Object implements Parcelable {
+public class Vocab extends Object implements Parcelable, Comparable<Vocab> {
     private int id;
     private String answer;
     private String question;
@@ -102,4 +102,7 @@ public class Vocab extends Object implements Parcelable {
         return id == vocab.id;
     }
 
+    public int compareTo(Vocab voc) {
+        return this.id - voc.getId();
+    }
 }
