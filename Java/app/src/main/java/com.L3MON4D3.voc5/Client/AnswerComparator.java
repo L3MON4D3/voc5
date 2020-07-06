@@ -1,12 +1,6 @@
 package com.L3MON4D3.voc5.Client;
 
-import java.util.Comparator;
-
-public class AnswerComparator implements Comparator<Vocab> {
-    private static boolean ascending = true;
-
-    public void setAscending(boolean asc) { this.ascending = asc; }
-
+public class AnswerComparator extends VocabComparator {
     /**
      * compares either ascending or descending
      *
