@@ -36,7 +36,7 @@
                 android:id="@+id/srchSel_btn"
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
-                android:text="Ans"
+                android:text="@string/gal_searchAnswer"
                 android:textSize="12dp" />
 
             <EditText
@@ -45,20 +45,20 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="fill_vertical"
                 android:layout_weight="1"
-                android:hint="Search" />
+                android:hint="@string/gal_searchHint" />
 
             <Button
                 android:id="@+id/sortSel_btn"
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
-                android:text="Ans"
+                android:text="@string/gal_searchAnswer"
                 android:textSize="12dp" />
 
             <Button
                 android:id="@+id/sortDir_btn"
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
-                android:text="Asc"
+                android:text="@string/gal_searchDirection"
                 android:textSize="12dp" />
 
         </LinearLayout>
@@ -76,7 +76,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="fill_vertical"
                 android:layout_weight="1"
-                android:text="edit" />
+                android:text="@string/gal_editBtn" />
 
             <Button
                 android:id="@+id/galleryLearnBtn"
@@ -84,7 +84,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="fill_vertical"
                 android:layout_weight="1"
-                android:text="learn" />
+                android:text="@string/gal_learnBtn" />
 
             <Button
                 android:id="@+id/galleryDeleteBtn"
@@ -92,7 +92,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="fill_vertical"
                 android:layout_weight="1"
-                android:text="löschen" />
+                android:text="@string/gal_delBtn" />
 
         </LinearLayout>
 

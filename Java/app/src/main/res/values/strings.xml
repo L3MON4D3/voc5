@@ -1,1 +1,34 @@
-<resources></resources>
+<resources>
+    <string name="log_emailHint">E-Mail</string>
+    <string name="log_passwordHint">Passwort</string>
+    <string name="log_loginBtn">Login</string>
+    <string name="log_registerBtn">Register</string>
+    <string name="log_rememberMe">Remember me</string>
+    <string name="log_serverHint">Server</string>
+    <string name="log_serverText">https://api.voc5.org</string>
+
+    <string name="pop_userAnswer">User Answer</string>
+    <string name="pop_answer">Answer</string>
+    <string name="pop_rightBtn">Right</string>
+    <string name="pop_wrongBtn">Btn</string>
+
+    <string name="lern_Language">Language</string>
+    <string name="lern_Question">Question</string>
+    <string name="lern_answerHint">Enter your Answer</string>
+    <string name="lern_okBtn">OK</string>
+    <string name="lern_finishBtn">Finish</string>
+
+    <string name="gal_searchAnswer">Ans</string>
+    <string name="gal_searchHint">Search</string>
+    <string name="gal_searchDirection">Asc</string>
+    <string name="gal_editBtn">Edit</string>
+    <string name="gal_learnBtn">Learn</string>
+    <string name="gal_delBtn">Delete</string>
+
+    <string name="edi_answerHint">Enter new Answer</string>
+    <string name="edi_questionHint">Enter new Question</string>
+    <string name="edi_langHint">Enter new Language</string>
+    <string name="edi_phaseHint">Enter new Phase</string>
+    <string name="edi_commitBtn">Commit Changes</string>
+
+</resources>

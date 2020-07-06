@@ -12,14 +12,14 @@
         android:id="@+id/textViewLanguage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Language"
+        android:text="@string/lern_Language"
         android:layout_gravity="left"
         android:textColor="@color/yorange" />
     <TextView
         android:id="@+id/textViewQuestion"
         android:layout_width="167dp"
         android:layout_height="59dp"
-        android:text="Question"
+        android:text="@string/lern_Question"
         android:textColor="@color/yorange"
         android:textSize="32sp" />
 
@@ -35,7 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:hint="Enter your answer"
+            android:hint="@string/lern_answerHint"
             android:inputType="text"
             android:textColor="@color/yorange">
 
@@ -46,7 +46,7 @@
             android:layout_width="48dp"
             android:layout_height="30dp"
             android:background="@color/orange"
-            android:text="OK"
+            android:text="@string/lern_okBtn"
             android:textColor="@color/darkblue" />
     </LinearLayout>
 
@@ -57,7 +57,7 @@
         android:background="@color/purpleblue"
         android:layout_gravity="right"
         android:gravity="center"
-        android:text="finish"
+        android:text="@string/lern_finishBtn"
         android:textColor="@color/yorange" />
 
 

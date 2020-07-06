@@ -13,14 +13,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:hint="Enter new Answer"
+        android:hint="@string/lern_answerHint"
         android:textSize="20dp" />
 
     <EditText
         android:id="@+id/newQuestionEt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter new Questions"
+        android:hint="@string/edi_questionHint"
         android:layout_marginTop="20dp"
         android:textSize="20dp" />
 
@@ -29,7 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:hint="Enter new Language"
+        android:hint="@string/edi_langHint"
         android:textSize="20dp" />
 
     <EditText
@@ -37,7 +37,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:hint="Enter new Phase"
+        android:hint="@string/edi_phaseHint"
         android:textSize="20dp"
         android:inputType="number"/>
 
@@ -46,7 +46,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="commit changes"
+        android:text="@string/edi_commitBtn"
         android:textAllCaps="false"
         android:textSize="20dp" />
 

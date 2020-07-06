@@ -12,7 +12,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="E-Mail" >
+            android:hint="@string/log_emailHint" >
 
             <EditText
                 android:id="@+id/usr_et"
@@ -26,7 +26,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Passwort"
+            android:hint="@string/log_passwordHint"
             android:layout_marginBottom="20dp">
             <!--Add margin so that Keyboard doesnt move EditTexts.-->
 
@@ -49,13 +49,13 @@
                 android:id="@+id/login_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Login" 
+                android:text="@string/log_loginBtn"
                 android:layout_gravity="center" />
             <Button
                 android:id="@+id/register_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Register" 
+                android:text="@string/log_registerBtn"
                 android:layout_gravity="center" />
         </LinearLayout>
         
@@ -63,19 +63,19 @@
             android:id="@+id/rmbr_cbx"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Remember me" />
+            android:text="@string/log_rememberMe" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Server"
+            android:hint="@string/log_serverHint"
             android:layout_marginBottom="20dp">
 
             <EditText
                 android:id="@+id/server_et"
                 android:layout_width="170dp"
                 android:layout_height="wrap_content"
-                android:text="https://api.voc5.org" />
+                android:text="@string/log_serverText" />
 
         </com.google.android.material.textfield.TextInputLayout>
         
