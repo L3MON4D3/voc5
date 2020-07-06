@@ -89,7 +89,7 @@ public class GalleryActivity extends VocActivity {
         selected = new ArrayList<GalleryCard>();
         currentCards = new ArrayList<GalleryCard>();
         if (savedInstanceState == null) {
-            if (client.hasVocabs()) {
+            if (!client.hasVocabs()) {
                 client.loadVocs(() -> {
                     runOnUiThread(() -> setGalleryContent(client.getVocabs()));
                 });

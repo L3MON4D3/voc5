@@ -57,7 +57,7 @@ public class Voc5Client implements Parcelable {
      * @return true if there are vocabs, false otherwise.
      */
     public boolean hasVocabs() {
-        return vocabs == null;
+        return vocabs != null;
     }
 
     public OkHttpClient getOkClient() { return okClient; }
