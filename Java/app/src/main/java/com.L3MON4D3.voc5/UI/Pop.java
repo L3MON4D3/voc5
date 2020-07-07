@@ -18,9 +18,9 @@ import com.L3MON4D3.voc5.R;
 import java.util.ArrayList;
 
 public class Pop extends VocActivity {
-    TextView textViewUserAnswer ;
-    TextView textViewRigthAnswer ;
-    Button rigthbtn ;
+    TextView textViewUserAnswer;
+    TextView textViewRigthAnswer;
+    Button rigthbtn;
     Button wrongbtn;
 
     int currentp;
@@ -37,18 +37,20 @@ public class Pop extends VocActivity {
         rigthbtn = (Button) findViewById(R.id.rigthbtn);
         wrongbtn = (Button) findViewById(R.id.wrongbtn);
 
-        if (getIntent().hasExtra("UserAnswer")) {
+        if (getIntent().hasExtra("userAnswer")) {
 
-            textViewUserAnswer.setText(getIntent().getExtras().getString("UserAnswer"));
+            UserAnswer = getIntent().getExtras().getString("userAnswer");
 
         }
         if (getIntent().hasExtra("rightAnswer")) {
-            textViewRigthAnswer.setText(getIntent().getExtras().getString("rightAnswer"));
+            RightAnswer = getIntent().getExtras().getString("rightAnswer");
         }
         if (getIntent().hasExtra("phase")) {
-            currentp =getIntent().getExtras().getInt("phase");
+            currentp = getIntent().getExtras().getInt("phase");
         }
-
+        textViewUserAnswer.setText(UserAnswer);
+        textViewRigthAnswer.setText(RightAnswer);
+        findf(UserAnswer,RightAnswer);
 
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -88,6 +90,34 @@ public class Pop extends VocActivity {
             }
         });
     }
+
+    public void findf(String user,String answer) {
+        ArrayList<Boolean> temp = new ArrayList<Boolean>();
+        for (int i = 0; i <= user.length() - 1; i++) {
+            if (user.charAt(i) == answer.charAt(i)) {
+                temp.add(true);
+            } else {
+                temp.add(false);
+            }
+        }
+        window(temp);
+    }
+    public void window(ArrayList<Boolean> b) {
+        String mtext = UserAnswer;
+        char[] f;
+        f=UserAnswer.toCharArray();
+       
+        SpannableString ss = new SpannableString(mtext);
+        BackgroundColorSpan bcsRed = new BackgroundColorSpan(Color.RED);
+        for(int i= 0; i<=textViewUserAnswer.getText().length()-1; i++){
+            if(b.get(i)) {
+               ss.setSpan(bcsRed, i,i+1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+        }
+
+        textViewUserAnswer.setText(ss);
+    }
+
 
 
 }
