@@ -33,46 +33,54 @@ public class LernActivity  extends VocActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.lern_activity2);
+        textViewQuestion = (TextView) findViewById(R.id.textViewQuestion);
+        textViewLanguage = (TextView) findViewById(R.id.textViewLanguage);
+        editTextAnswer = (EditText) findViewById(R.id.editTextAnswer);
+        finishbtn =(Button) findViewById(R.id.finishbtn);
+        checkbtn = (ImageButton) findViewById(R.id.checkbtn);
 
         if (savedInstanceState != null) {
             vocs =savedInstanceState.getParcelableArrayList("ArrayListLern");
             newPhases=savedInstanceState.getIntArray("newPhases");
             tolern();
         }else {
-            newPhases = new int[client.getVocabs().size()];
-            Arrays.fill(newPhases,-1);
-            vocs = getIntent().getExtras().getParcelableArrayList("ArrayListLern");
-            tolern();
-        }
-
-        if(vocs==null){
-            if (!client.hasVocabs()) {
-                client.loadVocs(() -> {
-                    vocs=client.getVocabs();
-                    runOnUiThread(()-> tolern());
-
-                });
-            } else {
-                vocs=client.getVocabs();
+            if (getIntent().hasExtra("ArrayListLern")) {
+                vocs = getIntent().getExtras().getParcelableArrayList("ArrayListLern");
+                newPhases = new int[client.getVocabs().size()];
+                Arrays.fill(newPhases, -1);
                 tolern();
+            } else {
+                if (!client.hasVocabs()) {
+                    client.loadVocs(() -> {
+                        vocs = client.getVocabs();
+                        newPhases = new int[client.getVocabs().size()];
+                        Arrays.fill(newPhases, -1);
+                        runOnUiThread(() -> tolern());
+                    });
+                } else {
+                    vocs = client.getVocabs();
+                    newPhases = new int[client.getVocabs().size()];
+                    Arrays.fill(newPhases, -1);
+                    tolern();
+                }
             }
-
         }
 
 
 
-        setContentView(R.layout.lern_activity2);
-        textViewQuestion = (TextView) findViewById(R.id.textViewQuestion);
-        textViewLanguage = (TextView) findViewById(R.id.textViewLanguage);
-        editTextAnswer = (EditText) findViewById(R.id.editTextAnswer);
-        finishbtn =(Button) findViewById(R.id.finishbtn);
+
+
+
         finishbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(LernActivity.this,GalleryActivity.class));
+                Intent startIntent = new Intent();
+                startIntent.putExtra("newPhases", newPhases);
+                setResult(RESULT_OK, startIntent);
+                finish();
             }
         });
-        checkbtn = (ImageButton) findViewById(R.id.checkbtn);
         checkbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
