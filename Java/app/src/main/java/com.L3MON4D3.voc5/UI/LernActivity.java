@@ -57,8 +57,6 @@ public class LernActivity  extends VocActivity {
                 for(int i=0; i!=vocs.size();i++){
                     Vocab v = vocs.get(i);
                     newPhases[i] = new IntPair(v.getId(), v.getPhase());
-                    Log.e("voc5", "Pair: "+String.valueOf(newPhases[i].second));
-                    Log.e("voc5", "Pair: "+String.valueOf(newPhases[i].first));
                 }
 
                 tolern();
@@ -129,7 +127,6 @@ public class LernActivity  extends VocActivity {
         }
     }
     public void saveChanges(Vocab v){
-        Log.e("voc5", v.toString());
         client.getOkClient().newCall(client.updateVocRqst(v)).enqueue(new Callback() {
             @Override
             public void onFailure(@NotNull Call call, @NotNull IOException e) {
@@ -142,10 +139,7 @@ public class LernActivity  extends VocActivity {
             }
         });
         for(int i =0; i!=newPhases.length;i++){
-            Log.e("voc5", String.valueOf(v.getId()));
-            Log.e("voc5", String.valueOf(newPhases[i].first));
             if(newPhases[i].first == v.getId()){
-                Log.e("voc5", "upd");
                 newPhases[i].second = v.getPhase();
                 return;
             }

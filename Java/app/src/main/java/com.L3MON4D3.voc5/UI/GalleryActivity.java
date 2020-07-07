@@ -562,7 +562,6 @@ public class GalleryActivity extends VocActivity {
                                 allCards.add(i, newCard);
                                 searchGallery(allCards);
                                 sortGallery();
-                                Log.e("voc5", "editvoc");
                             });
                         });
                     }
