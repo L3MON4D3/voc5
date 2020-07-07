@@ -7,14 +7,50 @@
     android:orientation="vertical"
     android:paddingTop="5dp">
 
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/galleryFab"
+        android:id="@+id/galleryDeleteBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="end|bottom"
+        android:layout_marginLeft="16dp"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/ic_baseline_clear_24"
+        android:visibility="gone"
+        app:backgroundTint="@color/buttonBackgroundGreen"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/galleryLearnBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/ic_baseline_menu_book_24"
+        android:visibility="gone"
+        app:backgroundTint="@color/buttonBackgroundGreen"
+        app:layout_constraintBottom_toTopOf="@id/galleryDeleteBtn"
+        app:layout_constraintStart_toStartOf="@id/galleryDeleteBtn" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/galleryEditBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/ic_baseline_edit_24"
+        android:visibility="gone"
+        app:backgroundTint="@color/buttonBackgroundGreen"
+        app:layout_constraintBottom_toTopOf="@id/galleryLearnBtn"
+        app:layout_constraintStart_toStartOf="@+id/galleryLearnBtn" />
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/galleryAddBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:src="@android:drawable/ic_menu_add"
-        app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
+        android:src="@drawable/ic_baseline_add_24"
+        app:backgroundTint="@color/buttonBackgroundGreen"
+        app:layout_constraintBottom_toBottomOf="@id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent" />
 
 
@@ -63,38 +99,6 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp">
-
-
-            <Button
-                android:id="@+id/galleryEditBtn"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="fill_vertical"
-                android:layout_weight="1"
-                android:text="@string/gal_editBtn" />
-
-            <Button
-                android:id="@+id/galleryLearnBtn"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="fill_vertical"
-                android:layout_weight="1"
-                android:text="@string/gal_learnBtn" />
-
-            <Button
-                android:id="@+id/galleryDeleteBtn"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="fill_vertical"
-                android:layout_weight="1"
-                android:text="@string/gal_delBtn" />
-
-        </LinearLayout>
 
         <ScrollView
             android:layout_width="match_parent"
