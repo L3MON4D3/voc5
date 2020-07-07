@@ -2,8 +2,10 @@ package com.L3MON4D3.voc5.UI;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.RegionIterator;
 import android.os.Bundle;
 import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.BackgroundColorSpan;
 import android.util.DisplayMetrics;
@@ -50,7 +52,7 @@ public class Pop extends VocActivity {
         }
         textViewUserAnswer.setText(UserAnswer);
         textViewRigthAnswer.setText(RightAnswer);
-        findf(UserAnswer,RightAnswer);
+        findf();
 
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -91,10 +93,21 @@ public class Pop extends VocActivity {
         });
     }
 
-    public void findf(String user,String answer) {
+    public void findf() {
         ArrayList<Boolean> temp = new ArrayList<Boolean>();
-        for (int i = 0; i <= user.length() - 1; i++) {
-            if (user.charAt(i) == answer.charAt(i)) {
+        if(UserAnswer.length()<RightAnswer.length()){
+            int l = (RightAnswer.length())-(UserAnswer.length());
+            for(int k=0; k<=l; k++){
+                UserAnswer.concat(" ");
+            }
+        }else if(RightAnswer.length()<UserAnswer.length()){
+            int l = (RightAnswer.length())-(UserAnswer.length());
+            for(int k=0; k<=l; k++){
+                temp.add(false);
+            }
+        }
+        for (int i = 0; i <= UserAnswer.length() - 1; i++) {
+            if (UserAnswer.charAt(i) == RightAnswer.charAt(i)) {
                 temp.add(true);
             } else {
                 temp.add(false);
@@ -103,19 +116,15 @@ public class Pop extends VocActivity {
         window(temp);
     }
     public void window(ArrayList<Boolean> b) {
-        String mtext = UserAnswer;
-        char[] f;
-        f=UserAnswer.toCharArray();
-       
-        SpannableString ss = new SpannableString(mtext);
+        SpannableStringBuilder ssb = new SpannableStringBuilder("");
         BackgroundColorSpan bcsRed = new BackgroundColorSpan(Color.RED);
-        for(int i= 0; i<=textViewUserAnswer.getText().length()-1; i++){
-            if(b.get(i)) {
-               ss.setSpan(bcsRed, i,i+1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        for(int i=0; i<UserAnswer.length(); i++){
+            ssb.append(UserAnswer.charAt(i));
+            if(!b.get(i)){
+                ssb.setSpan(bcsRed,1,ssb.length(),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
         }
-
-        textViewUserAnswer.setText(ss);
+        textViewUserAnswer.setText(ssb);
     }
 
 

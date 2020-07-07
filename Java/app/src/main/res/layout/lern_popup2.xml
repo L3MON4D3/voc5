@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="300dp"
     android:layout_height="400dp"
-    android:layout_gravity="center">
+    android:layout_gravity="center"
+    android:background="@color/purpleblue">
 
     <TextView
         android:id="@+id/textViewUserAnswer"
@@ -11,7 +12,8 @@
         android:text="UserAnswer"
         android:layout_marginTop="32dp"
         android:layout_marginLeft="32dp"
-        android:textSize="30sp"/>
+        android:textSize="30sp"
+        android:textColor="@color/yorange"/>
 
     <TextView
         android:id="@+id/textViewRigthAnswer"
@@ -20,7 +22,8 @@
         android:layout_marginLeft="32dp"
         android:layout_marginTop="132dp"
         android:text="Answer"
-        android:textSize="30sp" />
+        android:textSize="30sp"
+        android:textColor="@color/yorange"/>
 
     <Button
         android:id="@+id/rigthbtn"
@@ -28,7 +31,9 @@
         android:layout_height="wrap_content"
         android:text="right"
         android:textAllCaps="false"
-        android:layout_marginTop="250dp"/>
+        android:layout_marginTop="250dp"
+        android:textColor="@color/purpleblue"
+        android:background="@color/orange"/>
 
     <Button
         android:id="@+id/wrongbtn"
@@ -36,6 +41,8 @@
         android:layout_height="wrap_content"
         android:text="wrong"
         android:textAllCaps="false"
-        android:layout_marginTop="200dp"/>
+        android:layout_marginTop="200dp"
+        android:textColor="@color/purpleblue"
+        android:background="@color/orange"/>
 
 </RelativeLayout>

@@ -3,6 +3,8 @@ package com.L3MON4D3.voc5.Client;
 import android.os.Parcelable;
 import android.os.Parcel;
 
+import java.util.ArrayList;
+
 
 public class Vocab extends Object implements Parcelable, Comparable<Vocab> {
     private int id;
@@ -104,6 +106,8 @@ public class Vocab extends Object implements Parcelable, Comparable<Vocab> {
         Vocab vocab = (Vocab) o;
         return id == vocab.id;
     }
+
+
 
     public int compareTo(Vocab voc) {
         return this.id - voc.getId();

@@ -58,6 +58,7 @@
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/darkblue"
         android:orientation="vertical"
         android:paddingTop="5dp"
         tools:layout_editor_absoluteY="5dp">
@@ -73,6 +74,7 @@
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:text="@string/gal_searchAnswer"
+                android:textColor="@color/purpleblue"
                 android:textSize="12dp" />
 
             <EditText
@@ -81,13 +83,15 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="fill_vertical"
                 android:layout_weight="1"
-                android:hint="@string/gal_searchHint" />
+                android:hint="@string/gal_searchHint"
+                android:textColor="@color/yorange" />
 
             <Button
                 android:id="@+id/sortSel_btn"
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:text="@string/gal_searchAnswer"
+                android:textColor="@color/purpleblue"
                 android:textSize="12dp" />
 
             <Button
@@ -95,10 +99,10 @@
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:text="@string/gal_searchDirection"
+                android:textColor="@color/purpleblue"
                 android:textSize="12dp" />
 
         </LinearLayout>
-
 
         <ScrollView
             android:layout_width="match_parent"
