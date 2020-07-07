@@ -24,6 +24,7 @@ public class LernActivity  extends VocActivity {
 
     ArrayList<Vocab> vocs;
     int[] newPhases;
+    int[] vocIds;
     TextView textViewQuestion;
     TextView textViewLanguage;
     EditText editTextAnswer;
@@ -42,35 +43,20 @@ public class LernActivity  extends VocActivity {
 
         if (savedInstanceState != null) {
             vocs =savedInstanceState.getParcelableArrayList("ArrayListLern");
+            vocIds=savedInstanceState.getIntArray("vocIds");
             newPhases=savedInstanceState.getIntArray("newPhases");
             tolern();
         }else {
-            if (getIntent().hasExtra("ArrayListLern")) {
                 vocs = getIntent().getExtras().getParcelableArrayList("ArrayListLern");
-                newPhases = new int[client.getVocabs().size()];
-                Arrays.fill(newPhases, -1);
-                tolern();
-            } else {
-                if (!client.hasVocabs()) {
-                    client.loadVocs(() -> {
-                        vocs = client.getVocabs();
-                        newPhases = new int[client.getVocabs().size()];
-                        Arrays.fill(newPhases, -1);
-                        runOnUiThread(() -> tolern());
-                    });
-                } else {
-                    vocs = client.getVocabs();
-                    newPhases = new int[client.getVocabs().size()];
-                    Arrays.fill(newPhases, -1);
-                    tolern();
+                newPhases = new int[vocs.size()];
+                vocIds = new int[vocs.size()];
+                for(int i=0; i!=vocs.size();i++){
+                    newPhases[i]= vocs.get(i).getPhase();
+                    vocIds[i]= vocs.get(i).getId();
                 }
-            }
+
+                tolern();
         }
-
-
-
-
-
 
         finishbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,11 +105,13 @@ public class LernActivity  extends VocActivity {
     public void window(Vocab currentVoc){
         textViewQuestion.setText(currentVoc.getQuestion());
         textViewLanguage.setText(currentVoc.getLanguage());
+        editTextAnswer.setText("");
 
     }
     public void onSaveInstanceState(Bundle sis) {
         sis.putParcelableArrayList("ArrayListLern",vocs);
         sis.putIntArray("newPhases", newPhases);
+        sis.putIntArray("vocIds",vocIds);
         super.onSaveInstanceState(sis);
     }
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -132,13 +120,20 @@ public class LernActivity  extends VocActivity {
             if (resultCode == RESULT_OK) {
                 int newP=data.getExtras().getInt("phase");
                 currentVoc.setPhase(newP);
+                saveChanges(currentVoc);
                 tolern();
             }
         }
     }
     public void saveChanges(Vocab v){
         client.updateVocRqst(currentVoc);
-        newPhases[client.getVocabs().indexOf(currentVoc)] = v.getPhase();
+        for(int i =0; i<=vocIds.length;i++){
+            if(vocIds[i]==currentVoc.getId()){
+                newPhases[i] = v.getPhase();
+                return;
+            }
+        }
+
     }
 
 }
