@@ -1,6 +1,7 @@
 package com.L3MON4D3.voc5.UI;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,15 +13,17 @@ import com.L3MON4D3.voc5.Client.Vocab;
 import com.L3MON4D3.voc5.R;
 import android.content.Intent;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class LernActivity  extends VocActivity {
     ImageButton checkbtn;
     Button finishbtn;
     Random rad = new Random();
-    int currentP;
     Vocab currentVoc;
+    private static final int POPREQ=11;
 
-    ArrayList<Vocab> Vocs;
+    ArrayList<Vocab> vocs;
+    int[] newPhases;
     TextView textViewQuestion;
     TextView textViewLanguage;
     EditText editTextAnswer;
@@ -32,20 +35,26 @@ public class LernActivity  extends VocActivity {
         super.onCreate(savedInstanceState);
 
         if (savedInstanceState != null) {
-            Vocs =savedInstanceState.getParcelableArrayList("ArrayListLern");
-        }else if (getIntent().hasExtra("ArrayListLern")) {
-            Vocs = getIntent().getExtras().getParcelableArrayList("ArrayListLern");
+            vocs =savedInstanceState.getParcelableArrayList("ArrayListLern");
+            newPhases=savedInstanceState.getIntArray("newPhases");
+            tolern();
+        }else {
+            newPhases = new int[client.getVocabs().size()];
+            Arrays.fill(newPhases,-1);
+            vocs = getIntent().getExtras().getParcelableArrayList("ArrayListLern");
+            tolern();
         }
 
-        if(Vocs==null){
+        if(vocs==null){
             if (!client.hasVocabs()) {
                 client.loadVocs(() -> {
-                    Vocs=client.getVocabs();
-                    tolern();
+                    vocs=client.getVocabs();
+                    runOnUiThread(()-> tolern());
+
                 });
             } else {
-                Vocs=client.getVocabs();
-                currentVoc= tolern();
+                vocs=client.getVocabs();
+                tolern();
             }
 
         }
@@ -68,30 +77,35 @@ public class LernActivity  extends VocActivity {
             @Override
             public void onClick(View view) {
                 String currentAns = editTextAnswer.getText().toString();
-                if(currentAns.equals(editTextAnswer)){
-                    currentP= currentVoc.getPhase()+1;
-                    currentVoc.setPhase(currentP);
-                    client.updateVocRqst(currentVoc);
-                    currentVoc=tolern();
+                if(currentAns.equals(currentVoc.getAnswer())){
+                    currentVoc.incPhase();
+                    saveChanges(currentVoc);
+                    tolern();
+                }else {
+                    Intent startIntent = new Intent(getApplicationContext(), Pop.class);
+                    startIntent.putExtra("userAnswer", editTextAnswer.getText().toString());
+                    startIntent.putExtra("rightAnswer", currentVoc.getAnswer());
+                    startIntent.putExtra("phase", currentVoc.getPhase());
+                    startActivityForResult(startIntent, POPREQ);
                 }
-                Intent startIntent = new Intent(getApplicationContext(), Pop.class);
-                startIntent.putExtra("UserAnswer", editTextAnswer.getText().toString());
-                startIntent.putExtra("rightAnswer", currentVoc.getAnswer());
-                startIntent.putExtra("phase", currentVoc.getPhase());
-                startActivityForResult(startIntent, currentP);
 
             }
         });
 
-
-
     }
-    public Vocab  tolern(){
-        int rn = rad.nextInt(Vocs.size());
-        currentVoc = Vocs.get(rn);
-        Vocs.remove(rn);
-        window(currentVoc);
-        return currentVoc;
+    public void tolern() {
+        if (!vocs.isEmpty()) {
+            int rn = rad.nextInt(vocs.size());
+            currentVoc = vocs.get(rn);
+            vocs.remove(rn);
+            window(currentVoc);
+
+        } else {
+            Intent startIntent = new Intent();
+            startIntent.putExtra("newPhases", newPhases);
+            setResult(RESULT_OK, startIntent);
+            finish();
+        }
 
     }
     public void window(Vocab currentVoc){
@@ -100,17 +114,23 @@ public class LernActivity  extends VocActivity {
 
     }
     public void onSaveInstanceState(Bundle sis) {
-        sis.putParcelableArrayList("ArrayListLern", Vocs);
+        sis.putParcelableArrayList("ArrayListLern",vocs);
+        sis.putIntArray("newPhases", newPhases);
         super.onSaveInstanceState(sis);
     }
-    public void onResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == currentP) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == POPREQ) {
             if (resultCode == RESULT_OK) {
-                client.updateVocRqst(currentVoc);
-                currentVoc=tolern();
-
+                int newP=data.getExtras().getInt("phase");
+                currentVoc.setPhase(newP);
+                tolern();
             }
         }
+    }
+    public void saveChanges(Vocab v){
+        client.updateVocRqst(currentVoc);
+        newPhases[client.getVocabs().indexOf(currentVoc)] = v.getPhase();
     }
 
 }
