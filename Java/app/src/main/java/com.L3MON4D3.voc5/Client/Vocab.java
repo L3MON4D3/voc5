@@ -41,8 +41,8 @@ public class Vocab extends Object implements Parcelable, Comparable<Vocab> {
     public void setAnswer(String newAnswer) { this.answer = newAnswer; }
     public void setLanguage(String newLanguage) { this.language = newLanguage; }
     public void setPhase(int newPhase){ this.phase = newPhase; }
-    public void incPhase(){ phase=(phase==5)?5:phase++;}
-    public void decPhase(){ phase=(phase==1)?1:phase--;}
+    public void incPhase(){ phase = phase==5 ? 5 : (phase + 1);}
+    public void decPhase(){ phase = phase==1 ? 1 : (phase - 1);}
     public void setId(int newId){ this.id = newId; }
 
     /**
@@ -50,8 +50,8 @@ public class Vocab extends Object implements Parcelable, Comparable<Vocab> {
      * @return String as follows: "id:__answer:__question:__language:__"
      */
     public String toString() {
-        return String.format("id: %sanswer: %squestion: %slanguage: %s",
-            id, answer, question, language);
+        return String.format("id: %s, answer: %s, question: %s, language: %s, phase: %s",
+            id, answer, question, language, phase);
     }
     //Begin Parcelable implementation.
         /**
