@@ -10,10 +10,17 @@ import android.widget.TextView;
 import java.util.Random;
 import java.util.ArrayList;
 import com.L3MON4D3.voc5.Client.Vocab;
+import com.L3MON4D3.voc5.Client.IntPair;
 import com.L3MON4D3.voc5.R;
 import android.content.Intent;
 import java.util.ArrayList;
 import java.util.Arrays;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
+import org.jetbrains.annotations.NotNull;
+
+import java.io.IOException;
 
 public class LernActivity  extends VocActivity {
     ImageButton checkbtn;
@@ -23,8 +30,7 @@ public class LernActivity  extends VocActivity {
     private static final int POPREQ=11;
 
     ArrayList<Vocab> vocs;
-    int[] newPhases;
-    int[] vocIds;
+    IntPair[] newPhases;
     TextView textViewQuestion;
     TextView textViewLanguage;
     EditText editTextAnswer;
@@ -43,16 +49,16 @@ public class LernActivity  extends VocActivity {
 
         if (savedInstanceState != null) {
             vocs =savedInstanceState.getParcelableArrayList("ArrayListLern");
-            vocIds=savedInstanceState.getIntArray("vocIds");
-            newPhases=savedInstanceState.getIntArray("newPhases");
+            newPhases=(IntPair[]) savedInstanceState.getParcelableArray("newPhases");
             tolern();
         }else {
                 vocs = getIntent().getExtras().getParcelableArrayList("ArrayListLern");
-                newPhases = new int[vocs.size()];
-                vocIds = new int[vocs.size()];
+                newPhases = new IntPair[vocs.size()];
                 for(int i=0; i!=vocs.size();i++){
-                    newPhases[i]= vocs.get(i).getPhase();
-                    vocIds[i]= vocs.get(i).getId();
+                    Vocab v = vocs.get(i);
+                    newPhases[i] = new IntPair(v.getId(), v.getPhase());
+                    Log.e("voc5", "Pair: "+String.valueOf(newPhases[i].second));
+                    Log.e("voc5", "Pair: "+String.valueOf(newPhases[i].first));
                 }
 
                 tolern();
@@ -85,7 +91,6 @@ public class LernActivity  extends VocActivity {
 
             }
         });
-
     }
     public void tolern() {
         if (!vocs.isEmpty()) {
@@ -100,18 +105,16 @@ public class LernActivity  extends VocActivity {
             setResult(RESULT_OK, startIntent);
             finish();
         }
-
     }
     public void window(Vocab currentVoc){
         textViewQuestion.setText(currentVoc.getQuestion());
         textViewLanguage.setText(currentVoc.getLanguage());
         editTextAnswer.setText("");
-
     }
     public void onSaveInstanceState(Bundle sis) {
         sis.putParcelableArrayList("ArrayListLern",vocs);
-        sis.putIntArray("newPhases", newPhases);
-        sis.putIntArray("vocIds",vocIds);
+        sis.putParcelableArray("newPhases", newPhases);
+
         super.onSaveInstanceState(sis);
     }
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -126,15 +129,27 @@ public class LernActivity  extends VocActivity {
         }
     }
     public void saveChanges(Vocab v){
-        client.updateVocRqst(currentVoc);
-        for(int i =0; i<=vocIds.length;i++){
-            if(vocIds[i]==currentVoc.getId()){
-                newPhases[i] = v.getPhase();
+        Log.e("voc5", v.toString());
+        client.getOkClient().newCall(client.updateVocRqst(v)).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                Log.e("voc5:", e.getMessage());
+            }
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                Log.e("voc5:", response.body().string());
+            }
+        });
+        for(int i =0; i!=newPhases.length;i++){
+            Log.e("voc5", String.valueOf(v.getId()));
+            Log.e("voc5", String.valueOf(newPhases[i].first));
+            if(newPhases[i].first == v.getId()){
+                Log.e("voc5", "upd");
+                newPhases[i].second = v.getPhase();
                 return;
             }
         }
-
     }
-
 }
 

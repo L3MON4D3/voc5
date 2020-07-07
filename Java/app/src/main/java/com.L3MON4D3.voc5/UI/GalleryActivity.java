@@ -1,6 +1,7 @@
 package com.L3MON4D3.voc5.UI;
 
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.content.Intent;
 
 import android.util.DisplayMetrics;
@@ -15,9 +16,12 @@ import android.widget.EditText;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Comparator;
 import java.util.Collections;
 import java.util.stream.Collectors;
+import java.util.function.Consumer;
 
 import com.L3MON4D3.voc5.Client.*;
 import com.L3MON4D3.voc5.R;
@@ -27,10 +31,6 @@ import org.jetbrains.annotations.NotNull;
 
 import okhttp3.Call;
 import okhttp3.Callback;
-import okhttp3.Response;
-
-import okhttp3.Callback;
-import okhttp3.Call;
 import okhttp3.Response;
 
 import java.io.IOException;
@@ -50,7 +50,7 @@ public class GalleryActivity extends VocActivity {
     };
     private static final int EDIT_RESULT = 21;
     private static final int NEW_RESULT = 22;
-    private static final int LEARN_RESULT = 23;
+    private static final int LEARN_RESULT = 45;
 
     private Thread updateThread = new Thread(() -> {
         while(true) {
@@ -270,21 +270,6 @@ public class GalleryActivity extends VocActivity {
         });
         updateThread.start();
     }
-
-    /**
-     * Start LernActivity with selected Vocs.
-     */
-    public void startLearn(){
-        Intent startIntent = new Intent(getApplicationContext(), LernActivity.class);
-        ArrayList<Vocab> learnVocs = new ArrayList();
-        for (GalleryCard gc : selected)
-            learnVocs.add(gc.getVoc());
-
-        startIntent.putParcelableArrayListExtra("ArrayListLern", learnVocs);
-        Log.e("voc5", client.getUser());
-        startActivityForResult(startIntent, LEARN_RESULT);
-    }
-
 
     /**
      * Create GalleryCard for each Vocab in vocs.
@@ -511,10 +496,21 @@ public class GalleryActivity extends VocActivity {
         startActivityForResult(startIntent, EDIT_RESULT);
     }
 
+    /**
+     * Start LernActivity with selected Vocs.
+     */
+    public void startLearn(){
+        Intent startIntent = new Intent(getApplicationContext(), LernActivity.class);
+        ArrayList<Vocab> learnVocs = (ArrayList) selected.stream().map(GalleryCard::getVoc).collect(Collectors.toList());
+
+        startIntent.putParcelableArrayListExtra("ArrayListLern", learnVocs);
+        startActivityForResult(startIntent, LEARN_RESULT);
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == EDIT_RESULT)
+        if (requestCode == EDIT_RESULT) {
             if (resultCode == RESULT_OK) {
                 Vocab newVoc = data.getExtras().getParcelable("com.L3MON4D3.voc5.newVoc");
 
@@ -535,7 +531,7 @@ public class GalleryActivity extends VocActivity {
                     }
                 });
             }
-        else if (requestCode == NEW_RESULT)
+        } else if (requestCode == NEW_RESULT) {
             if(resultCode == RESULT_OK){
                 Vocab voc = data.getExtras().getParcelable("com.L3MON4D3.voc5.newVoc");
                 String newQuestion = voc.getQuestion();
@@ -572,8 +568,35 @@ public class GalleryActivity extends VocActivity {
                     }
                 });
             }
+        } else if(requestCode == LEARN_RESULT) {
+            if (resultCode == RESULT_OK) {
+                Bundle extras = data.getExtras();
+                Parcelable[] newPhases = extras.getParcelableArray("newPhases");
+
+                //sort newPhases by Vocab id, makes finding Vocabs in client-List faster.
+                Arrays.sort(newPhases, (a, b) -> {return ((IntPair) a).first - ((IntPair) b).first;});
+
+                //Assign new Phases to Vocabs in Voc5Client.
+                int nPInd = 0;
+                IntPair next = (IntPair) newPhases[0];
+                for (GalleryCard gc : allCards) {
+                    Vocab v = gc.getVoc();
+                    if (v.getId() == next.first) {
+                        v.setPhase(next.second);
+                        gc.refresh();
+                        if (++nPInd == newPhases.length)
+                            break;
+                        next = (IntPair) newPhases[nPInd];
+                    }
+                }
+            }
+        }
     }
 
+    /**
+     * Create new GalleryCard for each Vocab in vocs and add it to the Gallery.
+     * @param vocs ArrayList of Vocabs, preferably some that have not yet been added to the Gallery.
+     */
     public void addVocsToGallery(ArrayList<Vocab> vocs){
         if (vocs.size() != 0) {
             ArrayList<Vocab> cVocs = client.getVocabs();

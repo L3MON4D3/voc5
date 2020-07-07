@@ -64,7 +64,7 @@ public class Pop extends VocActivity {
                 if (currentp >= 5) {
                     currentp = 5;
                 } else {
-                    currentp = currentp++;
+                    currentp++;
                 }
                 Intent startIntent = new Intent();
                 startIntent.putExtra("phase", currentp);
@@ -72,16 +72,17 @@ public class Pop extends VocActivity {
                 finish();
             }
         });
+
         wrongbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (currentp <= 1) {
                     currentp = 1;
                 } else {
-                    currentp = currentp--;
+                    currentp--;
                 }
                 Intent startIntent = new Intent();
-                startIntent.putExtra("Phase", currentp);
+                startIntent.putExtra("phase", currentp);
                 setResult(RESULT_OK, startIntent);
                 finish();
             }

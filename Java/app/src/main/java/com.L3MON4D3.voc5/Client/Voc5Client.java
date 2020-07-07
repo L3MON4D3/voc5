@@ -173,7 +173,7 @@ public class Voc5Client implements Parcelable {
 
         return newRqstBdr("/voc/"+voc.getId())
             .patch(body)
-                .build();
+            .build();
     }
 
     public Request deleteVocRqst(Vocab voc) {
