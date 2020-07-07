@@ -24,7 +24,8 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:paddingTop="5dp"
-        tools:layout_editor_absoluteY="5dp">
+        tools:layout_editor_absoluteY="5dp"
+        android:background="@color/darkblue">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -37,7 +38,9 @@
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:text="@string/gal_searchAnswer"
-                android:textSize="12dp" />
+                android:textSize="12dp"
+                android:textColor="@color/purpleblue"
+                />
 
             <EditText
                 android:id="@+id/search_et"
@@ -45,21 +48,26 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="fill_vertical"
                 android:layout_weight="1"
-                android:hint="@string/gal_searchHint" />
+                android:hint="@string/gal_searchHint"
+                android:textColor="@color/yorange"/>
 
             <Button
                 android:id="@+id/sortSel_btn"
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:text="@string/gal_searchAnswer"
-                android:textSize="12dp" />
+                android:textSize="12dp"
+                android:textColor="@color/purpleblue"
+                />
 
             <Button
                 android:id="@+id/sortDir_btn"
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:text="@string/gal_searchDirection"
-                android:textSize="12dp" />
+                android:textSize="12dp"
+                android:textColor="@color/purpleblue"
+                />
 
         </LinearLayout>
 
@@ -76,7 +84,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="fill_vertical"
                 android:layout_weight="1"
-                android:text="@string/gal_editBtn" />
+                android:text="@string/gal_editBtn"
+                android:textColor="@color/purpleblue"
+                />
 
             <Button
                 android:id="@+id/galleryLearnBtn"
@@ -84,7 +94,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="fill_vertical"
                 android:layout_weight="1"
-                android:text="@string/gal_learnBtn" />
+                android:text="@string/gal_learnBtn"
+                android:textColor="@color/purpleblue"
+                />
 
             <Button
                 android:id="@+id/galleryDeleteBtn"
@@ -92,7 +104,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="fill_vertical"
                 android:layout_weight="1"
-                android:text="@string/gal_delBtn" />
+                android:text="@string/gal_delBtn"
+                android:textColor="@color/purpleblue"
+                />
 
         </LinearLayout>
 
