@@ -50,6 +50,7 @@ public class GalleryActivity extends VocActivity {
     };
     private static final int EDIT_RESULT = 21;
     private static final int NEW_RESULT = 22;
+    private static final int LEARN_RESULT = 23;
 
     private Thread updateThread = new Thread(() -> {
         while(true) {
@@ -269,6 +270,21 @@ public class GalleryActivity extends VocActivity {
         });
         updateThread.start();
     }
+
+    /**
+     * Start LernActivity with selected Vocs.
+     */
+    public void startLearn(){
+        Intent startIntent = new Intent(getApplicationContext(), LernActivity.class);
+        ArrayList<Vocab> learnVocs = new ArrayList();
+        for (GalleryCard gc : selected)
+            learnVocs.add(gc.getVoc());
+
+        startIntent.putParcelableArrayListExtra("ArrayListLern", learnVocs);
+        Log.e("voc5", client.getUser());
+        startActivityForResult(startIntent, LEARN_RESULT);
+    }
+
 
     /**
      * Create GalleryCard for each Vocab in vocs.
