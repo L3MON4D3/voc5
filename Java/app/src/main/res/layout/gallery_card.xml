@@ -24,4 +24,12 @@
         android:layout_marginRight="8dp"
         android:layout_marginBottom="5dp" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="8dp"
+        android:layout_gravity="top | left"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="5dp" />
+
 </com.L3MON4D3.voc5.UI.GalleryCard>
