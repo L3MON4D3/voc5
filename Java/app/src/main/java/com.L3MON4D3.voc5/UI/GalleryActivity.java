@@ -148,6 +148,8 @@ public class GalleryActivity extends VocActivity {
         allCards = new ArrayList<GalleryCard>();
         if (savedInstanceState == null) {
             if (!client.hasVocabs()) {
+                setLoadingInfoText("Downloading Vocab");
+                startLoading();
                 client.loadVocs(() -> {
                     runOnUiThread(() -> {
                         fillAllAndCurrent(client.getVocabs());
@@ -155,6 +157,7 @@ public class GalleryActivity extends VocActivity {
 
                         sortSearchSet();
                         sortSearch();
+                        stopLoading();
                     });
                 });
             } else {
