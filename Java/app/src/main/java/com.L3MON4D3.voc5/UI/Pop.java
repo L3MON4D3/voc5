@@ -107,7 +107,7 @@ public class Pop extends AppCompatActivity {
     public void window(ArrayList<Boolean> b) {
         SpannableString ss = new SpannableString("");
         SpannableStringBuilder ssb = new SpannableStringBuilder("");
-        BackgroundColorSpan bcsRed = new BackgroundColorSpan(Color.argb(67,24,9,5));
+        BackgroundColorSpan bcsRed = new BackgroundColorSpan(Color.argb(150,178,223,238));
         for(int i =0; i<UserAnswer.length(); i++){
             ss = getSpannableString( String.valueOf(UserAnswer.charAt(i)));
             if(!b.get(i)){

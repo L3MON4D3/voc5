@@ -1,5 +1,7 @@
 <resources>
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar"/>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorAccent">@color/buttonBackgroundBlue</item>
+    </style>
     <style name= "AppTheme.CustomTheme">
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowCloseOnTouchOutside">true</item>
@@ -9,7 +11,10 @@
         <item name="android:textColor">@color/white</item>
 
     </style>
-    <style name="edit_text_sytle">
-
+    <style name="Theme.App.Base" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorControlNormal">@color/buttonBackgroundBlue</item>
+        <item name="colorControlActivated">@color/buttonBackgroundBlue</item>
+        <item name="colorControlHighlight">@color/buttonBackgroundBlue</item>
     </style>
+
 </resources>

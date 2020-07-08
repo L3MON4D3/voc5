@@ -9,8 +9,8 @@
 
     <string name="pop_userAnswer">User Answer</string>
     <string name="pop_answer">Answer</string>
-    <string name="pop_rightBtn">Right</string>
-    <string name="pop_wrongBtn">Btn</string>
+    <string name="pop_rightBtn">right</string>
+    <string name="pop_wrongBtn">wrong</string>
 
     <string name="lern_Language">Language</string>
     <string name="lern_Question">Question</string>
