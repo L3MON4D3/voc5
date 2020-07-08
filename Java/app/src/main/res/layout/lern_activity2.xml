@@ -5,8 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/darkblue">
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/textViewQuestion"
@@ -15,8 +14,7 @@
         android:layout_marginTop="45dp"
         android:text="question"
         android:textSize="30sp"
-        android:layout_gravity="center"
-        android:textColor="@color/yorange"/>
+        android:layout_gravity="center" />
 
     <TextView
         android:id="@+id/textViewLanguage"
@@ -24,21 +22,20 @@
         android:layout_height="wrap_content"
         android:text="Language"
         android:textSize="15sp"
-       android:layout_gravity="center"
-        android:textColor="@color/orange"/>
+       android:layout_gravity="center" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center">
         <EditText
+
             android:id="@+id/editTextAnswer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:hint="Enter your answer"
+            android:hint="@string/lern_answerHint"
             android:inputType="text"
-            android:layout_gravity="center"
-            android:textColor="@color/yorange">
+            android:layout_gravity="center">
         </EditText>
         <ImageButton
             android:id="@+id/checkbtn"
@@ -46,8 +43,7 @@
             android:layout_height="wrap_content"
             app:srcCompat="@android:drawable/checkbox_on_background"
             android:layout_gravity="bottom"
-            android:background="@color/purpleblue"
-            >
+            android:background="@color/white">
         </ImageButton>
 
     </LinearLayout>
@@ -61,8 +57,7 @@
              android:layout_gravity="center"
             android:gravity="center"
             android:layout_marginTop="400dp"
-            android:textColor="@color/purpleblue"
-             android:background="@color/orange"/>
+             style="@style/button_style"/>
 
 
 

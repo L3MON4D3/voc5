@@ -21,9 +21,6 @@
     <string name="gal_searchAnswer">Ans</string>
     <string name="gal_searchHint">Search</string>
     <string name="gal_searchDirection">Asc</string>
-    <string name="gal_editBtn">Edit</string>
-    <string name="gal_learnBtn">Learn</string>
-    <string name="gal_delBtn">Delete</string>
 
     <string name="edi_answerHint">Enter new Answer</string>
     <string name="edi_questionHint">Enter new Question</string>

@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="white">#FFFFFF</color>
-    <color name="darkblue">#104E8B</color>
-    <color name="purpleblue">#15408B</color>
-    <color name="orange">#FF7F24</color>
-    <color name="yorange">#FFA500</color>
-    <color name="buttonBackgroundGreen">#4CAF50</color>
+    <color name="black">#000000</color>
+    <color name="buttonBackgroundBlue">#104E8B</color>
+    <color name="ligthblue">#6699FF</color>
 </resources>
