@@ -120,7 +120,7 @@ public class GalleryCard extends CardView implements Comparable<GalleryCard> {
         } else {
             ((TextView) getChildAt(0)).setText(voc.getQuestion());
         }
-        ((TextView) getChildAt(1)).setText(voc.getLanguage());
+        ((TextView) getChildAt(1)).setText(voc.getLanguage().toUpperCase());
         ((TextView) getChildAt(2)).setText(voc.getPhaseString());
     }
 

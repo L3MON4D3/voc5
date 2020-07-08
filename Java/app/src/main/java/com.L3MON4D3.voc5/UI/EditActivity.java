@@ -75,7 +75,7 @@ public class EditActivity extends AppCompatActivity {
                 //Creates a new Voc that will be changed on server, ID must be set to change Voc
                 String newQuestion = newQuestionEt.getText().toString();
                 String newAnswer = newAnswerEt.getText().toString();
-                String newLanguage = newLanguageEt.getText().toString();
+                String newLanguage = newLanguageEt.getText().toString().toUpperCase();
                 int newPhase = Integer.parseInt(newPhaseEt.getText().toString());
 
                 Vocab newVoc = new Vocab(newAnswer, newQuestion, newLanguage);
