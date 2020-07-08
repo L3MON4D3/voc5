@@ -33,13 +33,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="@string/log_passwordHint"
-            android:layout_marginBottom="20dp">
+            android:layout_marginBottom="20dp"
+            app:passwordToggleEnabled="true">
             <!--Add margin so that Keyboard doesnt move EditTexts.-->
+
 
             <EditText
                 android:id="@+id/pwd_et"
                 android:maxLines="1"
-                android:inputType="text"
+                android:inputType="textPassword"
                 android:layout_width="170dp"
                 android:layout_height="wrap_content" />
 
