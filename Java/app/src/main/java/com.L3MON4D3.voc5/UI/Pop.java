@@ -95,9 +95,9 @@ public class Pop extends AppCompatActivity {
     public void findf() {
         ArrayList<Boolean> temp = new ArrayList<Boolean>();
         if(RightAnswer.length()<UserAnswer.length()){
-            int l = (RightAnswer.length())-(UserAnswer.length());
-            for(int k=0; k<=l; k++){
-                temp.add(false);
+            int l = UserAnswer.length()-RightAnswer.length();
+            for(int k =0; k<=l;k++) {
+                RightAnswer.concat("a");
             }
         }
         for (int i = 0; i <= UserAnswer.length() - 1; i++) {
