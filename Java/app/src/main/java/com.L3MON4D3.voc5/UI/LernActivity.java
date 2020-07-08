@@ -14,11 +14,12 @@ import com.L3MON4D3.voc5.Client.Vocab;
 import com.L3MON4D3.voc5.Client.IntPair;
 import com.L3MON4D3.voc5.R;
 import android.content.Intent;
-import android.widget.Toast;
+
 import android.util.DisplayMetrics;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
@@ -32,7 +33,6 @@ public class LernActivity extends VocActivity {
     Random rad = new Random();
     Vocab currentVoc;
     private static final int POPREQ=11;
-
     ArrayList<Vocab> vocs;
     IntPair[] newPhases;
     FrameLayout cardParent;
@@ -106,13 +106,16 @@ public class LernActivity extends VocActivity {
             }
         });
     }
+    /**
+     * tolern() chooses a currentVoc and calls window()
+     * if ArrayList vocs is empty, the GalleryActivity will start
+     */
     public void tolern() {
         if (!vocs.isEmpty()) {
             int rn = rad.nextInt(vocs.size());
             currentVoc = vocs.get(rn);
             vocs.remove(rn);
             window(currentVoc);
-
         } else {
             Intent startIntent = new Intent();
             startIntent.putExtra("newPhases", newPhases);
@@ -120,16 +123,27 @@ public class LernActivity extends VocActivity {
             finish();
         }
     }
+    /**
+     * window() shows the current Question on Screen
+     * and delete old answers
+     */
     public void window(Vocab currentVoc){
         cardParent.addView(gcf.newCardNoFunctionality(currentVoc));
         editTextAnswer.setText("");
     }
+    /**
+     * onSaveInstanceState(Bundle sis) saves important ArrayLists
+     * in case information get lost by starting Pop
+     */
     public void onSaveInstanceState(Bundle sis) {
         sis.putParcelableArrayList("ArrayListLern",vocs);
         sis.putParcelableArray("newPhases", newPhases);
-
         super.onSaveInstanceState(sis);
     }
+    /**
+     * after Pop finish, onActivityResult refresh the currentVoc
+     * and call tolern()
+     */
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == POPREQ) {
@@ -141,13 +155,16 @@ public class LernActivity extends VocActivity {
             }
         }
     }
+    /**
+     * saveChanges saves the changed Vocs
+     *
+     */
     public void saveChanges(Vocab v){
         client.getOkClient().newCall(client.updateVocRqst(v)).enqueue(new Callback() {
             @Override
             public void onFailure(@NotNull Call call, @NotNull IOException e) {
                 Log.e("voc5:", e.getMessage());
             }
-
             @Override
             public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
                 Log.e("voc5:", response.body().string());
