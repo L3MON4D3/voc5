@@ -123,8 +123,7 @@ public class Pop extends AppCompatActivity {
 
         textViewUserAnswer.setText(ssb);
     }
-<<<<<<< HEAD
-=======
+
     public SpannableString getSpannableString(String c){
         SpannableString ss = new SpannableString(c);
         return ss;
@@ -132,5 +131,5 @@ public class Pop extends AppCompatActivity {
 
 
 
->>>>>>> ec23799... some Color changes
+
 }
