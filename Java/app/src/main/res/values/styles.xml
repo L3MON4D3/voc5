@@ -2,8 +2,9 @@
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorAccent">@color/buttonBackgroundBlue</item>
         <item name="colorPrimary">@color/buttonBackgroundBlue</item>
+        <item name="colorPrimaryDark">@color/buttonBackgroundBlue</item>
         <item name="colorSecondary">@color/buttonBackgroundBlue</item>
-        <item name="colorOnSecondary">@color/yellowOrange</item>
+        <item name="colorOnSecondary">@color/white</item>
     </style>
 
     <style name="voc5TextInput"
