@@ -13,6 +13,8 @@ import com.L3MON4D3.voc5.Client.Vocab;
 import com.L3MON4D3.voc5.Client.IntPair;
 import com.L3MON4D3.voc5.R;
 import android.content.Intent;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import okhttp3.Call;
@@ -75,17 +77,20 @@ public class LernActivity extends VocActivity {
             @Override
             public void onClick(View view) {
                 String currentAns = editTextAnswer.getText().toString();
-                if(currentAns.equals(currentVoc.getAnswer())){
-                    currentVoc.incPhase();
-                    saveChanges(currentVoc);
-                    tolern();
-                }else {
-                    Intent startIntent = new Intent(getApplicationContext(), Pop.class);
-                    startIntent.putExtra("userAnswer", editTextAnswer.getText().toString());
-                    startIntent.putExtra("rightAnswer", currentVoc.getAnswer());
-                    startIntent.putExtra("phase", currentVoc.getPhase());
-                    startActivityForResult(startIntent, POPREQ);
+
+
+                if (currentAns.equals(currentVoc.getAnswer())) {
+                        currentVoc.incPhase();
+                        saveChanges(currentVoc);
+                        tolern();
+                } else {
+                        Intent startIntent = new Intent(getApplicationContext(), Pop.class);
+                        startIntent.putExtra("userAnswer", editTextAnswer.getText().toString());
+                        startIntent.putExtra("rightAnswer", currentVoc.getAnswer());
+                        startIntent.putExtra("phase", currentVoc.getPhase());
+                        startActivityForResult(startIntent, POPREQ);
                 }
+
 
             }
         });

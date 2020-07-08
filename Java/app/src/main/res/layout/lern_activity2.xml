@@ -6,14 +6,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-   android:layout_marginTop="50dp"
     android:background="@color/darkblue">
 
     <TextView
         android:id="@+id/textViewQuestion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="45dp"
         android:text="question"
         android:textSize="30sp"
         android:layout_gravity="center"
@@ -47,7 +46,8 @@
             android:layout_height="wrap_content"
             app:srcCompat="@android:drawable/checkbox_on_background"
             android:layout_gravity="bottom"
-            android:background="@color/purpleblue">
+            android:background="@color/purpleblue"
+            >
         </ImageButton>
 
     </LinearLayout>

@@ -5,7 +5,10 @@
     android:layout_width="175dp"
     android:layout_height="80dp"
     android:layout_margin="5dp">
+<<<<<<< HEAD
 
+=======
+>>>>>>> ec23799... some Color changes
 
     <TextView
         android:layout_width="wrap_content"

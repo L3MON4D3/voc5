@@ -2,7 +2,7 @@
 <resources>
     <color name="white">#FFFFFF</color>
     <color name="darkblue">#104E8B</color>
-    <color name="purpleblue">#27408B</color>
+    <color name="purpleblue">#15408B</color>
     <color name="orange">#FF7F24</color>
     <color name="yorange">#FFA500</color>
     <color name="buttonBackgroundGreen">#4CAF50</color>

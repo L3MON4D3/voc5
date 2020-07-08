@@ -94,12 +94,7 @@ public class Pop extends AppCompatActivity {
 
     public void findf() {
         ArrayList<Boolean> temp = new ArrayList<Boolean>();
-        if(UserAnswer.length()<RightAnswer.length()){
-            int l = (RightAnswer.length())-(UserAnswer.length());
-            for(int k=0; k<=l; k++){
-                UserAnswer.concat(" ");
-            }
-        }else if(RightAnswer.length()<UserAnswer.length()){
+        if(RightAnswer.length()<UserAnswer.length()){
             int l = (RightAnswer.length())-(UserAnswer.length());
             for(int k=0; k<=l; k++){
                 temp.add(false);
@@ -115,14 +110,27 @@ public class Pop extends AppCompatActivity {
         window(temp);
     }
     public void window(ArrayList<Boolean> b) {
+        SpannableString ss = new SpannableString("");
         SpannableStringBuilder ssb = new SpannableStringBuilder("");
         BackgroundColorSpan bcsRed = new BackgroundColorSpan(Color.RED);
-        for(int i=0; i<UserAnswer.length(); i++){
-            ssb.append(UserAnswer.charAt(i));
+        for(int i =0; i<UserAnswer.length(); i++){
+            ss = getSpannableString( String.valueOf(UserAnswer.charAt(i)));
             if(!b.get(i)){
-                ssb.setSpan(bcsRed,1,ssb.length(),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                ss.setSpan(bcsRed,0, ss.length(), Spanned.SPAN_INCLUSIVE_INCLUSIVE);
             }
+            ssb.append(ss);
         }
+
         textViewUserAnswer.setText(ssb);
     }
+<<<<<<< HEAD
+=======
+    public SpannableString getSpannableString(String c){
+        SpannableString ss = new SpannableString(c);
+        return ss;
+    }
+
+
+
+>>>>>>> ec23799... some Color changes
 }
