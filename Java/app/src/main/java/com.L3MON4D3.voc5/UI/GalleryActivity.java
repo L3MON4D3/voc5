@@ -105,6 +105,12 @@ public class GalleryActivity extends VocActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gallery);
 
+        galleryEditBtn = findViewById(R.id.galleryEditBtn);
+        galleryLearnBtn = findViewById(R.id.galleryLearnBtn);
+        galleryDeleteBtn = findViewById(R.id.galleryDeleteBtn);
+        galleryAddBtn = findViewById(R.id.galleryAddBtn);
+        searchET = findViewById(R.id.search_et);
+
         srchSel = 0;
         sortSel = 0;
         sortAsc = true;
@@ -148,11 +154,7 @@ public class GalleryActivity extends VocActivity {
                 savedInstanceState.getIntArray("selectedPos"));
         }
 
-        galleryEditBtn = findViewById(R.id.galleryEditBtn);
-        galleryLearnBtn = findViewById(R.id.galleryLearnBtn);
-        galleryDeleteBtn = findViewById(R.id.galleryDeleteBtn);
-        galleryAddBtn = findViewById(R.id.galleryAddBtn);
-        searchET = findViewById(R.id.search_et);
+
 
         searchET.addTextChangedListener(new TextWatcher(){
             public void onTextChanged(CharSequence s, int start, int before, int count) {
