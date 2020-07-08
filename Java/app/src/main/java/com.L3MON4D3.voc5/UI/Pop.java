@@ -2,10 +2,8 @@ package com.L3MON4D3.voc5.UI;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.RegionIterator;
 import android.os.Bundle;
 import android.text.SpannableString;
-import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.BackgroundColorSpan;
 import android.util.DisplayMetrics;
@@ -19,12 +17,16 @@ import com.L3MON4D3.voc5.R;
 
 import java.util.ArrayList;
 
+
 public class Pop extends AppCompatActivity {
     TextView textViewUserAnswer;
     TextView textViewRigthAnswer;
     Button rigthbtn;
     Button wrongbtn;
-
+    String se = new String("");
+    ArrayList<Boolean> b = new ArrayList<>();
+    char aux1=' ';
+    char aux2=' ';
     int currentp;
     String UserAnswer;
     String RightAnswer;
@@ -51,7 +53,8 @@ public class Pop extends AppCompatActivity {
         }
         textViewUserAnswer.setText(UserAnswer);
         textViewRigthAnswer.setText(RightAnswer);
-        findf();
+        rekfindf(UserAnswer,RightAnswer,0);
+        window(b,se);
 
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -75,7 +78,6 @@ public class Pop extends AppCompatActivity {
                 finish();
             }
         });
-
         wrongbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -91,43 +93,106 @@ public class Pop extends AppCompatActivity {
             }
         });
     }
-
-    public void findf() {
-        ArrayList<Boolean> temp = new ArrayList<Boolean>();
-        for(int i =1; i<=UserAnswer.length();i++)   {
-            if(RightAnswer.length()<i){
-                temp.add(false);
-            }else {
-                if (UserAnswer.charAt(i-1) == RightAnswer.charAt(i-1)) {
-                    temp.add(true);
-                } else {
-                    temp.add(false);
+    public int rekfindf(String s1,String s2, int k) {
+        if(Math.max(s1.length(),s2.length())==1){
+            if(s1.length()==0){
+                k++;
+                se+=' ';
+                b.add(false);
+            }else if(s2.length()==0){
+                k++;
+                se+=s1.charAt(0);
+                b.add(false);
+            }else{
+                if (s1.charAt(0) == s2.charAt(0)) {
+                    b.add(true);
+                    se+=s1.charAt(0);
+                }else{
+                    k++;
+                    b.add(false);
+                    se+=s1.charAt(0);
+                }
+            }
+            return k;
+        }else{
+            if(s1.length()==0){
+                se+=' ';
+                b.add(false);
+                return rekfindf(s1, s2.substring(1,s2.length()),k+1);
+            }else if(s2.length()==0){
+                b.add(false);
+                se+=s1.charAt(0);
+                return rekfindf(s1.substring(1,s1.length()), s2,k+1);
+            }else{
+                aux1=s1.charAt(0);
+                aux2=s2.charAt(0);
+                //if(s1.charAt(0)==s2.charAt(0)){
+                if(aux1==aux2){
+                    b.add(true);
+                    se+=s1.charAt(0);
+                    return (rekfindf(s1.substring(1,s1.length()), s2.substring(1,s2.length()),k));
+                }else{
+                    b.add(false);
+                    if((rekfindf2(s1, s2.substring(1,s2.length()),k+1))<(rekfindf2(s1.substring(1,s1.length()), s2,k+1))){
+                        se+=' ';
+                        return rekfindf(s1, s2.substring(1,s2.length()),k+1);
+                    }else if((rekfindf2(s1.substring(1,s1.length()), s2,k+1))<(rekfindf2(s1, s2.substring(1,s2.length()),k+1))){
+                        se+=s1.charAt(0);
+                        return rekfindf(s1.substring(1,s1.length()), s2,k+1);
+                    }else{
+                        se+=s1.charAt(0);
+                        return rekfindf(s1.substring(1,s1.length()), s2.substring(1,s2.length()),k+1);
+                    }
                 }
             }
         }
-        window(temp,UserAnswer);
     }
-    public void window(ArrayList<Boolean> b,String cAns) {
-        SpannableString ss = new SpannableString("");
-        SpannableStringBuilder ssb = new SpannableStringBuilder("");
-        BackgroundColorSpan bcsRed = new BackgroundColorSpan(Color.argb(150,178,223,238));
-        for(int i =0; i<cAns.length(); i++){
-            ss = getSpannableString( String.valueOf(cAns.charAt(i)));
-            if(!b.get(i)){
-                ss.setSpan(bcsRed,0, ss.length(), Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+    public int rekfindf2(String s1,String s2, int k) {
+
+        if(Math.max(s1.length(),s2.length())==1){
+            if(s1.length()==0){
+                k++;
+            }else if(s2.length()==0){
+                k++;
+            }else{
+                if (s1.charAt(0) != s2.charAt(0)) {
+                    k++;
+                }
             }
-            ssb.append(ss);
+            return k;
+        }else{
+            if(s1.length()==0){
+                return rekfindf2(s1, s2.substring(1,s2.length()),k+1);
+            }else if(s2.length()==0){
+                return rekfindf2(s1.substring(1,s1.length()), s2,k+1);
+            }else{
+                if(s1.charAt(0)==s2.charAt(0)){
+                    return (rekfindf2(s1.substring(1,s1.length()), s2.substring(1,s2.length()),k));
+                }else{
+                    if((rekfindf2(s1, s2.substring(1,s2.length()),k))<(rekfindf2(s1.substring(1,s1.length()), s2,k))){
+                        return rekfindf2(s1, s2.substring(1,s2.length()),k+1);
+                    }else if((rekfindf2(s1.substring(1,s1.length()), s2,k))<(rekfindf2(s1, s2.substring(1,s2.length()),k))){
+                        return rekfindf2(s1.substring(1,s1.length()), s2,k+1);
+                    }else {
+                        return rekfindf2(s1.substring(1,s1.length()), s2.substring(1,s2.length()),k+1);
+                    }
+                }
+
+            }
+
         }
 
-        textViewUserAnswer.setText(ssb);
     }
+    public void window(ArrayList<Boolean> bn,String cAns) {
+       SpannableString spaSt = new SpannableString(cAns);
+        for(int i =0; i<cAns.length(); i++){
+            if(!bn.get(i)){
+                spaSt.setSpan(new BackgroundColorSpan(Color.argb(150,178,223,238)),i,i+1,Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+        }
+        textViewUserAnswer.setText(spaSt);
+        se ="";
+        b.clear();
 
-    public SpannableString getSpannableString(String c){
-        SpannableString ss = new SpannableString(c);
-        return ss;
     }
-
-
-
-
 }
