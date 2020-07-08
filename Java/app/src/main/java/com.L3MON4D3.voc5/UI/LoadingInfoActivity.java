@@ -44,6 +44,7 @@ public class LoadingInfoActivity extends AppCompatActivity {
      */
     protected void startLoading() {
         loadingInfoParentLayout.addView(loadingInfo);
+        changeLayout();
     }
 
     /**
@@ -51,10 +52,16 @@ public class LoadingInfoActivity extends AppCompatActivity {
      */
     protected void stopLoading() {
         loadingInfoParentLayout.removeView(loadingInfo);
+        undoChangeLayout();
     }
 
     /**
      * Called in startLoading, override to make changes to Layout eg disable Buttons.
      */
     protected void changeLayout() { }
+
+    /**
+     * Called in stopLoading, override to revert changes to Layout eg enabling Buttons.
+     */
+    protected void undoChangeLayout() { }
 }
