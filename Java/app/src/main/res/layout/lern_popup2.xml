@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
-    android:background="@color/purpleblue">
+    >
 
     <TextView
         android:id="@+id/textViewUserAnswer"
@@ -13,7 +13,7 @@
         android:layout_marginTop="32dp"
         android:layout_marginLeft="32dp"
         android:textSize="30sp"
-        android:textColor="@color/yorange"/>
+        />
 
     <TextView
         android:id="@+id/textViewRigthAnswer"
@@ -23,7 +23,7 @@
         android:layout_marginTop="132dp"
         android:text="Answer"
         android:textSize="30sp"
-        android:textColor="@color/yorange"/>
+        />
 
     <Button
         android:id="@+id/rigthbtn"
@@ -32,8 +32,7 @@
         android:text="right"
         android:textAllCaps="false"
         android:layout_marginTop="250dp"
-        android:textColor="@color/purpleblue"
-        android:background="@color/orange"/>
+        style="@style/button_style"/>
 
     <Button
         android:id="@+id/wrongbtn"
@@ -42,7 +41,6 @@
         android:text="wrong"
         android:textAllCaps="false"
         android:layout_marginTop="200dp"
-        android:textColor="@color/purpleblue"
-        android:background="@color/orange"/>
+        style="@style/button_style" />
 
 </RelativeLayout>

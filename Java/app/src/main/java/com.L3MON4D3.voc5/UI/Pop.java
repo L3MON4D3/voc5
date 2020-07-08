@@ -94,12 +94,7 @@ public class Pop extends AppCompatActivity {
 
     public void findf() {
         ArrayList<Boolean> temp = new ArrayList<Boolean>();
-        if(RightAnswer.length()<UserAnswer.length()){
-            int l = UserAnswer.length()-RightAnswer.length();
-            for(int k =0; k<=l;k++) {
-                RightAnswer.concat("a");
-            }
-        }
+
         for (int i = 0; i <= UserAnswer.length() - 1; i++) {
             if (UserAnswer.charAt(i) == RightAnswer.charAt(i)) {
                 temp.add(true);
@@ -112,7 +107,7 @@ public class Pop extends AppCompatActivity {
     public void window(ArrayList<Boolean> b) {
         SpannableString ss = new SpannableString("");
         SpannableStringBuilder ssb = new SpannableStringBuilder("");
-        BackgroundColorSpan bcsRed = new BackgroundColorSpan(Color.RED);
+        BackgroundColorSpan bcsRed = new BackgroundColorSpan(Color.argb(67,24,9,5));
         for(int i =0; i<UserAnswer.length(); i++){
             ss = getSpannableString( String.valueOf(UserAnswer.charAt(i)));
             if(!b.get(i)){

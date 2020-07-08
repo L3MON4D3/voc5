@@ -5,8 +5,8 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:layout_gravity="center"
-    android:background="@color/purpleblue"
     android:orientation="vertical">
+
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
@@ -19,7 +19,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:textColor="@color/white"
             android:textSize="20dp" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -34,10 +33,7 @@
             android:id="@+id/newQuestionEt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-
-            android:textColor="@color/white"
-            android:textSize="20dp" />
+            android:layout_marginTop="20dp"/>
     </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -52,7 +48,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:textColor="@color/white"
             android:textSize="20dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -70,7 +65,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:inputType="number"
-            android:textColor="@color/white"
             android:textSize="20dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
