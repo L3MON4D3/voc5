@@ -19,7 +19,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            android:theme="@style/Theme.App.Base"
+            />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -27,13 +29,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
-        android:hint="@string/edi_questionHint">
+        android:hint="@string/edi_questionHint"
+       >
 
         <EditText
             android:id="@+id/newQuestionEt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"/>
+            android:layout_marginTop="20dp"
+            android:theme="@style/Theme.App.Base"
+            />
     </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -48,7 +53,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            android:theme="@style/Theme.App.Base"
+           />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -65,7 +72,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:inputType="number"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            android:theme="@style/Theme.App.Base"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button

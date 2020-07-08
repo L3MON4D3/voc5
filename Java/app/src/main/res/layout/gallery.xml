@@ -85,7 +85,7 @@
                 android:layout_gravity="fill_vertical"
                 android:layout_weight="1"
                 android:hint="@string/gal_searchHint"
-               />
+                android:theme="@style/Theme.App.Base"/>
 
             <Button
                 android:id="@+id/sortSel_btn"

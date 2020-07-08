@@ -11,9 +11,6 @@
         android:label="voc5"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".UI.MainMenuActivity"
-            android:exported="true" />
-        <activity
             android:name=".UI.EditActivity"
             android:exported="true" />
         <activity
