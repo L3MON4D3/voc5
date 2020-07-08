@@ -8,7 +8,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.L3MON4D3.voc5.Client.Voc5Client;
-import com.L3MON4D3.voc5.Client.Vocab;
 import com.L3MON4D3.voc5.R;
 
 public class VocActivity extends AppCompatActivity {
@@ -30,23 +29,6 @@ public class VocActivity extends AppCompatActivity {
         } else {
             client = savedInstanceState.getParcelable("client");
         }
-    }
-
-    /**
-     *Starts Gallery activity and passes proper Intent
-     */
-    public void startGallery(){
-        Intent startIntent = new Intent(getApplicationContext(), GalleryActivity.class);
-        startActivity(startIntent);
-    }
-
-    /**
-     * Starts newVoc activity and passes proper Intent
-      */
-    public void startNewVoc(){
-        Intent startIntent = new Intent(getApplicationContext(),MainMenuActivity.class);//todo add activity for creating new Voc
-        //todo: add proper extra to Intent
-        startActivity(startIntent);
     }
 
     /**

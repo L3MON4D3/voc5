@@ -12,14 +12,14 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Button;
-
+import androidx.appcompat.app.AppCompatActivity;
 
 
 import com.L3MON4D3.voc5.R;
 
 import java.util.ArrayList;
 
-public class Pop extends VocActivity {
+public class Pop extends AppCompatActivity {
     TextView textViewUserAnswer;
     TextView textViewRigthAnswer;
     Button rigthbtn;
@@ -28,7 +28,6 @@ public class Pop extends VocActivity {
     int currentp;
     String UserAnswer;
     String RightAnswer;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,7 +125,4 @@ public class Pop extends VocActivity {
         }
         textViewUserAnswer.setText(ssb);
     }
-
-
-
 }

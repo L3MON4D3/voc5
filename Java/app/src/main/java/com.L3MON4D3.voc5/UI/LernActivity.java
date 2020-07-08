@@ -22,7 +22,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 
-public class LernActivity  extends VocActivity {
+public class LernActivity extends VocActivity {
     ImageButton checkbtn;
     Button finishbtn;
     Random rad = new Random();

@@ -1,5 +1,7 @@
 package com.L3MON4D3.voc5.UI;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,7 +12,7 @@ import android.widget.Toast;
 import com.L3MON4D3.voc5.Client.Vocab;
 import com.L3MON4D3.voc5.R;
 
-public class EditActivity extends VocActivity{
+public class EditActivity extends AppCompatActivity {
     EditText newQuestionEt;
     EditText newLanguageEt;
     EditText newAnswerEt;
@@ -57,5 +59,4 @@ public class EditActivity extends VocActivity{
             }
         });
     }
-
 }
