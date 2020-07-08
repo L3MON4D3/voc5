@@ -63,6 +63,7 @@ public class GalleryActivity extends VocActivity {
                 break;
             }
 
+            //search for new vocabulary to add to Gallery
             ArrayList oldVocs = new ArrayList(client.getVocabs());
             client.loadVocs(() -> {
                 for (Vocab voc : client.getVocabs()) {
@@ -71,6 +72,7 @@ public class GalleryActivity extends VocActivity {
                     else
                         oldVocs.add(voc);
                 }
+                //add new vocabulary to gallery
                 runOnUiThread(() -> {
                     addVocsToGallery(oldVocs);
                 });
@@ -317,12 +319,17 @@ public class GalleryActivity extends VocActivity {
         activateButtons();
     }
 
+    /**
+     * Makes edit,learn and delete button appear
+     * or disappear depending on amount of selected vocabulary.
+     */
     public void activateButtons(){
         if(selCount == 1) {
             galleryEditBtn.setVisibility(View.VISIBLE);
             galleryLearnBtn.setVisibility(View.VISIBLE);
             galleryDeleteBtn.setVisibility(View.VISIBLE);
-        }else if(selCount > 1) {
+        }//only one vocab can be edited at a time
+        else if(selCount > 1) {
             galleryEditBtn.setVisibility(View.GONE);
         } else {
             galleryEditBtn.setVisibility(View.GONE);
@@ -573,6 +580,7 @@ public class GalleryActivity extends VocActivity {
             if (resultCode == RESULT_OK) {
                 Vocab newVoc = data.getExtras().getParcelable("com.L3MON4D3.voc5.newVoc");
 
+                //set vocab attributes to new attributes
                 GalleryCard oldVocCard = selected.get(selCount - 1);
                 Vocab oldVoc = oldVocCard.getVoc();
                 oldVoc.setAnswer(newVoc.getAnswer());
@@ -582,6 +590,7 @@ public class GalleryActivity extends VocActivity {
 
                 oldVocCard.refresh();
 
+                //update vocab on server
                 client.getOkClient().newCall(client.updateVocRqst(oldVoc)).enqueue(new Callback() {
                     public void onFailure(Call call, IOException e) {
                     }
@@ -590,14 +599,19 @@ public class GalleryActivity extends VocActivity {
                     }
                 });
             }
-        } else if (requestCode == NEW_RESULT) {
+        }//check if new vocab was added
+        else if (requestCode == NEW_RESULT) {
             if(resultCode == RESULT_OK){
                 setLoadingInfoText("Adding Vocab");
                 startLoading();
+
+                //load voc from edit Intent
                 Vocab voc = data.getExtras().getParcelable("com.L3MON4D3.voc5.newVoc");
                 String newQuestion = voc.getQuestion();
                 String newAnswer = voc.getAnswer();
                 String newLang = voc.getLanguage();
+                int newphase = voc.getPhase();
+                //upload voc to server
                 client.getOkClient().newCall(client.newVocabRqst(voc)).enqueue(new Callback() {
                     @Override
                     public void onFailure(@NotNull Call call, @NotNull IOException e) {
@@ -605,6 +619,7 @@ public class GalleryActivity extends VocActivity {
 
                     @Override
                     public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                        //once uploaded, download vocabs and find new vocab
                         client.loadVocs(() -> {
                             runOnUiThread(() -> {
                                 ArrayList<Vocab> vocs = client.getVocabs();
@@ -618,6 +633,18 @@ public class GalleryActivity extends VocActivity {
                                         break;
                                     }
                                 }
+                                //set the phase as server sets it to 0
+                                v.setPhase(newphase);
+                                client.getOkClient().newCall(client.updateVocRqst(v)).enqueue(new Callback() {
+                                    @Override
+                                    public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                                    }
+
+                                    @Override
+                                    public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                                    }
+                                });
+                                //create gallery card for new vocab
                                 GalleryCard newCard = gcf.newCard(v, 0);
                                 allCards.add(i, newCard);
                                 searchGallery(allCards);
@@ -627,6 +654,7 @@ public class GalleryActivity extends VocActivity {
                         });
                     }
                 });
+
             }
         } else if(requestCode == LEARN_RESULT) {
             if (resultCode == RESULT_OK) {

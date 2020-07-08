@@ -16,11 +16,11 @@ import com.L3MON4D3.voc5.R;
 import com.google.android.material.textfield.TextInputLayout;
 
 public class EditActivity extends AppCompatActivity {
-    TextInputLayout phaseInputLayout;
     EditText newQuestionEt;
     EditText newLanguageEt;
     EditText newAnswerEt;
     EditText newPhaseEt;
+    TextInputLayout phaseInputLayout;
     Button commitChangesBtn;
 
     @Override
@@ -35,6 +35,12 @@ public class EditActivity extends AppCompatActivity {
         newLanguageEt = findViewById(R.id.newLanguageEt);
         newPhaseEt = findViewById(R.id.newPhaseEt);
         phaseInputLayout = findViewById(R.id.phaseInputLayout);
+
+        //Check if a legal Phase is already set to not allow empty Phase or Phase 0
+        if(newPhaseEt.getText().toString().equals("") || newPhaseEt.getText().toString().equals("0")) {
+            phaseInputLayout.setError("Phase muss zwischen 1 und 5 sein");
+            commitChangesBtn.setEnabled(false);
+        }
 
         newPhaseEt.addTextChangedListener(new TextWatcher() {
             @Override
