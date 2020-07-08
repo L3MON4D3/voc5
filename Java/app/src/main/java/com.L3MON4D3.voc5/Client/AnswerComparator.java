@@ -6,6 +6,6 @@ public class AnswerComparator extends VocabComparator {
      */
     @Override
     public int compare(Vocab a, Vocab b) {
-        return (ascending?1:-1)*a.getAnswer().compareTo(b.getAnswer());
+        return (ascending?1:-1)*a.getAnswer().toLowerCase().compareTo(b.getAnswer().toLowerCase());
     }
 }
