@@ -156,7 +156,7 @@ public class GalleryActivity extends VocActivity {
                         setGalleryContentFromCurrent();
 
                         sortSearchSet();
-                        sortSearch();
+                        searchSortGallery(allCards);
                         stopLoading();
                     });
                 });
@@ -177,7 +177,7 @@ public class GalleryActivity extends VocActivity {
             sortAsc = savedInstanceState.getBoolean("sortAsc");
 
             sortSearchSet();
-            sortSearch();
+            searchSortGallery(allCards);
         }
 
         searchET.addTextChangedListener(new TextWatcher(){
@@ -185,12 +185,12 @@ public class GalleryActivity extends VocActivity {
                 crtSrchPred.setSearchString(String.valueOf(s));
                 //if Text was changed somewhere not at the end, search allCards
                 if (start != s.length()-1)
-                    searchGallery(allCards);
+                    searchSortGallery(allCards);
                 //if a char was added, search current Cards (search got more specific)
                 else if (before < count)
-                    searchGallery(currentCards);
+                    searchSortGallery(currentCards);
                 else
-                    searchGallery(allCards);
+                    searchSortGallery(allCards);
             }
 
             public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
@@ -204,14 +204,15 @@ public class GalleryActivity extends VocActivity {
                 Button tv = (Button) view;
                 srchSel = (srchSel + 1) % 4;
                 srchSet();
-                searchGallery(allCards);
+                //if there is no input, do nothing.
+                if (!searchET.getText().toString().equals(""))
+                    searchSortGallery(allCards);
             }
         });
 
         sortSelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Button tv = (Button) view;
                 sortSel = (sortSel + 1) % 4;
                 sortSet();
                 sortGallery();
@@ -221,7 +222,6 @@ public class GalleryActivity extends VocActivity {
         sortDirBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Button tv = (Button) view;
                 sortAsc = !sortAsc;
                 sortDirSet();
                 sortReverse();
@@ -277,14 +277,6 @@ public class GalleryActivity extends VocActivity {
         srchSet();
         sortSet();
         sortDirSet();
-    }
-
-    /**
-     * Filters and Sorts Gallery with srchComp and sortComp.
-     */
-    public void sortSearch() {
-        searchGallery(allCards);
-        sortGallery();
     }
 
     /**
@@ -424,11 +416,11 @@ public class GalleryActivity extends VocActivity {
      * Filter Cards based on crtSrchPred.
      * @param cards search this ArrayList, useful for more/less specific searches.
      */
-    public void searchGallery(ArrayList<GalleryCard> cards) {
+    public void searchSortGallery(ArrayList<GalleryCard> cards) {
         currentCards = (ArrayList<GalleryCard>) cards.stream()
             .filter(gc -> crtSrchPred.test(gc.getVoc()))
             .collect(Collectors.toList());
-        setGalleryContentFromCurrent();
+        sortGallery();
     }
 
     /**
@@ -620,8 +612,7 @@ public class GalleryActivity extends VocActivity {
                                 }
                                 GalleryCard newCard = gcf.newCard(v, 0);
                                 allCards.add(i, newCard);
-                                searchGallery(allCards);
-                                sortGallery();
+                                searchSortGallery(allCards);
                                 stopLoading();
                             });
                         });
@@ -665,8 +656,7 @@ public class GalleryActivity extends VocActivity {
                 int ind = cVocs.indexOf(v);
                 allCards.add(ind, gcf.newCard(v, 0));
             }
-            searchGallery(allCards);
-            sortGallery();
+            searchSortGallery(allCards);
         }
     }
 
