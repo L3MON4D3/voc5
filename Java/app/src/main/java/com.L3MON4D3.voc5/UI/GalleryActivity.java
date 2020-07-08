@@ -253,35 +253,7 @@ public class GalleryActivity extends VocActivity {
         galleryDeleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                selected.sort(null);
-
-                int size = selected.size();
-                for(int i = 0; i != size; i++){
-                    GalleryCard tmp = selected.get(0);
-                    Vocab tmpVoc = tmp.getVoc();
-
-                    client.getVocabs().remove(tmpVoc);
-                    currentCards.remove(tmp);
-                    deselect(tmp);
-                    //Gallery cards replace deleted galley cards therefore shift index from parents.
-                    gallery.removeViewAt(tmp.parentPos-i);
-
-                    client.getOkClient().newCall(client.deleteVocRqst(tmpVoc)).enqueue(new Callback() {
-                        @Override
-                        public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                            Log.e("voc5:", e.getMessage());
-                        }
-
-                        @Override
-                        public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-                            Log.e("voc5:", response.body().string());
-                        }
-                    });
-                }
-
-                for(int i = 0; i != gallery.getChildCount();i++) {
-                    ((GalleryCard)gallery.getChildAt(i)).parentPos = i;
-                }
+                deleteBtn();
             }
         });
         updateThread.start();
@@ -537,6 +509,41 @@ public class GalleryActivity extends VocActivity {
             select(gc);
         else
            selectRange(selected.get(selCount - 1), gc);
+    }
+
+    /**
+     * Deletes all vocabulary that is selected and updates gallery
+     */
+    public void deleteBtn() {
+        selected.sort(null);
+
+        int size = selected.size();
+        for(int i = 0; i != size; i++){
+            GalleryCard tmp = selected.get(0);
+            Vocab tmpVoc = tmp.getVoc();
+
+            client.getVocabs().remove(tmpVoc);
+            currentCards.remove(tmp);
+            deselect(tmp);
+            //Gallery cards replace deleted galley cards therefore shift index from parents.
+            gallery.removeViewAt(tmp.parentPos-i);
+
+            client.getOkClient().newCall(client.deleteVocRqst(tmpVoc)).enqueue(new Callback() {
+                @Override
+                public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                    Log.e("voc5:", e.getMessage());
+                }
+
+                @Override
+                public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                    Log.e("voc5:", response.body().string());
+                }
+            });
+        }
+
+        for(int i = 0; i != gallery.getChildCount();i++) {
+            ((GalleryCard)gallery.getChildAt(i)).parentPos = i;
+        }
     }
 
     /**
