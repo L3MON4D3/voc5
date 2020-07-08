@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="175dp"
     android:layout_height="80dp"
-    android:layout_margin="5dp"
-    android:background="@color/purpleblue">
+    android:layout_margin="5dp">
+
 
     <TextView
         android:layout_width="wrap_content"
@@ -15,8 +15,7 @@
         android:typeface="serif"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="20dp"
-        android:gravity="center"
-        android:textColor="@color/yorange"/>
+        android:gravity="center" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -24,8 +23,7 @@
         android:textSize="8dp"
         android:layout_gravity="bottom | right"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="5dp"
-        android:textColor="@color/yorange"/>
+        android:layout_marginBottom="5dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -33,7 +31,6 @@
         android:textSize="8dp"
         android:layout_gravity="top | left"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="5dp"
-        android:textColor="@color/yorange"/>
+        android:layout_marginTop="5dp" />
 
 </com.L3MON4D3.voc5.UI.GalleryCard>

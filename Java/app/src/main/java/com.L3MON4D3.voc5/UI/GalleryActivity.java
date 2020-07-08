@@ -84,10 +84,10 @@ public class GalleryActivity extends VocActivity {
     private ArrayList<GalleryCard> currentCards;
     private ArrayList<GalleryCard> selected;
 
-    private Button galleryEditBtn;
-    private Button galleryLearnBtn;
-    private Button galleryDeleteBtn;
-    private FloatingActionButton fab;
+    private FloatingActionButton galleryEditBtn;
+    private FloatingActionButton galleryLearnBtn;
+    private FloatingActionButton galleryDeleteBtn;
+    private FloatingActionButton galleryAddBtn;
     private EditText searchET;
 
     private int srchSel;
@@ -98,6 +98,7 @@ public class GalleryActivity extends VocActivity {
     VocPredicate crtSrchPred;
 
     private int selCount = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -150,7 +151,7 @@ public class GalleryActivity extends VocActivity {
         galleryEditBtn = findViewById(R.id.galleryEditBtn);
         galleryLearnBtn = findViewById(R.id.galleryLearnBtn);
         galleryDeleteBtn = findViewById(R.id.galleryDeleteBtn);
-        fab = findViewById(R.id.galleryFab);
+        galleryAddBtn = findViewById(R.id.galleryAddBtn);
         searchET = findViewById(R.id.search_et);
 
         searchET.addTextChangedListener(new TextWatcher(){
@@ -226,7 +227,7 @@ public class GalleryActivity extends VocActivity {
             }
         });
 
-        fab.setOnClickListener(new View.OnClickListener() {
+        galleryAddBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent startIntent = new Intent(getApplicationContext(), EditActivity.class);
@@ -269,6 +270,7 @@ public class GalleryActivity extends VocActivity {
             }
         });
         updateThread.start();
+        //buttonThread.start();
     }
 
     /**
@@ -276,6 +278,7 @@ public class GalleryActivity extends VocActivity {
      * @param vocs
      */
     public void fillAll(ArrayList<Vocab> vocs) {
+
         for (Vocab voc : vocs) {
             //Pass parentPos of 0, will be set correctly later on.
             allCards.add(gcf.newCard(voc, 0));
@@ -308,6 +311,22 @@ public class GalleryActivity extends VocActivity {
         gc.elevate();
         gc.setSelected(true);
         selCount++;
+
+        activateButtons();
+    }
+
+    public void activateButtons(){
+        if(selCount == 1) {
+            galleryEditBtn.setVisibility(View.VISIBLE);
+            galleryLearnBtn.setVisibility(View.VISIBLE);
+            galleryDeleteBtn.setVisibility(View.VISIBLE);
+        }else if(selCount > 1) {
+            galleryEditBtn.setVisibility(View.GONE);
+        } else {
+            galleryEditBtn.setVisibility(View.GONE);
+            galleryLearnBtn.setVisibility(View.GONE);
+            galleryDeleteBtn.setVisibility(View.GONE);
+        }
     }
 
     /**
@@ -321,6 +340,8 @@ public class GalleryActivity extends VocActivity {
         gc.resetElevation();
         gc.setSelected(false);
         selCount--;
+
+        activateButtons();
     }
 
     /**
