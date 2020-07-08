@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="45dp"
-        android:text="question"
+        android:text="@string/lern_Question"
         android:textSize="30sp"
         android:layout_gravity="center" />
 
@@ -22,7 +22,8 @@
         android:layout_height="wrap_content"
         android:text="Language"
         android:textSize="15sp"
-       android:layout_gravity="center" />
+        android:layout_gravity="center" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -53,7 +54,7 @@
             android:id="@+id/finishbtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="finish"
+            android:text="@string/lern_finishBtn"
              android:layout_gravity="center"
             android:gravity="center"
             android:layout_marginTop="400dp"
