@@ -14,6 +14,8 @@ import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.EditText;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -99,11 +101,12 @@ public class GalleryActivity extends VocActivity {
 
     private int selCount = 0;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gallery);
+
+        setLoadingInfoParentLayout((ConstraintLayout) findViewById(R.id.galleryOuter_lt));
 
         galleryEditBtn = findViewById(R.id.galleryEditBtn);
         galleryLearnBtn = findViewById(R.id.galleryLearnBtn);
@@ -280,7 +283,6 @@ public class GalleryActivity extends VocActivity {
      * @param vocs
      */
     public void fillAll(ArrayList<Vocab> vocs) {
-
         for (Vocab voc : vocs) {
             //Pass parentPos of 0, will be set correctly later on.
             allCards.add(gcf.newCard(voc, 0));
@@ -556,6 +558,8 @@ public class GalleryActivity extends VocActivity {
             }
         } else if (requestCode == NEW_RESULT) {
             if(resultCode == RESULT_OK){
+                setLoadingInfoText("Adding Vocab");
+                startLoading();
                 Vocab voc = data.getExtras().getParcelable("com.L3MON4D3.voc5.newVoc");
                 String newQuestion = voc.getQuestion();
                 String newAnswer = voc.getAnswer();
@@ -567,7 +571,6 @@ public class GalleryActivity extends VocActivity {
 
                     @Override
                     public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-                        Log.e("voc5", response.body().string());
                         client.loadVocs(() -> {
                             runOnUiThread(() -> {
                                 ArrayList<Vocab> vocs = client.getVocabs();
@@ -585,6 +588,7 @@ public class GalleryActivity extends VocActivity {
                                 allCards.add(i, newCard);
                                 searchGallery(allCards);
                                 sortGallery();
+                                stopLoading();
                             });
                         });
                     }
