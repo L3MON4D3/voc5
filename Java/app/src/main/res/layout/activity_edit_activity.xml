@@ -1,89 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:layout_gravity="center"
-    android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
 
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:hint="@string/edi_answerHint">
-
-        <com.google.android.material.textfield.TextInputEditText
-            style="@style/voc5TextInput.EditText"
-            android:id="@+id/newAnswerEt"
+        android:orientation="vertical"
+        android:layout_gravity="center" >
+    
+    
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/voc5TextInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:textSize="20dp" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:hint="@string/edi_questionHint" >
-
-        <com.google.android.material.textfield.TextInputEditText
-            style="@style/voc5TextInput.EditText"
-            android:id="@+id/newQuestionEt"
+            android:layout_marginBottom="20dp"
+            android:hint="@string/edi_answerHint">
+    
+            <com.google.android.material.textfield.TextInputEditText
+                style="@style/voc5TextInput.EditText"
+                android:id="@+id/newAnswerEt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:textSize="20dp" />
+    
+        </com.google.android.material.textfield.TextInputLayout>
+    
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/voc5TextInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:hint="@string/edi_langHint">
-
-        <com.google.android.material.textfield.TextInputEditText
-            style="@style/voc5TextInput.EditText"
-            android:id="@+id/newLanguageEt"
+            android:layout_marginBottom="20dp"
+            android:hint="@string/edi_questionHint" >
+    
+            <com.google.android.material.textfield.TextInputEditText
+                style="@style/voc5TextInput.EditText"
+                android:id="@+id/newQuestionEt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp" 
+                android:textSize="20dp" />
+    
+        </com.google.android.material.textfield.TextInputLayout>
+    
+    
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/voc5TextInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:textSize="20dp" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/phaseInputLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:hint="@string/edi_phaseHint"
-        app:errorEnabled="true">
-
-        <com.google.android.material.textfield.TextInputEditText
-            style="@style/voc5TextInput.EditText"
-            android:id="@+id/newPhaseEt"
+            android:layout_marginBottom="20dp"
+            android:hint="@string/edi_langHint">
+    
+            <com.google.android.material.textfield.TextInputEditText
+                style="@style/voc5TextInput.EditText"
+                android:id="@+id/newLanguageEt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:textSize="20dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+    
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/voc5TextInput"
+            android:id="@+id/phaseInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:inputType="number"
-            android:textSize="20dp" />
+            android:layout_marginBottom="20dp"
+            android:hint="@string/edi_phaseHint"
+            app:errorEnabled="true">
+    
+            <com.google.android.material.textfield.TextInputEditText
+                style="@style/voc5TextInput.EditText"
+                android:id="@+id/newPhaseEt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:inputType="number"
+                android:textSize="20dp" />
+    
+        </com.google.android.material.textfield.TextInputLayout>
+    
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp" >
+            
+                <Button
+                    style="@style/voc5Button"
+                    android:id="@+id/commitChangeBtn"
+                    android:layout_width="0px"
+                    android:layout_weight="1"
+                    android:layout_marginRight="5dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/edi_acceptBtn"
+                    android:textSize="12dp" />
 
-    </com.google.android.material.textfield.TextInputLayout>
+                <Button
+                    style="@style/voc5Button.outlinedButton"
+                    android:id="@+id/abortChangeBtn"
+                    android:layout_width="0px"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="5dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/edi_cancelBtn"
+                    android:textSize="12dp" />
 
-    <Button
-        android:id="@+id/commitChangeBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:background="@color/cardview_dark_background"
-        android:text="@string/edi_commitBtn"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="20dp" />
-
-
-</LinearLayout>
+            </LinearLayout>
+    </LinearLayout>
+</FrameLayout>

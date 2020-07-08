@@ -38,6 +38,7 @@
             android:inputType="text"
             android:layout_gravity="center">
         </EditText>
+
         <ImageButton
             android:id="@+id/checkbtn"
             android:layout_width="wrap_content"
@@ -49,7 +50,6 @@
 
     </LinearLayout>
 
-
          <Button
             android:id="@+id/finishbtn"
             android:layout_width="wrap_content"
@@ -59,8 +59,5 @@
             android:gravity="center"
             android:layout_marginTop="400dp"
              style="@style/button_style"/>
-
-
-
 
 </LinearLayout>

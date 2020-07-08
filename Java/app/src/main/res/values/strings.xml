@@ -22,9 +22,10 @@
     <string name="gal_searchHint">Search</string>
     <string name="gal_searchDirection">Asc</string>
 
-    <string name="edi_answerHint">Enter new Answer</string>
-    <string name="edi_questionHint">Enter new Question</string>
-    <string name="edi_langHint">Enter new Language</string>
-    <string name="edi_phaseHint">Enter new Phase</string>
-    <string name="edi_commitBtn">Commit Changes</string>
+    <string name="edi_answerHint">Answer</string>
+    <string name="edi_questionHint">Question</string>
+    <string name="edi_langHint">Language</string>
+    <string name="edi_phaseHint">Phase</string>
+    <string name="edi_acceptBtn">Accept</string>
+    <string name="edi_cancelBtn">Cancel</string>
 </resources>

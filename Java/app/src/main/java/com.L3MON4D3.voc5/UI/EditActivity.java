@@ -22,6 +22,7 @@ public class EditActivity extends AppCompatActivity {
     EditText newPhaseEt;
     TextInputLayout phaseInputLayout;
     Button commitChangesBtn;
+    Button abortChangesBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +30,7 @@ public class EditActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_activity);
 
         commitChangesBtn = findViewById(R.id.commitChangeBtn);
+        abortChangesBtn = findViewById(R.id.abortChangeBtn);
 
         newQuestionEt = findViewById(R.id.newQuestionEt);
         newAnswerEt = findViewById(R.id.newAnswerEt);
@@ -89,6 +91,15 @@ public class EditActivity extends AppCompatActivity {
                 newVoc.setPhase(newPhase);
                 resultIntent.putExtra("com.L3MON4D3.voc5.newVoc", newVoc);
                 setResult(RESULT_OK, resultIntent);
+                finish();
+            }
+        });
+
+        abortChangesBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent resultIntent = new Intent();
+                setResult(RESULT_CANCELED, resultIntent);
                 finish();
             }
         });
