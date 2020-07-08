@@ -25,7 +25,7 @@ import com.L3MON4D3.voc5.R;
 
 import java.io.IOException;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends LoadingInfoActivity {
     private Voc5Client vClient;
     private OkHttpClient okClient;
 
@@ -39,21 +39,25 @@ public class LoginActivity extends AppCompatActivity {
 
     private Callback loginCallback = new Callback() {
         public void onFailure(Call call, IOException e) {
+            runOnUiThread(() -> stopLoading());
             Log.e("voc5:", e.getMessage());
         }
 
         public void onResponse(Call call, Response res) throws IOException {
             Log.e("voc5:", res.body().string());
+            runOnUiThread(() -> stopLoading());
             openMainMenu();
         }
     };
 
     private Callback registerCallback = new Callback() {
         public void onFailure(Call call, IOException e) {
+            runOnUiThread(() -> stopLoading());
             Log.e("voc5:", "not successful:"+e.getMessage());
         }
 
         public void onResponse(Call call, Response res) throws IOException {
+            runOnUiThread(() -> stopLoading());
             if (!res.isSuccessful())
                 registerFailToast.show();
             else
@@ -88,6 +92,8 @@ public class LoginActivity extends AppCompatActivity {
                 logIn(true);
             }
         });
+
+        setLoadingInfoParentLayout(findViewById(R.id.loginOuter_lt));
     }
 
     /**
@@ -103,11 +109,15 @@ public class LoginActivity extends AppCompatActivity {
 
         okClient = vClient.getOkClient();
 
+        String loadInfoText = "";
         if (!register) {
             okClient.newCall(vClient.loginRqst()).enqueue(loginCallback);
+            loadInfoText = "Logging In";
         } else {
             okClient.newCall(vClient.registerRqst()).enqueue(registerCallback);
+            loadInfoText = "Registering";
         }
+        startLoading();
         saveLogin();
     }
 
