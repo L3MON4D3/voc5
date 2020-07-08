@@ -17,7 +17,7 @@
         android:layout_marginBottom="16dp"
         android:src="@drawable/ic_baseline_clear_24"
         android:visibility="gone"
-        app:backgroundTint="@color/buttonBackgroundGreen"
+        app:backgroundTint="@color/buttonBackgroundBlue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -28,7 +28,7 @@
         android:layout_marginBottom="16dp"
         android:src="@drawable/ic_baseline_menu_book_24"
         android:visibility="gone"
-        app:backgroundTint="@color/buttonBackgroundGreen"
+        app:backgroundTint="@color/buttonBackgroundBlue"
         app:layout_constraintBottom_toTopOf="@id/galleryDeleteBtn"
         app:layout_constraintStart_toStartOf="@id/galleryDeleteBtn" />
 
@@ -39,7 +39,7 @@
         android:layout_marginBottom="16dp"
         android:src="@drawable/ic_baseline_edit_24"
         android:visibility="gone"
-        app:backgroundTint="@color/buttonBackgroundGreen"
+        app:backgroundTint="@color/buttonBackgroundBlue"
         app:layout_constraintBottom_toTopOf="@id/galleryLearnBtn"
         app:layout_constraintStart_toStartOf="@+id/galleryLearnBtn" />
 
@@ -50,7 +50,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:src="@drawable/ic_baseline_add_24"
-        app:backgroundTint="@color/buttonBackgroundGreen"
+        app:backgroundTint="@color/buttonBackgroundBlue"
         app:layout_constraintBottom_toBottomOf="@id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -59,9 +59,7 @@
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/orange"
         android:orientation="vertical"
-
         android:paddingTop="5dp"
         tools:layout_editor_absoluteY="5dp">
 
@@ -77,7 +75,8 @@
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:text="@string/gal_searchAnswer"
-                android:textSize="12dp" />
+                android:textSize="12dp"
+                style="@style/button_style"/>
 
             <EditText
                 android:id="@+id/search_et"
@@ -85,18 +84,16 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="fill_vertical"
                 android:layout_weight="1"
-                android:hint="@string/gal_searchHint" />
+                android:hint="@string/gal_searchHint"
+               />
 
             <Button
                 android:id="@+id/sortSel_btn"
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:text="@string/gal_searchAnswer"
-
-                android:textColor="@color/purpleblue"
-
-
-                android:textSize="12dp" />
+                android:textSize="12dp"
+                style="@style/button_style"/>
 
 
             <Button
@@ -104,9 +101,8 @@
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:text="@string/gal_searchDirection"
-
-                android:textColor="@color/purpleblue"
-                android:textSize="12dp" />
+                android:textSize="12dp"
+                style="@style/button_style"/>
 
         </LinearLayout>
 

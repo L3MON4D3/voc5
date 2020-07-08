@@ -6,7 +6,7 @@
     android:layout_height="fill_parent"
     android:layout_gravity="center"
     android:orientation="vertical"
-    android:background="@color/purpleblue">
+    >
 
 
     <EditText
@@ -16,7 +16,7 @@
         android:layout_marginTop="20dp"
         android:hint="@string/lern_answerHint"
         android:textSize="20dp"
-        android:textColor="@color/white"/>
+        />
 
     <EditText
         android:id="@+id/newQuestionEt"
@@ -25,7 +25,7 @@
         android:hint="@string/edi_questionHint"
         android:layout_marginTop="20dp"
         android:textSize="20dp"
-        android:textColor="@color/white"/>
+        />
 
     <EditText
         android:id="@+id/newLanguageEt"
@@ -34,7 +34,7 @@
         android:layout_marginTop="20dp"
         android:hint="@string/edi_langHint"
         android:textSize="20dp"
-        android:textColor="@color/white"/>
+        />
 
     <EditText
         android:id="@+id/newPhaseEt"
@@ -44,7 +44,7 @@
         android:hint="@string/edi_phaseHint"
         android:textSize="20dp"
         android:inputType="number"
-        android:textColor="@color/white"/>
+       />
 
     <Button
         android:id="@+id/commitChangeBtn"
@@ -54,8 +54,7 @@
         android:text="@string/edi_commitBtn"
         android:textAllCaps="false"
         android:textSize="20dp"
-        android:textColor="@color/white"
-        android:background="@color/cardview_dark_background"/>
+        style="@style/button_style"/>
 
 
 </LinearLayout>
