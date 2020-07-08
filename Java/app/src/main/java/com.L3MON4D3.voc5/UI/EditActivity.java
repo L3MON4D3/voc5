@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,8 +13,10 @@ import android.widget.Toast;
 
 import com.L3MON4D3.voc5.Client.Vocab;
 import com.L3MON4D3.voc5.R;
+import com.google.android.material.textfield.TextInputLayout;
 
 public class EditActivity extends AppCompatActivity {
+    TextInputLayout phaseInputLayout;
     EditText newQuestionEt;
     EditText newLanguageEt;
     EditText newAnswerEt;
@@ -24,10 +28,37 @@ public class EditActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_activity);
 
+        commitChangesBtn = findViewById(R.id.commitChangeBtn);
+
         newQuestionEt = findViewById(R.id.newQuestionEt);
         newAnswerEt = findViewById(R.id.newAnswerEt);
         newLanguageEt = findViewById(R.id.newLanguageEt);
         newPhaseEt = findViewById(R.id.newPhaseEt);
+        phaseInputLayout = findViewById(R.id.phaseInputLayout);
+
+        newPhaseEt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(newPhaseEt.getText().toString().equals("") || newPhaseEt.getText().toString().equals("0")) {
+                    phaseInputLayout.setError("Phase muss zwischen 1 und 5 sein");
+                    commitChangesBtn.setEnabled(false);
+                } else if(Integer.parseInt(newPhaseEt.getText().toString()) > 5) {
+                    phaseInputLayout.setError("Phase muss zwischen 1 und 5 liegen");
+                    commitChangesBtn.setEnabled(false);
+                } else {
+                    phaseInputLayout.setError("");
+                    commitChangesBtn.setEnabled(true);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
 
         //set Edit Texts to  content that should be edited
         if(getIntent().hasExtra("com.L3MON4D3.voc5.Voc")) {
@@ -38,7 +69,6 @@ public class EditActivity extends AppCompatActivity {
             newPhaseEt.setText(String.valueOf(tmp.getPhase()));
         }
 
-        commitChangesBtn = findViewById(R.id.commitChangeBtn);
         commitChangesBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -46,9 +76,7 @@ public class EditActivity extends AppCompatActivity {
                 String newQuestion = newQuestionEt.getText().toString();
                 String newAnswer = newAnswerEt.getText().toString();
                 String newLanguage = newLanguageEt.getText().toString();
-                int newPhase = 0;
-                if(!newPhaseEt.getText().toString().equals(""))
-                    newPhase = Integer.parseInt(newPhaseEt.getText().toString());
+                int newPhase = Integer.parseInt(newPhaseEt.getText().toString());
 
                 Vocab newVoc = new Vocab(newAnswer, newQuestion, newLanguage);
                 Intent resultIntent = new Intent(getApplicationContext(),GalleryActivity.class);
