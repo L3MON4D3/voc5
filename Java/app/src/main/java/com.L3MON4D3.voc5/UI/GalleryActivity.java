@@ -92,6 +92,10 @@ public class GalleryActivity extends VocActivity {
     private FloatingActionButton galleryAddBtn;
     private EditText searchET;
 
+    private Button srchSelBtn;
+    private Button sortSelBtn;
+    private Button sortDirBtn;
+
     private int srchSel;
     private int sortSel;
     private boolean sortAsc;
@@ -113,6 +117,10 @@ public class GalleryActivity extends VocActivity {
         galleryDeleteBtn = findViewById(R.id.galleryDeleteBtn);
         galleryAddBtn = findViewById(R.id.galleryAddBtn);
         searchET = findViewById(R.id.search_et);
+
+        srchSelBtn = findViewById(R.id.srchSel_btn);
+        sortSelBtn = findViewById(R.id.sortSel_btn);
+        sortDirBtn = findViewById(R.id.sortDir_btn);
 
         srchSel = 0;
         sortSel = 0;
@@ -144,20 +152,30 @@ public class GalleryActivity extends VocActivity {
                     runOnUiThread(() -> {
                         fillAllAndCurrent(client.getVocabs());
                         setGalleryContentFromCurrent();
+
+                        sortSearchSet();
+                        sortSearch();
                     });
                 });
             } else {
                 fillAllAndCurrent(client.getVocabs());
                 setGalleryContentFromCurrent();
+
+                sortSearchSet();
             }
         } else {
             fillAll(client.getVocabs());
             setGalleryContent(
                 savedInstanceState.getIntArray("currentVocs"),
                 savedInstanceState.getIntArray("selectedPos"));
+
+            srchSel = savedInstanceState.getInt("srchSel");
+            sortSel = savedInstanceState.getInt("sortSel");
+            sortAsc = savedInstanceState.getBoolean("sortAsc");
+
+            sortSearchSet();
+            sortSearch();
         }
-
-
 
         searchET.addTextChangedListener(new TextWatcher(){
             public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -172,48 +190,37 @@ public class GalleryActivity extends VocActivity {
                     searchGallery(allCards);
             }
 
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
 
             public void afterTextChanged(Editable e) { }
         });
 
-        Button srchSelBtn = findViewById(R.id.srchSel_btn);
-        srchSet(srchSelBtn);
-        searchGallery(allCards);
         srchSelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Button tv = (Button) view;
                 srchSel = (srchSel + 1) % 4;
-                srchSet(tv);
+                srchSet();
                 searchGallery(allCards);
             }
         });
 
-        Button sortBtn = findViewById(R.id.sortSel_btn);
-        sortSet(sortBtn);
-        sortGallery();
-        sortBtn.setOnClickListener(new View.OnClickListener() {
+        sortSelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Button tv = (Button) view;
                 sortSel = (sortSel + 1) % 4;
-                sortSet(tv);
+                sortSet();
                 sortGallery();
             }
         });
 
-        Button sortDirBtn = findViewById(R.id.sortDir_btn);
-        sortDirSet(sortDirBtn);
-        if(!sortAsc)
-            sortReverse();
         sortDirBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Button tv = (Button) view;
                 sortAsc = !sortAsc;
-                sortDirSet(tv);
+                sortDirSet();
                 sortReverse();
             }
         });
@@ -275,7 +282,6 @@ public class GalleryActivity extends VocActivity {
             }
         });
         updateThread.start();
-        //buttonThread.start();
     }
 
     /**
@@ -287,6 +293,23 @@ public class GalleryActivity extends VocActivity {
             //Pass parentPos of 0, will be set correctly later on.
             allCards.add(gcf.newCard(voc, 0));
         }
+    }
+
+    /**
+     * Sets srchComp and sortComp according to srchSel and sortSel.
+     */
+    public void sortSearchSet() {
+        srchSet();
+        sortSet();
+        sortDirSet();
+    }
+
+    /**
+     * Filters and Sorts Gallery with srchComp and sortComp.
+     */
+    public void sortSearch() {
+        searchGallery(allCards);
+        sortGallery();
     }
 
     /**
@@ -350,21 +373,20 @@ public class GalleryActivity extends VocActivity {
 
     /**
      * Sets text and srchComp according to variable srchSel.
-     * @param srchBtn Button that displays current selection.
      */
-    public void srchSet(Button srchBtn) {
+    public void srchSet() {
         switch(srchSel) {
             case(0) :
-                srchBtn.setText("Ans");
+                srchSelBtn.setText("Ans");
                 break;
             case(1) :
-                srchBtn.setText("Qes");
+                srchSelBtn.setText("Qes");
                 break;
             case(2) :
-                srchBtn.setText("Lan");
+                srchSelBtn.setText("Lan");
                 break;
             case(3) :
-                srchBtn.setText("Phs");
+                srchSelBtn.setText("Phs");
                 break;
         }
         crtSrchPred = srchPreds[srchSel];
@@ -375,19 +397,19 @@ public class GalleryActivity extends VocActivity {
      * Sets text and sortComp according to variable sortSel.
      * @param sortBtn Button that displays current selection.
      */
-    public void sortSet(Button sortBtn) {
+    public void sortSet() {
         switch(sortSel) {
             case(0) :
-                sortBtn.setText("Ans");
+                sortSelBtn.setText("Ans");
                 break;
             case(1) :
-                sortBtn.setText("Qes");
+                sortSelBtn.setText("Qes");
                 break;
             case(2) :
-                sortBtn.setText("Lan");
+                sortSelBtn.setText("Lan");
                 break;
             case(3) :
-                sortBtn.setText("Phs");
+                sortSelBtn.setText("Phs");
                 break;
         }
         crtSortComp = sortComps[sortSel];
@@ -397,7 +419,7 @@ public class GalleryActivity extends VocActivity {
      * Sets text and boolean ascending for VocabComparator.
      * @param sortDirBtn Button that displays current sort Direction(Asc/Dsc)
      */
-    public void sortDirSet(Button sortDirBtn) {
+    public void sortDirSet() {
         if (sortAsc)
             sortDirBtn.setText("Asc");
         else
@@ -410,6 +432,8 @@ public class GalleryActivity extends VocActivity {
      */
     public void sortGallery() {
         currentCards.sort(Comparator.comparing(GalleryCard::getVoc, crtSortComp));
+        if (!sortAsc)
+            Collections.reverse(currentCards);
         setGalleryContentFromCurrent();
     }
 
@@ -665,6 +689,10 @@ public class GalleryActivity extends VocActivity {
         for (int i = 0; i != selCount; i++)
             selectedArr[i] = selected.get(i).parentPos;
         sis.putIntArray("selectedPos", selectedArr);
+
+        sis.putInt("srchSel", srchSel);
+        sis.putInt("sortSel", sortSel);
+        sis.putBoolean("sortAsc", sortAsc);
 
         super.onSaveInstanceState(sis);
     }
