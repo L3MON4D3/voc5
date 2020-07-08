@@ -14,9 +14,10 @@
 
     <string name="lern_Language">Language</string>
     <string name="lern_Question">Question</string>
-    <string name="lern_answerHint">Enter your Answer</string>
+    <string name="lern_answerHint">Answer</string>
     <string name="lern_okBtn">OK</string>
     <string name="lern_finishBtn">Finish</string>
+    <string name="lern_confirmBtn">Confirm</string>
 
     <string name="gal_searchAnswer">Ans</string>
     <string name="gal_searchHint">Search</string>

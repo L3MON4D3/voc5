@@ -3,6 +3,7 @@ package com.L3MON4D3.voc5.UI;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import androidx.cardview.widget.CardView;
 
 import android.util.Log;
 
@@ -23,7 +24,8 @@ public class GalleryCardFactory {
         this.inf = inf;
         this.parent = parent;
         this.cardWidth = cardWidth;
-        GalleryCard.setGa(ga);
+        if (ga != null)
+            GalleryCard.setGa(ga);
     }
 
     /**
@@ -38,5 +40,20 @@ public class GalleryCardFactory {
         gc.refresh();
         gc.parentPos = pos;
         return gc;
+    }
+
+    /**
+     * Create new CardView with same Layout as GalleryCard.
+     * @param voc Vocab associated with Card.
+     * @return CardView that looks like a GalleryCard, but isn't.
+     */
+    public CardView newCardNoFunctionality(Vocab voc) {
+        CardView cv = (CardView) inf.inflate(R.layout.gallery_card, parent, false);
+        ((TextView) cv.getChildAt(0)).setText(voc.getQuestion());
+        ((TextView) cv.getChildAt(1)).setText(voc.getLanguage().toUpperCase());
+        ((TextView) cv.getChildAt(2)).setText(voc.getPhaseString());
+        //Make cv ignore clicks.
+        cv.setEnabled(false);
+        return cv;
     }
 }

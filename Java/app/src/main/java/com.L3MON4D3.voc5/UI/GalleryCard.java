@@ -65,7 +65,9 @@ public class GalleryCard extends CardView implements Comparable<GalleryCard> {
      * @return true if Motion processed.
      */
     public boolean onTouchEvent(MotionEvent me) {
-        return gestDect.onTouchEvent(me) || super.onTouchEvent(me);
+        if (isEnabled())
+            return gestDect.onTouchEvent(me) || super.onTouchEvent(me);
+        return false;
     }
 
     /**

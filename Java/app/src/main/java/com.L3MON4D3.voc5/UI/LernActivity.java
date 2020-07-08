@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.FrameLayout;
 import java.util.Random;
 import java.util.ArrayList;
 import com.L3MON4D3.voc5.Client.Vocab;
@@ -14,6 +15,7 @@ import com.L3MON4D3.voc5.Client.IntPair;
 import com.L3MON4D3.voc5.R;
 import android.content.Intent;
 import android.widget.Toast;
+import android.util.DisplayMetrics;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,7 +27,7 @@ import org.jetbrains.annotations.NotNull;
 import java.io.IOException;
 
 public class LernActivity extends VocActivity {
-    ImageButton checkbtn;
+    Button checkbtn;
     Button finishbtn;
     Random rad = new Random();
     Vocab currentVoc;
@@ -33,21 +35,34 @@ public class LernActivity extends VocActivity {
 
     ArrayList<Vocab> vocs;
     IntPair[] newPhases;
-    TextView textViewQuestion;
-    TextView textViewLanguage;
+    FrameLayout cardParent;
+    GalleryCardFactory gcf;
     EditText editTextAnswer;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lern_activity2);
-        textViewQuestion = (TextView) findViewById(R.id.textViewQuestion);
-        textViewLanguage = (TextView) findViewById(R.id.textViewLanguage);
+
+        cardParent = findViewById(R.id.cardParent_lt);
         editTextAnswer = (EditText) findViewById(R.id.editTextAnswer);
         finishbtn =(Button) findViewById(R.id.finishbtn);
-        checkbtn = (ImageButton) findViewById(R.id.checkbtn);
+        checkbtn = findViewById(R.id.checkbtn);
+
+        //Code from GalleryActivity to determine width of cards.
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        float density = displayMetrics.density;
+        
+        //margin of GridLayout gallery * 2 in pixels.
+        int ltBorderPx = (int)(40 * density);
+        
+        int width = displayMetrics.widthPixels - ltBorderPx;
+        
+        //approximate number of Cards that fit beside each other(cardWidth+marginLeft+marginRight).
+        int colCount = (int)(width/(185*density));
+        
+        gcf = new GalleryCardFactory(getLayoutInflater(), cardParent, width/colCount-(int)(10*density), null);
 
         if (savedInstanceState != null) {
             vocs =savedInstanceState.getParcelableArrayList("ArrayListLern");
@@ -63,7 +78,6 @@ public class LernActivity extends VocActivity {
 
                 tolern();
         }
-
         finishbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -78,7 +92,6 @@ public class LernActivity extends VocActivity {
             public void onClick(View view) {
                 String currentAns = editTextAnswer.getText().toString();
 
-
                 if (currentAns.equals(currentVoc.getAnswer())) {
                         currentVoc.incPhase();
                         saveChanges(currentVoc);
@@ -90,8 +103,6 @@ public class LernActivity extends VocActivity {
                         startIntent.putExtra("phase", currentVoc.getPhase());
                         startActivityForResult(startIntent, POPREQ);
                 }
-
-
             }
         });
     }
@@ -110,8 +121,7 @@ public class LernActivity extends VocActivity {
         }
     }
     public void window(Vocab currentVoc){
-        textViewQuestion.setText(currentVoc.getQuestion());
-        textViewLanguage.setText(currentVoc.getLanguage());
+        cardParent.addView(gcf.newCardNoFunctionality(currentVoc));
         editTextAnswer.setText("");
     }
     public void onSaveInstanceState(Bundle sis) {
