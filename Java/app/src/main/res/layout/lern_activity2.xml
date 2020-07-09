@@ -22,10 +22,11 @@
                 style="@style/voc5TextInput"
                 android:hint="@string/lern_answerHint"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp" >
     
                 <com.google.android.material.textfield.TextInputEditText
-                    style="@style/voc5TextInput.EditText"
+                    style="@style/voc5EditText"
                     android:id="@+id/editTextAnswer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -36,7 +37,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal" >
+                android:orientation="horizontal"
+                android:layout_marginTop="2dp" >
             
                 <Button
                     style="@style/voc5Button"

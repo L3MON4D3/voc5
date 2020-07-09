@@ -12,14 +12,13 @@
         android:layout_gravity="center" >
     
         <com.google.android.material.textfield.TextInputLayout
-            style="@style/voc5TextInput"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:hint="@string/edi_answerHint">
     
             <com.google.android.material.textfield.TextInputEditText
-                style="@style/voc5TextInput.EditText"
                 android:id="@+id/newAnswerEt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -28,7 +27,7 @@
         </com.google.android.material.textfield.TextInputLayout>
     
         <com.google.android.material.textfield.TextInputLayout
-            style="@style/voc5TextInput"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
@@ -36,7 +35,6 @@
             android:hint="@string/edi_questionHint" >
     
             <com.google.android.material.textfield.TextInputEditText
-                style="@style/voc5TextInput.EditText"
                 android:id="@+id/newQuestionEt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -45,7 +43,7 @@
         </com.google.android.material.textfield.TextInputLayout>
     
         <com.google.android.material.textfield.TextInputLayout
-            style="@style/voc5TextInput"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
@@ -53,7 +51,6 @@
             android:hint="@string/edi_langHint">
     
             <com.google.android.material.textfield.TextInputEditText
-                style="@style/voc5TextInput.EditText"
                 android:id="@+id/newLanguageEt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -61,17 +58,14 @@
         </com.google.android.material.textfield.TextInputLayout>
     
         <com.google.android.material.textfield.TextInputLayout
-            style="@style/voc5TextInput"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:id="@+id/phaseInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
             android:layout_marginTop="5dp"
-            android:hint="@string/edi_phaseHint"
-            app:errorEnabled="true">
+            android:hint="@string/edi_phaseHint" >
     
             <com.google.android.material.textfield.TextInputEditText
-                style="@style/voc5TextInput.EditText"
                 android:id="@+id/newPhaseEt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -83,8 +77,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:padding="0dp"
             android:orientation="horizontal" >
 
             <Button

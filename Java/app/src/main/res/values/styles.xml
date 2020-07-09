@@ -11,7 +11,7 @@
         parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
     </style>
 
-    <style name="voc5TextInput.EditText">
+    <style name="voc5EditText">
         <item name="android:padding">7dp</item>
     </style>
 

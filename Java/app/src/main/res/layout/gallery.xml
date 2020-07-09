@@ -81,7 +81,7 @@
                 android:hint="@string/gal_searchHint" >
             
                 <com.google.android.material.textfield.TextInputEditText
-                    style="@style/voc5TextInput.EditText"
+                    style="@style/voc5EditText"
                     android:id="@+id/search_et"
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent" />
