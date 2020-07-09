@@ -7,59 +7,70 @@
     android:layout_height="match_parent" >
 
     <LinearLayout
-        android:layout_width="200dp"
+        android:layout_width="220dp"
         android:layout_height="wrap_content"
         android:orientation="vertical" 
         android:layout_gravity="center" >
     
-        <FrameLayout
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/cardParent_lt"
-            android:layout_marginBottom="20dp" />
-    
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/voc5TextInput"
-                android:hint="@string/lern_answerHint"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp" >
+        
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="2dp" >
-    
-                <com.google.android.material.textfield.TextInputEditText
-                    style="@style/voc5EditText"
-                    android:id="@+id/editTextAnswer"
+                android:id="@+id/cardParent_lt"
+                android:layout_marginBottom="20dp" />
+            
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/voc5TextInput"
+                    android:hint="@string/lern_answerHint"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:layout_gravity="center"/>
-            </com.google.android.material.textfield.TextInputLayout>
-    
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="2dp" >
+                    android:layout_marginBottom="2dp" >
             
-                <Button
-                    style="@style/voc5Button"
-                    android:id="@+id/checkbtn"
-                    android:layout_width="0px"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:text="@string/lern_confirmBtn"
-                    android:layout_marginRight="5dp" 
-                    android:gravity="center" />
-                
-                <Button
-                    style="@style/voc5Button.outlinedButton"
-                    android:id="@+id/finishbtn"
-                    android:layout_width="0px"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:text="@string/lern_finishBtn"
-                    android:layout_marginLeft="5dp" 
-                    android:gravity="center" />
-            </LinearLayout>
+                    <com.google.android.material.textfield.TextInputEditText
+                        style="@style/voc5EditText"
+                        android:id="@+id/editTextAnswer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:layout_gravity="center"/>
+                </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+        
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:paddingBottom="10dp"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            android:layout_marginTop="2dp" >
+        
+            <Button
+                style="@style/voc5Button"
+                android:id="@+id/checkbtn"
+                android:layout_width="0px"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="@string/lern_confirmBtn"
+                android:layout_marginRight="5dp" 
+                android:gravity="center" />
+            
+            <Button
+                style="@style/voc5Button.outlinedButton"
+                android:id="@+id/finishbtn"
+                android:layout_width="0px"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="@string/lern_finishBtn"
+                android:layout_marginLeft="5dp" 
+                android:gravity="center" />
+        </LinearLayout>
     </LinearLayout>
 </FrameLayout>
-

@@ -7,7 +7,7 @@
     android:layout_height="match_parent" >
 
     <LinearLayout
-        android:layout_width="200dp"
+        android:layout_width="220dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="left"
@@ -16,44 +16,57 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" >
 
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/voc5TextInput"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/log_emailHint"
-            android:layout_marginBottom="10dp" >
-
-            <com.google.android.material.textfield.TextInputEditText
-                style="@style/voc5EditText"
-                android:id="@+id/usr_et"
-                android:maxLines="1"
-                android:inputType="text"
+            android:orientation="vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp" >
+        
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/voc5TextInput"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/voc5TextInput"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/log_passwordHint"
-            android:layout_marginBottom="10dp">
-            <!--Add margin so that Keyboard doesnt move EditTexts.-->
-
-            <com.google.android.material.textfield.TextInputEditText
-                style="@style/voc5EditText"
-                android:id="@+id/pwd_et"
-                android:maxLines="1"
-                android:inputType="text"
+                android:layout_height="wrap_content"
+                android:hint="@string/log_emailHint"
+                android:layout_marginBottom="10dp" >
+            
+                <com.google.android.material.textfield.TextInputEditText
+                    style="@style/voc5EditText"
+                    android:id="@+id/usr_et"
+                    android:maxLines="1"
+                    android:inputType="text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            
+            </com.google.android.material.textfield.TextInputLayout>
+            
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/voc5TextInput"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_height="wrap_content"
+                android:hint="@string/log_passwordHint"
+                android:layout_marginBottom="10dp">
+                <!--Add margin so that Keyboard doesnt move EditTexts.-->
+            
+                <com.google.android.material.textfield.TextInputEditText
+                    style="@style/voc5EditText"
+                    android:id="@+id/pwd_et"
+                    android:maxLines="1"
+                    android:inputType="text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+        
 
         <LinearLayout
             android:orientation="horizontal" 
             android:layout_gravity="center"
+            android:clipToPadding="false"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:paddingBottom="10dp"
             android:layout_height="wrap_content" 
             android:layout_width="match_parent" >
 
@@ -79,12 +92,15 @@
             android:id="@+id/rmbr_cbx"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
             android:text="@string/log_rememberMe" />
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/voc5TextInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:hint="@string/log_serverHint"
             android:layout_marginTop="20dp">
 

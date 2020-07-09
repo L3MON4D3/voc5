@@ -105,7 +105,7 @@
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent" >
 
             <GridLayout
                 android:id="@+id/gall_lt"
@@ -114,7 +114,8 @@
                 android:clipToPadding="false"
                 android:columnCount="2"
                 android:paddingLeft="20dp"
-                android:paddingRight="20dp" />
+                android:paddingRight="20dp"
+                android:paddingBottom="30dp" />
 
         </ScrollView>
     </LinearLayout>
