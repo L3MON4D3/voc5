@@ -14,8 +14,11 @@ import android.content.SharedPreferences;
 import android.content.Context;
 
 
+import android.view.KeyEvent;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.CheckBox;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.view.View;
 
@@ -94,6 +97,18 @@ public class LoginActivity extends LoadingInfoActivity {
         });
 
         setLoadingInfoParentLayout(findViewById(R.id.loginOuter_lt));
+
+        pwdET.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int keyCode, KeyEvent keyEvent) {
+                if((keyCode == keyEvent.KEYCODE_ENTER) && keyEvent.getAction() == keyEvent.ACTION_DOWN){
+                    logIn(false);
+                    return true;
+                }
+
+                return false;
+            }
+        });
     }
 
     /**
