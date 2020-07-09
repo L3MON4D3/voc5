@@ -25,8 +25,6 @@ public class Pop extends AppCompatActivity {
     Button wrongbtn;
     String se = new String("");
     ArrayList<Boolean> b = new ArrayList<>();
-    char aux1=' ';
-    char aux2=' ';
     int currentp;
     String UserAnswer;
     String RightAnswer;
@@ -124,10 +122,7 @@ public class Pop extends AppCompatActivity {
                 se+=s1.charAt(0);
                 return rekfindf(s1.substring(1,s1.length()), s2,k+1);
             }else{
-                aux1=s1.charAt(0);
-                aux2=s2.charAt(0);
-                //if(s1.charAt(0)==s2.charAt(0)){
-                if(aux1==aux2){
+                if(s1.charAt(0)==s2.charAt(0)){
                     b.add(true);
                     se+=s1.charAt(0);
                     return (rekfindf(s1.substring(1,s1.length()), s2.substring(1,s2.length()),k));
