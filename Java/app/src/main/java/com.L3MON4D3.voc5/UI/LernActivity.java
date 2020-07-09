@@ -55,7 +55,7 @@ public class LernActivity extends VocActivity {
         int colCount = (int)(width/(185*density));
         
         gcf = new GalleryCardFactory(getLayoutInflater(), cardParent, width/colCount-(int)(10*density), null);
-
+        //gets vocs passed
         if (savedInstanceState != null) {
             vocs =savedInstanceState.getParcelableArrayList("ArrayListLern");
             newPhases=(IntPair[]) savedInstanceState.getParcelableArray("newPhases");
@@ -67,9 +67,10 @@ public class LernActivity extends VocActivity {
                     Vocab v = vocs.get(i);
                     newPhases[i] = new IntPair(v.getId(), v.getPhase());
                 }
-
+                //first currentVoc is selected
                 tolern();
         }
+        //button to quit the activity
         finishbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -83,12 +84,13 @@ public class LernActivity extends VocActivity {
             @Override
             public void onClick(View view) {
                 String currentAns = editTextAnswer.getText().toString();
-
+                //correct answer was given, popup does not start, new currentVoc is selected
                 if (currentAns.equals(currentVoc.getAnswer())) {
                         currentVoc.incPhase();
                         saveChanges(currentVoc);
                         tolern();
                 } else {
+                    //Popup is started, userAnswer,rigthAnswer, and the phase of currentVoc is passed
                         Intent startIntent = new Intent(getApplicationContext(), Pop.class);
                         startIntent.putExtra("userAnswer", editTextAnswer.getText().toString());
                         startIntent.putExtra("rightAnswer", currentVoc.getAnswer());
@@ -147,10 +149,7 @@ public class LernActivity extends VocActivity {
             }
         }
     }
-    /**
-     * saveChanges saves the changed Vocs
-     *
-     */
+     // saves the new phases, hands them over to GalleryActivity
     public void saveChanges(Vocab v){
         client.getOkClient().newCall(client.updateVocRqst(v)).enqueue(new Callback() {
             @Override

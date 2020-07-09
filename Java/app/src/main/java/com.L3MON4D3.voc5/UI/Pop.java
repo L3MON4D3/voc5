@@ -6,17 +6,12 @@ import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.BackgroundColorSpan;
-import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
-
-
 import com.L3MON4D3.voc5.R;
-
 import java.util.ArrayList;
-
 
 public class Pop extends AppCompatActivity {
     TextView textViewUserAnswer;
@@ -37,11 +32,9 @@ public class Pop extends AppCompatActivity {
         textViewRigthAnswer = (TextView) findViewById(R.id.textViewRigthAnswer);
         rigthbtn = (Button) findViewById(R.id.rigthbtn);
         wrongbtn = (Button) findViewById(R.id.wrongbtn);
-
+        //checked if UserAnswer, RigthAnswer and the phase was passed
         if (getIntent().hasExtra("userAnswer")) {
-
             UserAnswer = getIntent().getExtras().getString("userAnswer");
-
         }
         if (getIntent().hasExtra("rightAnswer")) {
             RightAnswer = getIntent().getExtras().getString("rightAnswer");
@@ -49,19 +42,10 @@ public class Pop extends AppCompatActivity {
         if (getIntent().hasExtra("phase")) {
             currentp = getIntent().getExtras().getInt("phase");
         }
-        textViewUserAnswer.setText(UserAnswer);
         textViewRigthAnswer.setText(RightAnswer);
         rekfindf(UserAnswer,RightAnswer,0);
         window(b,se);
-
-        DisplayMetrics dm = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(dm);
-
-        int width = dm.widthPixels;
-        int heigth = dm.heightPixels;
-
-        getWindow().setLayout((int) (width * 0.8), (int) (heigth * 0.6));
-
+        //phase is increased, is returned to LernActivity
         rigthbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -76,6 +60,7 @@ public class Pop extends AppCompatActivity {
                 finish();
             }
         });
+        //phase is decreased, is returned to LernActivity
         wrongbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -91,6 +76,11 @@ public class Pop extends AppCompatActivity {
             }
         });
     }
+    /*
+    recursive method to calculate the error of UserAnswer,
+    overwriting string se and ArrayList b
+    returns the costs k
+     */
     public int rekfindf(String s1,String s2, int k) {
         if(Math.max(s1.length(),s2.length())==1){
             if(s1.length()==0){
@@ -142,6 +132,11 @@ public class Pop extends AppCompatActivity {
             }
         }
     }
+    /*
+    recursive method to calculate the error of the UserAnswer,
+    does not overwrite string se and  ArrayList b
+    returns only the costs k
+   */
     public int rekfindf2(String s1,String s2, int k) {
 
         if(Math.max(s1.length(),s2.length())==1){
@@ -178,6 +173,9 @@ public class Pop extends AppCompatActivity {
         }
 
     }
+    /*
+    colors the string at position i, if bn at position i is "false"
+     */
     public void window(ArrayList<Boolean> bn,String cAns) {
        SpannableString spaSt = new SpannableString(cAns);
         for(int i =0; i<cAns.length(); i++){
