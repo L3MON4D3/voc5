@@ -85,7 +85,7 @@ public class GalleryCard extends CardView implements Comparable<GalleryCard> {
      * Select Cards between this and last selected Card.
      */
     public void selectToThis() {
-        ga.selectFromLast(this);
+        ga.selectActionRepFromLast(this);
     }
 
     /**
