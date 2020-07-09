@@ -96,11 +96,12 @@
                 android:text="@string/gal_searchAnswer"
                 android:tooltipText="@string/gallery_sortTooltip" />
 
-            <Button
+            <ImageButton
                 style="@style/voc5Button.gallerySrchSort"
                 android:id="@+id/sortDir_btn"
                 android:layout_height="wrap_content"
-                android:text="@string/gal_searchDirection" />
+                android:src="@drawable/ic_baseline_arrow_upward_24"
+                />
 
         </LinearLayout>
 

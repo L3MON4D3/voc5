@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 
@@ -96,7 +97,7 @@ public class GalleryActivity extends VocActivity {
 
     private Button srchSelBtn;
     private Button sortSelBtn;
-    private Button sortDirBtn;
+    private ImageButton sortDirBtn;
 
     private int srchSel;
     private int sortSel;
@@ -395,9 +396,9 @@ public class GalleryActivity extends VocActivity {
      */
     public void sortDirSet() {
         if (sortAsc)
-            sortDirBtn.setText("Asc");
+            sortDirBtn.setImageDrawable(getResources().getDrawable(R.drawable.ic_baseline_arrow_downward_24));
         else
-           sortDirBtn.setText("Dsc");
+           sortDirBtn.setImageDrawable(getResources().getDrawable(R.drawable.ic_baseline_arrow_upward_24));
         crtSortComp.setAscending(sortAsc);
     }
 
