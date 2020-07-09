@@ -44,9 +44,9 @@ public class LoginActivity extends LoadingInfoActivity {
         }
 
         public void onResponse(Call call, Response res) throws IOException {
-            Log.e("voc5:", res.body().string());
             runOnUiThread(() -> stopLoading());
-            openMainMenu();
+            if (res.body().string().equals("Logged in"))
+                openMainMenu();
         }
     };
 
