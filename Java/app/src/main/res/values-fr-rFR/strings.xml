@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="log_emailHint">E-Mail</string>
+    <string name="log_rememberMe">se souvenir de moi</string>
+    <string name="log_passwordHint">mot de passe</string>
+    <string name="log_registerBtn">S\'inscrire</string>
+    <string name="pop_answer">Réponse</string>
+    <string name="pop_rightBtn">correct</string>
+    <string name="pop_wrongBtn">faux</string>
+    <string name="lern_Language">Langue</string>
+    <string name="lern_answerHint">Répone</string>
+    <string name="lern_Question">Question</string>
+    <string name="lern_finishBtn">fini</string>
+    <string name="lern_confirmBtn">confirmer</string>
+    <string name="gal_searchHint">Cherche</string>
+    <string name="edi_answerHint">Réponse</string>
+    <string name="edi_questionHint">Question</string>
+    <string name="edi_langHint">Langue</string>
+    <string name="edi_phaseHint">Phase</string>
+    <string name="edi_acceptBtn">Entériner</string>
+    <string name="edi_cancelBtn">lábrupt</string>
+</resources>

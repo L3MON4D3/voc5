@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="log_emailHint">E-Mail</string>
+    <string name="log_passwordHint">パスワード</string>
+    <string name="log_registerBtn">登録</string>
+    <string name="log_rememberMe">私を覚えてますか</string>
+    <string name="pop_userAnswer">ユーザーの回答</string>
+    <string name="pop_answer">回答</string>
+    <string name="edi_answerHint">回答</string>
+    <string name="pop_rightBtn">正しい</string>
+    <string name="pop_wrongBtn">違う</string>
+    <string name="lern_Language">言語</string>
+    <string name="lern_Question">質問</string>
+    <string name="lern_answerHint">回答</string>
+    <string name="lern_finishBtn">仕上げ</string>
+    <string name="lern_confirmBtn">確認</string>
+    <string name="gal_searchHint">探す</string>
+    <string name="edi_questionHint">質問</string>
+    <string name="edi_langHint">言語</string>
+    <string name="edi_phaseHint">段階</string>
+    <string name="edi_acceptBtn">受け入れる</string>
+    <string name="edi_cancelBtn">キャンセル</string>
+    <string name="log_loginBtn">ログインする</string>
+</resources>

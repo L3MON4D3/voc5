@@ -1,40 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="log_emailHint">E-Mail</string>
     <string name="log_passwordHint">Password</string>
     <string name="log_registerBtn">Register</string>
     <string name="log_rememberMe">Remember me</string>
     <string name="log_serverHint">Server</string>
-    <string name="log_serverText">https://api.voc5.org</string>
-
     <string name="pop_userAnswer">User Answer</string>
     <string name="pop_answer">Answer</string>
     <string name="pop_rightBtn">right</string>
     <string name="pop_wrongBtn">wrong</string>
-
-    <string name="lern_Language">Language</string>
+    <string name="lern_Language">Langauge</string>
     <string name="lern_Question">Question</string>
     <string name="lern_answerHint">Answer</string>
     <string name="lern_okBtn">OK</string>
     <string name="lern_finishBtn">Finish</string>
     <string name="lern_confirmBtn">Confirm</string>
-
     <string name="gal_searchAnswer">Ans</string>
     <string name="gal_searchHint">Search</string>
     <string name="gal_searchDirection">Asc</string>
-
     <string name="edi_answerHint">Answer</string>
     <string name="edi_questionHint">Question</string>
     <string name="edi_langHint">Language</string>
     <string name="edi_phaseHint">Phase</string>
     <string name="edi_acceptBtn">Accept</string>
     <string name="edi_cancelBtn">Cancel</string>
-
     <string name="voc_answerShort">Ans</string>
     <string name="voc_questionShort">Qes</string>
     <string name="voc_languageShort">Lan</string>
     <string name="voc_phaseShort">Phs</string>
-
+    <string name="log_loginBtn">Login</string>
     <string name="gallery_srchTooltip">Search for</string>
     <string name="gallery_sortTooltip">Sort by</string>
-    <string name="log_loginBtn">Login</string>
 </resources>
