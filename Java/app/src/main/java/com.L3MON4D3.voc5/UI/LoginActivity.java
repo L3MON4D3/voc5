@@ -197,4 +197,16 @@ public class LoginActivity extends LoadingInfoActivity {
         saveRememberStatus();
         super.onStop();
     }
+
+    @Override
+    protected void changeLayout() {
+        findViewById(R.id.login_btn).setEnabled(false);
+        findViewById(R.id.register_btn).setEnabled(false);
+    }
+
+    @Override
+    protected void undoChangeLayout() {
+        findViewById(R.id.login_btn).setEnabled(true);
+        findViewById(R.id.register_btn).setEnabled(true);
+    }
 }
