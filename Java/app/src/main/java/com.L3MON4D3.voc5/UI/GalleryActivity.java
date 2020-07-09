@@ -351,16 +351,16 @@ public class GalleryActivity extends VocActivity {
     public void srchSet() {
         switch(srchSel) {
             case(0) :
-                srchSelBtn.setText("Ans");
+                srchSelBtn.setText(R.string.voc_answerShort);
                 break;
             case(1) :
-                srchSelBtn.setText("Qes");
+                srchSelBtn.setText(R.string.voc_questionShort);
                 break;
             case(2) :
-                srchSelBtn.setText("Lan");
+                srchSelBtn.setText(R.string.voc_languageShort);
                 break;
             case(3) :
-                srchSelBtn.setText("Phs");
+                srchSelBtn.setText(R.string.voc_phaseShort);
                 break;
         }
         crtSrchPred = srchPreds[srchSel];
@@ -374,16 +374,16 @@ public class GalleryActivity extends VocActivity {
     public void sortSet() {
         switch(sortSel) {
             case(0) :
-                sortSelBtn.setText("Ans");
+                sortSelBtn.setText(R.string.voc_answerShort);
                 break;
             case(1) :
-                sortSelBtn.setText("Qes");
+                sortSelBtn.setText(R.string.voc_questionShort);
                 break;
             case(2) :
-                sortSelBtn.setText("Lan");
+                sortSelBtn.setText(R.string.voc_languageShort);
                 break;
             case(3) :
-                sortSelBtn.setText("Phs");
+                sortSelBtn.setText(R.string.voc_phaseShort);
                 break;
         }
         crtSortComp = sortComps[sortSel];

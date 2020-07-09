@@ -29,4 +29,12 @@
     <string name="edi_phaseHint">Phase</string>
     <string name="edi_acceptBtn">Accept</string>
     <string name="edi_cancelBtn">Cancel</string>
+
+    <string name="voc_answerShort">Ans</string>
+    <string name="voc_questionShort">Qes</string>
+    <string name="voc_languageShort">Lan</string>
+    <string name="voc_phaseShort">Phs</string>
+
+    <string name="gallery_srchTooltip">Search for</string>
+    <string name="gallery_sortTooltip">Sort by</string>
 </resources>
