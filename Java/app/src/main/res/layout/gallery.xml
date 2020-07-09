@@ -84,6 +84,9 @@
                 <com.google.android.material.textfield.TextInputEditText
                     style="@style/voc5EditText"
                     android:id="@+id/search_et"
+                    android:imeOptions="actionDone"
+                    android:maxLines="1"
+                    android:inputType="text"
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent" />
                 

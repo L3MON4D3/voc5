@@ -1,63 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-   android:layout_margin="5dp"
-    >
+    android:layout_margin="5dp" >
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:gravity="center"
+        android:paddingTop="10dp"
+        android:gravity="center" >
 
-        >
-    <TextView
-        android:id="@+id/textViewUserAnswer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/pop_userAnswer"
-        android:textSize="30sp"
-        />
-
-    <TextView
-        android:id="@+id/textViewRigthAnswer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Answer"
-        android:textSize="30sp"
-        />
-    <LinearLayout
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:paddingRight="10dp"
-        android:paddingLeft="10dp"
-        android:paddingBottom="10dp"
-        android:clipToPadding="false"
-        android:orientation="horizontal"
-        android:layout_marginTop="2dp" >
-        <Button
-            style="@style/voc5Button"
-            android:id="@+id/rigthbtn"
-            android:layout_width="0px"
-            android:layout_weight="1"
+        <TextView
+            android:id="@+id/textViewUserAnswer"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/pop_rightBtn"
-            android:layout_marginRight="5dp"
-            android:gravity="center" />
+            android:maxWidth="200dp"
+            android:gravity="center"
+            android:textSize="26dp" />
 
-        <Button
-            style="@style/voc5Button.outlinedButton"
-            android:id="@+id/wrongbtn"
-            android:layout_width="0px"
-            android:layout_weight="1"
+        <TextView
+            android:id="@+id/textViewRigthAnswer"
+            android:layout_width="wrap_content"
+            android:maxWidth="200dp"
+            android:gravity="center"
             android:layout_height="wrap_content"
-            android:text="@string/pop_wrongBtn"
-            android:layout_marginLeft="5dp"
-            android:gravity="center" />
+            android:text="Answer"
+            android:textSize="26dp" />
 
+        <LinearLayout
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:paddingBottom="5dp"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            android:layout_marginTop="2dp" >
+
+            <Button
+                style="@style/voc5Button"
+                android:id="@+id/rigthbtn"
+                android:layout_width="0px"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="@string/pop_rightBtn"
+                android:layout_marginRight="5dp"
+                android:gravity="center" />
+
+            <Button
+                style="@style/voc5Button.outlinedButton"
+                android:id="@+id/wrongbtn"
+                android:layout_width="0px"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="@string/pop_wrongBtn"
+                android:layout_marginLeft="5dp"
+                android:gravity="center" />
+
+        </LinearLayout>
     </LinearLayout>
-    </LinearLayout>
-
-
 </androidx.cardview.widget.CardView>
