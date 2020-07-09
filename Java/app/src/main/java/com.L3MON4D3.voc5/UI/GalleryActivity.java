@@ -29,6 +29,7 @@ import java.util.function.Consumer;
 import com.L3MON4D3.voc5.Client.*;
 import com.L3MON4D3.voc5.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.button.MaterialButton;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -99,7 +100,7 @@ public class GalleryActivity extends VocActivity {
 
     private Button srchSelBtn;
     private Button sortSelBtn;
-    private ImageButton sortDirBtn;
+    private Button sortDirBtn;
 
     private int srchSel;
     private int sortSel;
@@ -403,9 +404,9 @@ public class GalleryActivity extends VocActivity {
      */
     public void sortDirSet() {
         if (sortAsc)
-            sortDirBtn.setImageDrawable(getResources().getDrawable(R.drawable.ic_baseline_arrow_downward_24));
+            ((MaterialButton) sortDirBtn).setIcon(getResources().getDrawable(R.drawable.ic_baseline_arrow_downward_24));
         else
-           sortDirBtn.setImageDrawable(getResources().getDrawable(R.drawable.ic_baseline_arrow_upward_24));
+            ((MaterialButton) sortDirBtn).setIcon(getResources().getDrawable(R.drawable.ic_baseline_arrow_upward_24));
         crtSortComp.setAscending(sortAsc);
     }
 
