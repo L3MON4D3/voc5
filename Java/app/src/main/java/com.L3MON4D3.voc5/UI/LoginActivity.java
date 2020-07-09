@@ -8,6 +8,7 @@ import okhttp3.Response;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.app.Activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.text.Editable;
@@ -18,6 +19,7 @@ import android.content.Context;
 
 import android.view.KeyEvent;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.CheckBox;
 import android.widget.TextView;
@@ -40,6 +42,8 @@ public class LoginActivity extends LoadingInfoActivity {
 
     private Toast registerSuccessToast;
     private Toast registerFailToast;
+
+    private InputMethodManager imm;
 
     private Callback loginCallback = new Callback() {
         public void onFailure(Call call, IOException e) {
@@ -86,6 +90,8 @@ public class LoginActivity extends LoadingInfoActivity {
 
         registerSuccessToast = Toast.makeText(this, "Register Successful", Toast.LENGTH_SHORT);
         registerFailToast = Toast.makeText(this, "Couldn't register!", Toast.LENGTH_LONG);
+
+        imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
 
         loadPreferences();
 
@@ -136,25 +142,12 @@ public class LoginActivity extends LoadingInfoActivity {
         pwdET.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 boolean handled = false;
-                //Found out key with log.
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
                     logIn(false);
                     handled = true;
                 }
                 return handled;
-            }
-        });
-
-        //login on enter
-        pwdET.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View view, int keyCode, KeyEvent keyEvent) {
-                if((keyCode == keyEvent.KEYCODE_ENTER) && keyEvent.getAction() == keyEvent.ACTION_DOWN){
-                    logIn(false);
-                    return true;
-                }
-
-                return false;
             }
         });
 
