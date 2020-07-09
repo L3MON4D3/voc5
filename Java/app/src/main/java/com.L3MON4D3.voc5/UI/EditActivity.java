@@ -10,6 +10,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import android.widget.TextView;
+import android.view.KeyEvent;
+import android.view.inputmethod.EditorInfo;
+
+import android.util.Log;
 
 import com.L3MON4D3.voc5.Client.Vocab;
 import com.L3MON4D3.voc5.R;
@@ -77,21 +82,24 @@ public class EditActivity extends AppCompatActivity {
             newPhaseEt.setText(String.valueOf(tmp.getPhase()));
         }
 
+        newPhaseEt.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                boolean handled = false;
+                Log.e("voc5", String.valueOf(actionId));
+                //Found out key with log.
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    commitChanges();
+                    handled = true;
+                }
+                return handled;
+            }
+        });
+
+
         commitChangesBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Creates a new Voc that will be changed on server, ID must be set to change Voc
-                String newQuestion = newQuestionEt.getText().toString();
-                String newAnswer = newAnswerEt.getText().toString();
-                String newLanguage = newLanguageEt.getText().toString().toUpperCase();
-                int newPhase = Integer.parseInt(newPhaseEt.getText().toString());
-
-                Vocab newVoc = new Vocab(newAnswer, newQuestion, newLanguage);
-                Intent resultIntent = new Intent(getApplicationContext(),GalleryActivity.class);
-                newVoc.setPhase(newPhase);
-                resultIntent.putExtra("com.L3MON4D3.voc5.newVoc", newVoc);
-                setResult(RESULT_OK, resultIntent);
-                finish();
+                commitChanges();
             }
         });
 
@@ -103,5 +111,23 @@ public class EditActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    /**
+     * Send changes back to GalleryActivity.
+     */
+    public void commitChanges() {
+        //Creates a new Voc that will be changed on server, ID must be set to change Voc
+        String newQuestion = newQuestionEt.getText().toString();
+        String newAnswer = newAnswerEt.getText().toString();
+        String newLanguage = newLanguageEt.getText().toString().toUpperCase();
+        int newPhase = Integer.parseInt(newPhaseEt.getText().toString());
+
+        Vocab newVoc = new Vocab(newAnswer, newQuestion, newLanguage);
+        Intent resultIntent = new Intent(getApplicationContext(),GalleryActivity.class);
+        newVoc.setPhase(newPhase);
+        resultIntent.putExtra("com.L3MON4D3.voc5.newVoc", newVoc);
+        setResult(RESULT_OK, resultIntent);
+        finish();
     }
 }

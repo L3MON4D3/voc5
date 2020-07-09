@@ -45,12 +45,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/log_passwordHint"
-                android:layout_marginBottom="10dp">
+                android:layout_marginBottom="10dp" >
                 <!--Add margin so that Keyboard doesnt move EditTexts.-->
             
                 <com.google.android.material.textfield.TextInputEditText
                     style="@style/voc5EditText"
                     android:id="@+id/pwd_et"
+                    android:imeOptions="actionDone"
                     android:maxLines="1"
                     android:inputType="text"
                     android:layout_width="match_parent"

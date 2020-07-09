@@ -16,7 +16,6 @@ import android.util.Log;
 import android.content.SharedPreferences;
 import android.content.Context;
 
-
 import android.view.KeyEvent;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
@@ -24,7 +23,6 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.view.View;
-
 
 import com.L3MON4D3.voc5.Client.Voc5Client;
 import com.L3MON4D3.voc5.R;
@@ -132,6 +130,18 @@ public class LoginActivity extends LoadingInfoActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
+            }
+        });
+
+        pwdET.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                boolean handled = false;
+                //Found out key with log.
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    logIn(false);
+                    handled = true;
+                }
+                return handled;
             }
         });
 
