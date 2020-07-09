@@ -6,9 +6,12 @@ import okhttp3.Call;
 import okhttp3.Response;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.content.SharedPreferences;
 import android.content.Context;
@@ -43,13 +46,17 @@ public class LoginActivity extends LoadingInfoActivity {
     private Callback loginCallback = new Callback() {
         public void onFailure(Call call, IOException e) {
             runOnUiThread(() -> stopLoading());
-            Log.e("voc5:", e.getMessage());
+            runOnUiThread(() -> setServerError());
+
         }
 
         public void onResponse(Call call, Response res) throws IOException {
             runOnUiThread(() -> stopLoading());
-            if (res.body().string().equals("Logged in"))
+            String response = res.body().string();
+            if (response.equals("Logged in"))
                 openMainMenu();
+            else if (response.equals("Login failed, check your email and password"))
+                runOnUiThread(() -> setErrorMsg());
         }
     };
 
@@ -98,6 +105,37 @@ public class LoginActivity extends LoadingInfoActivity {
 
         setLoadingInfoParentLayout(findViewById(R.id.loginOuter_lt));
 
+        emailET.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                emailET.setCompoundDrawables(null,null,null,null);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
+
+        pwdET.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                pwdET.setCompoundDrawables(null,null,null,null);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
+
+        //login on enter
         pwdET.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View view, int keyCode, KeyEvent keyEvent) {
@@ -107,6 +145,21 @@ public class LoginActivity extends LoadingInfoActivity {
                 }
 
                 return false;
+            }
+        });
+
+        serverET.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                serverET.setCompoundDrawables(null,null,null,null);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
             }
         });
     }
@@ -134,6 +187,21 @@ public class LoginActivity extends LoadingInfoActivity {
         }
         startLoading();
         saveLogin();
+    }
+
+    public void setErrorMsg(){
+        Toast.makeText(this, "check email and password", Toast.LENGTH_SHORT).show();
+        Drawable dr = getResources().getDrawable(R.drawable.ic_baseline_error_24);
+        dr.setBounds(0,0,dr.getIntrinsicWidth(), dr.getIntrinsicHeight());
+        pwdET.setCompoundDrawables(null, null,dr,null);
+        emailET.setCompoundDrawables(null,null,dr,null);
+    }
+
+    public void setServerError(){
+        Toast.makeText(this, "server connection", Toast.LENGTH_SHORT).show();
+        Drawable dr = getResources().getDrawable(R.drawable.ic_baseline_error_24);
+        dr.setBounds(0,0,dr.getIntrinsicWidth(), dr.getIntrinsicHeight());
+        serverET.setCompoundDrawables(null, null,dr,null);
     }
 
     /**
