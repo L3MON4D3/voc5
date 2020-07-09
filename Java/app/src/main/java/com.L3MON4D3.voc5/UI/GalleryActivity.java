@@ -87,6 +87,8 @@ public class GalleryActivity extends VocActivity {
     private ArrayList<GalleryCard> allCards;
     private ArrayList<GalleryCard> currentCards;
     private ArrayList<GalleryCard> selected;
+    private ArrayList<GalleryCard> deSelected;
+    private boolean lastActionSelect;
 
     private FloatingActionButton galleryEditBtn;
     private FloatingActionButton galleryLearnBtn;
@@ -146,6 +148,7 @@ public class GalleryActivity extends VocActivity {
         gcf = new GalleryCardFactory(getLayoutInflater(), gallery, width/colCount-(int)(10*density), this);
 
         selected = new ArrayList<GalleryCard>();
+        deSelected = new ArrayList<GalleryCard>();
         currentCards = new ArrayList<GalleryCard>();
         allCards = new ArrayList<GalleryCard>();
         if (savedInstanceState == null) {
@@ -304,9 +307,11 @@ public class GalleryActivity extends VocActivity {
         if (gc.getSelected())
             return;
         selected.add(gc);
+        deSelected.remove(gc);
         gc.elevate();
         gc.setSelected(true);
         selCount++;
+        lastActionSelect = true;
 
         activateButtons();
     }
@@ -338,9 +343,11 @@ public class GalleryActivity extends VocActivity {
         if (!gc.getSelected())
             return;
         selected.remove(gc);
+        deSelected.add(gc);
         gc.resetElevation();
         gc.setSelected(false);
         selCount--;
+        lastActionSelect = false;
 
         activateButtons();
     }
@@ -479,35 +486,49 @@ public class GalleryActivity extends VocActivity {
     }
 
     /**
-     * Select Cards between first and second.
+     * Repeats Last select-Action on Cards between first and second.
      * @param first GalleryCard, may be before or after second.
      * @param second GalleryCard, may be before or after first.
      */
-    public void selectRange(GalleryCard first, GalleryCard second) {
+    public void repSelActionOnRange(GalleryCard first, GalleryCard second) {
         int pos1 = first.parentPos;
         int pos2 = second.parentPos;
         boolean goUp = pos1 < pos2;
-        select(first);
+        repLastSelAction(first);
         while (pos1 != pos2) {
-            select((GalleryCard) gallery.getChildAt(pos1));
+            repLastSelAction((GalleryCard) gallery.getChildAt(pos1));
             if (goUp)
                 pos1++;
             else
                pos1--;
         }
-        select(second);
+        repLastSelAction(second);
     }
 
     /**
-     * Selects from last selected Card to Card gc (inclusive).
-     * if there is no last selected, simply selects gc.
-     * @param gc GaleryCard.
+     * Repeats Last select-Action, eg deselect if !lastActionSelect, else select.
+     * @param gc GalleryCard that will be selected.
      */
-    public void selectFromLast(GalleryCard gc) {
+    public void repLastSelAction(GalleryCard gc) {
+        if (lastActionSelect)
+            select(gc);
+        else
+           deselect(gc);
+    }
+
+    /**
+     * Repeats last Select Action from last selected Card to Card gc (inclusive).
+     * if there is no last selected, simply selects gc.
+     * @param gc GalleryCard.
+     */
+    public void selectActionRepFromLast(GalleryCard gc) {
         if (selCount == 0)
             select(gc);
         else
-           selectRange(selected.get(selCount - 1), gc);
+            if (lastActionSelect)
+                repSelActionOnRange(selected.get(selCount - 1), gc);
+            else
+                repSelActionOnRange(deSelected.get(deSelected.size() - 1), gc);
     }
 
     /**
