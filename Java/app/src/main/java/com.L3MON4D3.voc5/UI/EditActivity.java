@@ -75,6 +75,8 @@ public class EditActivity extends AppCompatActivity {
             newAnswerEt.setText(tmp.getAnswer());
             newLanguageEt.setText(tmp.getLanguage());
             newPhaseEt.setText(String.valueOf(tmp.getPhase()));
+        }else {
+            newPhaseEt.setText("1");
         }
 
         commitChangesBtn.setOnClickListener(new View.OnClickListener() {
