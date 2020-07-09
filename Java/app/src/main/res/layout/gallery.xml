@@ -68,7 +68,8 @@
             <Button
                 style="@style/voc5Button.gallerySrchSort"
                 android:id="@+id/srchSel_btn"
-                android:text="@string/gal_searchAnswer" />
+                android:text="@string/gal_searchAnswer"
+                android:tooltipText="Search for" />
 
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/voc5TextInput"
@@ -92,7 +93,8 @@
                 style="@style/voc5Button.gallerySrchSort"
                 android:id="@+id/sortSel_btn"
                 android:layout_height="wrap_content"
-                android:text="@string/gal_searchAnswer" />
+                android:text="@string/gal_searchAnswer"
+                android:tooltipText="Sort by" />
 
             <Button
                 style="@style/voc5Button.gallerySrchSort"
