@@ -206,7 +206,7 @@ public class Voc5Client implements Parcelable {
             public void onResponse(Call call, Response res) throws IOException {
                 vocabs = gson.fromJson(res.body().string(), vocListType);
                 //sort vocs by id.
-                vocabs.sort(null);
+                vocabs.sort(null); 
                 if (rnble != null)
                     rnble.run();
             }

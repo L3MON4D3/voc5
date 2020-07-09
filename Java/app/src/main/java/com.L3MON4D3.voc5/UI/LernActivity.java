@@ -5,8 +5,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.TextView;
 import android.widget.FrameLayout;
 import java.util.Random;
 import java.util.ArrayList;
@@ -14,17 +12,11 @@ import com.L3MON4D3.voc5.Client.Vocab;
 import com.L3MON4D3.voc5.Client.IntPair;
 import com.L3MON4D3.voc5.R;
 import android.content.Intent;
-
 import android.util.DisplayMetrics;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 import org.jetbrains.annotations.NotNull;
-
 import java.io.IOException;
 
 public class LernActivity extends VocActivity {
