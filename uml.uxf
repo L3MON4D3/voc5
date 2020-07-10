@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="13.3">
-  <zoom_level>7</zoom_level>
+  <zoom_level>20</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>546</x>
-      <y>763</y>
-      <w>329</w>
-      <h>280</h>
+      <x>520</x>
+      <y>2140</y>
+      <w>940</w>
+      <h>800</h>
     </coordinates>
     <panel_attributes>com.L3MON4D3.voc5.UI::LoginActivity
 --
@@ -24,6 +24,8 @@
 --
 #onCreate(Bundle savedInstanceState): void
 +logIn(boolean register): void
++serErrorMsg(): void
++setServerError(): void
 +openMainMenu(): void
 +loadPreferences(): void
 +saveLogin(): void
@@ -36,10 +38,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>945</x>
-      <y>728</y>
-      <w>399</w>
-      <h>406</h>
+      <x>1660</x>
+      <y>2080</y>
+      <w>1140</w>
+      <h>1160</h>
     </coordinates>
     <panel_attributes>com.L3MON4D3.voc5.Client::Voc5Client
 --
@@ -77,10 +79,10 @@ Saves User, email and Password. Requests can be built using newRqstBdr.
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>525</x>
-      <y>413</y>
-      <w>371</w>
-      <h>315</h>
+      <x>560</x>
+      <y>1180</y>
+      <w>1060</w>
+      <h>900</h>
     </coordinates>
     <panel_attributes>com.L3MON4D3.voc5.Client::Vocab
 --
@@ -115,10 +117,10 @@ _CREATOR: Parcelable.Creator&lt;Vocab&gt;_
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>406</x>
-      <y>1106</y>
-      <w>504</w>
-      <h>161</h>
+      <x>160</x>
+      <y>3160</y>
+      <w>1440</w>
+      <h>460</h>
     </coordinates>
     <panel_attributes>com.L3MON4D3.voc5.UI::GalleryCardFactory
 --
@@ -135,10 +137,10 @@ Creates Gallery Cards</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1792</x>
-      <y>994</y>
-      <w>511</w>
-      <h>602</h>
+      <x>4160</x>
+      <y>2880</y>
+      <w>1460</w>
+      <h>1720</h>
     </coordinates>
     <panel_attributes>com.L3MON4D3.voc5.UI::GalleryActivity
 --
@@ -199,10 +201,10 @@ delete.</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>448</x>
-      <y>1302</y>
-      <w>399</w>
-      <h>294</h>
+      <x>340</x>
+      <y>3780</y>
+      <w>1020</w>
+      <h>840</h>
     </coordinates>
     <panel_attributes>com.L3MON4D3.voc5.UI::GalleryCard
 --
@@ -236,10 +238,10 @@ Class to manage GalleryCards</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1386</x>
-      <y>1022</y>
-      <w>231</w>
-      <h>140</h>
+      <x>3020</x>
+      <y>2900</y>
+      <w>660</w>
+      <h>420</h>
     </coordinates>
     <panel_attributes>com.L3MON4D3.voc5.UI::VocActivity
 --
@@ -255,26 +257,26 @@ Class to manage GalleryCards</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1610</x>
-      <y>1029</y>
-      <w>196</w>
-      <h>63</h>
+      <x>3660</x>
+      <y>2980</y>
+      <w>540</w>
+      <h>140</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>260.0;10.0;10.0;70.0</additional_attributes>
+    <additional_attributes>250.0;10.0;10.0;50.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>917</x>
-      <y>1218</y>
-      <w>427</w>
-      <h>343</h>
+      <x>1680</x>
+      <y>3480</y>
+      <w>1220</w>
+      <h>980</h>
     </coordinates>
     <panel_attributes>
 com.L3MON4D3.voc5.UI::LearnActivity
 --
--chekckbtn: ImageButton
+-checkbtn: ImageButton
 -finishBtn: Button
 -rad: Random
 -currentVoc: Vocab
@@ -305,10 +307,10 @@ Updates phase after every learned voc, also on server
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>994</x>
-      <y>1155</y>
-      <w>504</w>
-      <h>77</h>
+      <x>1900</x>
+      <y>3300</y>
+      <w>1440</w>
+      <h>220</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;90.0;700.0;10.0</additional_attributes>
@@ -316,10 +318,10 @@ Updates phase after every learned voc, also on server
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1400</x>
-      <y>1239</y>
-      <w>245</w>
-      <h>231</h>
+      <x>3060</x>
+      <y>3540</y>
+      <w>700</w>
+      <h>660</h>
     </coordinates>
     <panel_attributes>com.L3MON4D3.voc5.UI::EditActivity
 --
@@ -330,6 +332,7 @@ Updates phase after every learned voc, also on server
 -newPhaseEt : EditText
 -phaseInputLayout : TextInputLayout
 -commitChangeBtn : Button
+-abortChangesBtn: Button
 --
 #onCreate(Bundle savedInstanceState): void
 -createPhase(): int
@@ -347,10 +350,10 @@ extra.
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1414</x>
-      <y>1155</y>
-      <w>196</w>
-      <h>98</h>
+      <x>3100</x>
+      <y>3300</y>
+      <w>560</w>
+      <h>280</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;120.0;260.0;10.0</additional_attributes>
@@ -358,10 +361,10 @@ extra.
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>721</x>
-      <y>182</y>
-      <w>406</w>
-      <h>105</h>
+      <x>1120</x>
+      <y>520</y>
+      <w>1160</w>
+      <h>300</h>
     </coordinates>
     <panel_attributes>
 com.L3MON4D3.voc5.Client::VocabComparator extends Comparator
@@ -376,10 +379,10 @@ Compares based on Answer, ascending or descending.</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1330</x>
-      <y>126</y>
-      <w>343</w>
-      <h>112</h>
+      <x>2860</x>
+      <y>360</y>
+      <w>980</w>
+      <h>320</h>
     </coordinates>
     <panel_attributes>
 com.L3MON4D3.voc5.Client::QuestionComparator
@@ -394,10 +397,10 @@ Compares based on Question, ascending or descending.</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1323</x>
-      <y>364</y>
-      <w>343</w>
-      <h>98</h>
+      <x>2880</x>
+      <y>1120</y>
+      <w>980</w>
+      <h>280</h>
     </coordinates>
     <panel_attributes>
 com.L3MON4D3.voc5.Client::LanguageComparator 
@@ -413,31 +416,10 @@ Compares based on Phase, ascending or descending.</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1883</x>
-      <y>322</y>
-      <w>210</w>
-      <h>161</h>
-    </coordinates>
-    <panel_attributes>bg=red
-com.L3MON4D3.voc5::SubsetCreater
---
-
---
-+SubsetCreater() : ctor
-+answerContains(String s) : ArrayList&lt;Vocab&gt;
-+questionContains(String s) : ArrayList&lt;Vocab&gt;
-+phaseIs(int p) : ArrayList&lt;Vocab&gt;
-+languageIs(String lang) : ArrayList&lt;Vocab&gt;
---</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>1442</x>
-      <y>763</y>
-      <w>686</w>
-      <h>196</h>
+      <x>3180</x>
+      <y>2180</y>
+      <w>1960</w>
+      <h>560</h>
     </coordinates>
     <panel_attributes>com.L3MON4D3.com.UI::LoadingInfoActivity
 --
@@ -459,10 +441,10 @@ Loading animation</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>945</x>
-      <y>1589</y>
-      <w>434</w>
-      <h>182</h>
+      <x>1760</x>
+      <y>4540</y>
+      <w>1240</w>
+      <h>520</h>
     </coordinates>
     <panel_attributes>com.L3MON4D3.voc5.UI::Pop
 --
@@ -485,21 +467,21 @@ PopUp menu to practice Vocabulary</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1540</x>
-      <y>952</y>
-      <w>231</w>
-      <h>84</h>
+      <x>3460</x>
+      <y>2720</y>
+      <w>660</w>
+      <h>220</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;100.0;310.0;10.0</additional_attributes>
+    <additional_attributes>10.0;90.0;310.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1344</x>
+      <x>2900</x>
       <y>0</y>
-      <w>308</w>
-      <h>105</h>
+      <w>880</w>
+      <h>300</h>
     </coordinates>
     <panel_attributes>
 com.L3MON4D3.voc5.Client::AnswerComparator
@@ -514,10 +496,10 @@ Compares based on Answer, ascending or descending.</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1120</x>
-      <y>28</y>
-      <w>238</w>
-      <h>224</h>
+      <x>2260</x>
+      <y>80</y>
+      <w>680</w>
+      <h>640</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>320.0;10.0;10.0;300.0</additional_attributes>
@@ -525,10 +507,10 @@ Compares based on Answer, ascending or descending.</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1120</x>
-      <y>147</y>
-      <w>224</w>
-      <h>112</h>
+      <x>2260</x>
+      <y>420</y>
+      <w>640</w>
+      <h>320</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>300.0;10.0;10.0;140.0</additional_attributes>
@@ -536,21 +518,21 @@ Compares based on Answer, ascending or descending.</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1120</x>
-      <y>245</y>
-      <w>217</w>
-      <h>182</h>
+      <x>2260</x>
+      <y>700</y>
+      <w>660</w>
+      <h>600</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>290.0;240.0;10.0;10.0</additional_attributes>
+    <additional_attributes>310.0;280.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>952</x>
-      <y>504</y>
-      <w>413</w>
-      <h>133</h>
+      <x>1780</x>
+      <y>1440</y>
+      <w>1180</w>
+      <h>380</h>
     </coordinates>
     <panel_attributes>
 com.L3MON4D3.voc5.Client::VocPredicate implements Predicate&lt;Vocab&gt;
@@ -568,10 +550,10 @@ Compares based on Phase, ascending or descending.</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1337</x>
-      <y>266</y>
-      <w>343</w>
-      <h>98</h>
+      <x>2880</x>
+      <y>760</y>
+      <w>980</w>
+      <h>280</h>
     </coordinates>
     <panel_attributes>
 com.L3MON4D3.voc5.Client::PhaseComparator
@@ -587,13 +569,13 @@ Compares based on Phase, ascending or descending.</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>329</x>
-      <y>231</y>
-      <w>343</w>
-      <h>168</h>
+      <x>0</x>
+      <y>660</y>
+      <w>980</w>
+      <h>480</h>
     </coordinates>
     <panel_attributes>
-com.L3MON4D3.voc5.Client::intPair implements Parcelable
+com.L3MON4D3.voc5.Client::IntPair implements Parcelable
 --
 +first: int
 +second: int
@@ -604,7 +586,9 @@ com.L3MON4D3.voc5.Client::intPair implements Parcelable
 _+CREATOR: Parceable.Creator&lt;IntPair&gt;_
 -IntPair(Parcel in):ctor
 --
-Compares based on Phase, ascending or descending.</panel_attributes>
+Ein IntPair hält von einer Vokabel die ID und die Phase.
+Sie wird benutzt um Vokabel IDs und zugehörige Phasen
+unter Activities auszutauschen</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>

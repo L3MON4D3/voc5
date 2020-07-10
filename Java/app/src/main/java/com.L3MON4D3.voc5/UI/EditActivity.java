@@ -20,6 +20,16 @@ import com.L3MON4D3.voc5.Client.Vocab;
 import com.L3MON4D3.voc5.R;
 import com.google.android.material.textfield.TextInputLayout;
 
+/**
+ * Editactivity is used to edit individual vocabularies
+ * It is started from the Gallery and receives and the vocabulary
+ * that should be edited in the intent with the key "com.L3MON4D3.voc5.Voc".
+ * If intent has no extra, it is assumed that a new vocabulary will be created
+ * and only the phase will be set to a standard of 1.
+ *
+ * @author Jan Rogge and Simon Katz
+ * @version 300
+ */
 public class EditActivity extends AppCompatActivity {
     EditText newQuestionEt;
     EditText newLanguageEt;
@@ -73,14 +83,16 @@ public class EditActivity extends AppCompatActivity {
             }
         });
 
-        //set Edit Texts to  content that should be edited
+        //set Edit Texts to content that should be edited
         if(getIntent().hasExtra("com.L3MON4D3.voc5.Voc")) {
             Vocab tmp = getIntent().getExtras().getParcelable("com.L3MON4D3.voc5.Voc");
             newQuestionEt.setText(tmp.getQuestion());
             newAnswerEt.setText(tmp.getAnswer());
             newLanguageEt.setText(tmp.getLanguage());
             newPhaseEt.setText(String.valueOf(tmp.getPhase()));
-        }else {
+        }
+        //No Intent means that a new voc is created with a standard phase
+        else {
             newPhaseEt.setText("1");
         }
 

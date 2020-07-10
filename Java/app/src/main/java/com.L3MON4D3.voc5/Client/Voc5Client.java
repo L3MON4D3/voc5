@@ -18,6 +18,12 @@ import java.lang.reflect.Type;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Class is used to create requests to server.
+ * It also saves user, password and server
+ *
+ * @author Simon Katz and Jan Rogge
+ */
 public class Voc5Client implements Parcelable {
     private static final MediaType JSON = MediaType.get("application/json; charset=utf-8");
     private static final OkHttpClient okClient = new OkHttpClient();
