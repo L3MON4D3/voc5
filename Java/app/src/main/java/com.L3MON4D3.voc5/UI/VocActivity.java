@@ -25,10 +25,9 @@ public class VocActivity extends LoadingInfoActivity {
         setContentView(R.layout.login);
 
         Bundle ex = getIntent().getExtras();
-        if (savedInstanceState == null) {
-            if (ex != null)
-                client = ex.getParcelable("client");
-        } else {
+        if (ex != null)
+            client = ex.getParcelable("client");
+        if (savedInstanceState != null) {
             client = savedInstanceState.getParcelable("client");
         }
     }

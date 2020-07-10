@@ -63,7 +63,7 @@ public class GalleryActivity extends VocActivity {
     private static final int NEW_RESULT = 22;
     private static final int LEARN_RESULT = 45;
 
-    Runnable serverErrorRunnable = () -> runOnUiThread(() -> showErrorToast());
+    private final Runnable serverErrorRunnable = () -> runOnUiThread(() -> showErrorToast());
 
     private Thread updateThread = new Thread(() -> {
         while(true) {
@@ -182,7 +182,8 @@ public class GalleryActivity extends VocActivity {
                 sortSearchSet();
             }
         } else {
-            fillAll(client.getVocabs());
+            ArrayList<Vocab> allVocs = savedInstanceState.getParcelableArrayList("allVocs");
+            fillAll(allVocs);
             setGalleryContent(
                 savedInstanceState.getIntArray("currentVocs"),
                 savedInstanceState.getIntArray("selectedPos"));
@@ -197,7 +198,8 @@ public class GalleryActivity extends VocActivity {
 
         searchET.addTextChangedListener(new TextWatcher(){
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                crtSrchPred.setSearchString(String.valueOf(s));
+                if (crtSrchPred != null)
+                    crtSrchPred.setSearchString(String.valueOf(s));
                 //if Text was changed somewhere not at the end, search allCards
                 if (start != s.length()-1)
                     searchSortGallery(allCards);
@@ -385,7 +387,6 @@ public class GalleryActivity extends VocActivity {
 
     /**
      * Sets text and sortComp according to variable sortSel.
-     * @param sortBtn Button that displays current selection.
      */
     public void sortSet() {
         switch(sortSel) {
@@ -407,7 +408,6 @@ public class GalleryActivity extends VocActivity {
 
     /**
      * Sets text and boolean ascending for VocabComparator.
-     * @param sortDirBtn Button that displays current sort Direction(Asc/Dsc)
      */
     public void sortDirSet() {
         if (sortAsc)
@@ -421,14 +421,14 @@ public class GalleryActivity extends VocActivity {
      * Sorts Gallery using crtSortComp.
      */
     public void sortGallery() {
-        currentCards.sort(Comparator.comparing(GalleryCard::getVoc, crtSortComp));
-        if (!sortAsc)
-            Collections.reverse(currentCards);
-        setGalleryContentFromCurrent();
+        //currentCards.sort(Comparator.comparing(GalleryCard::getVoc, crtSortComp));
+        //if (!sortAsc)
+        //    Collections.reverse(currentCards);
+        //setGalleryContentFromCurrent();
     }
 
     /**
-     * Sort Ascending insteaaad of Descending <=> reverse currentCards.
+     * Sort Ascending insteaaad of Descending &gt;=&lt; reverse currentCards.
      */
     public void sortReverse() {
         Collections.reverse(currentCards);
@@ -594,6 +594,7 @@ public class GalleryActivity extends VocActivity {
         ArrayList<Vocab> learnVocs = (ArrayList) selected.stream().map(GalleryCard::getVoc).collect(Collectors.toList());
 
         startIntent.putParcelableArrayListExtra("ArrayListLern", learnVocs);
+        startIntent.putExtra("client", client);
         startActivityForResult(startIntent, LEARN_RESULT);
     }
 
@@ -740,6 +741,12 @@ public class GalleryActivity extends VocActivity {
      * Save currentVocs for next Instance.
      */
     public void onSaveInstanceState(Bundle sis) {
+        ArrayList<Vocab> allVocs = (ArrayList) allCards.stream()
+            .map(GalleryCard::getVoc)
+            .collect(Collectors.toList());
+
+        sis.putParcelableArrayList("allVocs", allVocs);
+
         //Pass indizes of current Vocs in Voc5Client's list.
         int[] currentArr = new int[allCards.size()];
         ArrayList<Vocab> clientVocs = client.getVocabs();

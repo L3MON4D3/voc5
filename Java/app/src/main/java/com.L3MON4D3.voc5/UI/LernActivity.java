@@ -115,7 +115,6 @@ public class LernActivity extends VocActivity {
                 return handled;
             }
         });
-
     }
 
     /**
