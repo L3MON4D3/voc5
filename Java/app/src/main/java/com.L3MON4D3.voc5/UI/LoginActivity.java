@@ -174,8 +174,13 @@ public class LoginActivity extends LoadingInfoActivity {
      * @param register if true, attempts to register user, if false logs in user.
      */
     public void logIn(boolean register) {
+        String server = serverET.getText().toString();
+        if (!(server.startsWith("https://") || server.startsWith("http://"))) {
+            setServerError("Please enter a valid Address");
+            return;
+        }
         vClient = new Voc5Client(
-            serverET.getText().toString(),
+            server,
             emailET.getText().toString(),
             pwdET.getText().toString() );
 
@@ -202,14 +207,18 @@ public class LoginActivity extends LoadingInfoActivity {
     }
 
     public void setServerError(){
-        showErrorToast();
+        setServerError("Couldn't connect to Server");
+    }
+
+    public void setServerError(String msg){
+        showErrorToast(msg);
         Drawable dr = getResources().getDrawable(R.drawable.ic_baseline_error_24);
         dr.setBounds(0,0,dr.getIntrinsicWidth(), dr.getIntrinsicHeight());
         serverET.setCompoundDrawables(null, null,dr,null);
     }
 
     /**
-     * Open Main Menu once user is logged in. CURRENTLY DOES NOTHING!!
+     * Open Main Menu once user is logged in.
      */
     public void openMainMenu() {
         Intent menuIntent = new Intent(getApplicationContext(), GalleryActivity.class);
