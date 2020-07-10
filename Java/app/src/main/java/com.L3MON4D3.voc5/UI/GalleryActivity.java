@@ -92,7 +92,7 @@ public class GalleryActivity extends VocActivity {
     private ArrayList<GalleryCard> allCards;
     private ArrayList<GalleryCard> currentCards;
     private ArrayList<GalleryCard> selected;
-    private ArrayList<GalleryCard> deSelected;
+    private GalleryCard lastDeSelected;
     private boolean lastActionSelect;
 
     private FloatingActionButton galleryEditBtn;
@@ -153,7 +153,6 @@ public class GalleryActivity extends VocActivity {
         gcf = new GalleryCardFactory(getLayoutInflater(), gallery, width/colCount-(int)(10*density), this);
 
         selected = new ArrayList<GalleryCard>();
-        deSelected = new ArrayList<GalleryCard>();
         currentCards = new ArrayList<GalleryCard>();
         allCards = new ArrayList<GalleryCard>();
         if (savedInstanceState == null) {
@@ -312,7 +311,6 @@ public class GalleryActivity extends VocActivity {
         if (gc.getSelected())
             return;
         selected.add(gc);
-        deSelected.remove(gc);
         gc.elevate();
         gc.setSelected(true);
         selCount++;
@@ -348,7 +346,7 @@ public class GalleryActivity extends VocActivity {
         if (!gc.getSelected())
             return;
         selected.remove(gc);
-        deSelected.add(gc);
+        lastDeSelected = gc;
         gc.resetElevation();
         gc.setSelected(false);
         selCount--;
@@ -533,7 +531,7 @@ public class GalleryActivity extends VocActivity {
             if (lastActionSelect)
                 repSelActionOnRange(selected.get(selCount - 1), gc);
             else
-                repSelActionOnRange(deSelected.get(deSelected.size() - 1), gc);
+                repSelActionOnRange(lastDeSelected, gc);
     }
 
     /**
