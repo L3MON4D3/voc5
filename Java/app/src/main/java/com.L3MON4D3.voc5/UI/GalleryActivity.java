@@ -78,6 +78,8 @@ public class GalleryActivity extends VocActivity {
             ArrayList oldVocs = new ArrayList(client.getVocabs());
             client.loadVocs(() -> {
                 for (Vocab voc : client.getVocabs()) {
+                    if (voc.getPhase() == 0)
+                        voc.setPhase(1);
                     if(oldVocs.contains(voc))
                         oldVocs.remove(voc);
                     else
