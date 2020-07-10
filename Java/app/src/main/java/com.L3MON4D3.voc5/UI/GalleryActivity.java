@@ -421,10 +421,10 @@ public class GalleryActivity extends VocActivity {
      * Sorts Gallery using crtSortComp.
      */
     public void sortGallery() {
-        //currentCards.sort(Comparator.comparing(GalleryCard::getVoc, crtSortComp));
-        //if (!sortAsc)
-        //    Collections.reverse(currentCards);
-        //setGalleryContentFromCurrent();
+        currentCards.sort(Comparator.comparing(GalleryCard::getVoc, crtSortComp));
+        if (!sortAsc)
+            Collections.reverse(currentCards);
+        setGalleryContentFromCurrent();
     }
 
     /**
