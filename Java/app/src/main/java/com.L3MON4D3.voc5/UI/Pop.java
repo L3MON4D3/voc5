@@ -12,6 +12,12 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 import com.L3MON4D3.voc5.R;
 import java.util.ArrayList;
+/**
+ * Pop checks the user response. To do this, the errors are marked in the user response.
+ * The user can decide whether the answer given is correct or incorrect.
+ * The vocabulary phase is then adjusted.
+ * @author Katharina Klein
+ */
 
 public class Pop extends AppCompatActivity {
     TextView textViewUserAnswer;
@@ -186,6 +192,5 @@ public class Pop extends AppCompatActivity {
         textViewUserAnswer.setText(spaSt);
         se ="";
         b.clear();
-
     }
 }

@@ -25,6 +25,13 @@ import android.view.inputmethod.EditorInfo;
 import android.view.KeyEvent;
 import android.app.Activity;
 
+/**
+ * LernActivity is used to query the individual words that are passed in an ArrayList.
+ * If the user answer is correct, the next vocabulary is called.
+ * If the user answer is wrong, the popup activity is started and the useful information is passed.
+ * @author Katharina Klein, Simon Katz
+ */
+
 public class LernActivity extends VocActivity {
     private static final int POPREQ=11;
 
