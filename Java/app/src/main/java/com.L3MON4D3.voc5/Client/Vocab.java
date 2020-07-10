@@ -5,7 +5,11 @@ import android.os.Parcel;
 
 import java.util.ArrayList;
 
-
+/**
+ * This class represents a Vocabulary
+ *
+ * author Katharina Ester Klein, Simon Katz, and Jan Rogge
+ */
 public class Vocab extends Object implements Parcelable, Comparable<Vocab> {
     private int id;
     private String answer;

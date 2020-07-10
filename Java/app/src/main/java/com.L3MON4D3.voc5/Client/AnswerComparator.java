@@ -1,5 +1,9 @@
 package com.L3MON4D3.voc5.Client;
 
+/**
+ *Compares two vocabulary according to their Answer
+ * @author Jan Rogge and Simon Katz
+ */
 public class AnswerComparator extends VocabComparator {
     /**
      * compares either ascending or descending

@@ -1,5 +1,10 @@
 package com.L3MON4D3.voc5.Client;
 
+/**
+ * Compares two vocabularies according to their phase
+ *
+ * @author Jan Rogge and Simon Katz
+ */
 public class PhaseComparator extends VocabComparator {
     /**
      * compares either ascending or descending

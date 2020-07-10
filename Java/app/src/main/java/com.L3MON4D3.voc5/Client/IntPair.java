@@ -3,6 +3,13 @@ package com.L3MON4D3.voc5.Client;
 import android.os.Parcelable;
 import android.os.Parcel;
 
+/**
+ * Used to save a pair of Integers.
+ * This is useful as it allows sending of
+ * id and phase pairs between activities.
+ *
+ * @author Simon Katz
+ */
 public class IntPair implements Parcelable {
     public int first;
     public int second;
