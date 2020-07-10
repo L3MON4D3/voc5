@@ -40,6 +40,12 @@ import okhttp3.Response;
 import java.io.IOException;
 import android.widget.Toast;
 
+/**
+ * Displays all Vocabs and serves as a gateway to all main functions of the App.
+ * Users can select Vocabs and learn/edit/delete them.
+ * Displayed Vocabs can be filtered and sorted.
+ * @author Simon Katz, Jan Rogge.
+ */
 public class GalleryActivity extends VocActivity {
     private static final VocabComparator[] sortComps = new VocabComparator[] {
         new AnswerComparator(),

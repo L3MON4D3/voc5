@@ -31,6 +31,10 @@ import com.L3MON4D3.voc5.R;
 
 import java.io.IOException;
 
+/**
+ * Entry Point into App. Users can Login or Register and switch Servers.
+ * @author Simon Katz, Jan Rogge.
+ */
 public class LoginActivity extends LoadingInfoActivity {
     private Voc5Client vClient;
     private OkHttpClient okClient;
@@ -198,18 +202,28 @@ public class LoginActivity extends LoadingInfoActivity {
         saveLogin();
     }
 
+    /**
+     * Prompts user to check email and password via Toast, sets Error on pwd/emailET.
+     */
     public void setErrorMsg(){
-        Toast.makeText(this, "check email and password", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Check email and password", Toast.LENGTH_SHORT).show();
         Drawable dr = getResources().getDrawable(R.drawable.ic_baseline_error_24);
         dr.setBounds(0,0,dr.getIntrinsicWidth(), dr.getIntrinsicHeight());
         pwdET.setCompoundDrawables(null, null,dr,null);
         emailET.setCompoundDrawables(null,null,dr,null);
     }
 
+    /**
+     * Stops loading and shows a Toast with message "Couldn't connect to Server".
+     */
     public void setServerError(){
         setServerError("Couldn't connect to Server");
     }
 
+    /**
+     * Stops loading and shows a Toast with message msg.
+     * @param msg String to display in Toast.
+     */
     public void setServerError(String msg){
         showErrorToast(msg);
         Drawable dr = getResources().getDrawable(R.drawable.ic_baseline_error_24);
@@ -279,13 +293,17 @@ public class LoginActivity extends LoadingInfoActivity {
         super.onStop();
     }
 
-    @Override
+    /**
+     * Disable Buttons login and register.
+     */
     protected void changeLayout() {
         findViewById(R.id.login_btn).setEnabled(false);
         findViewById(R.id.register_btn).setEnabled(false);
     }
 
-    @Override
+    /**
+     * Enable Buttons login and register.
+     */
     protected void undoChangeLayout() {
         findViewById(R.id.login_btn).setEnabled(true);
         findViewById(R.id.register_btn).setEnabled(true);

@@ -14,6 +14,7 @@ import com.L3MON4D3.voc5.R;
  * This class serves as a superclass for Classes that require a client.
  * The client is saved over destruction and recreation of the Activity.
  * If the Intent starting this Activity contains a "client"-extra it will be set.
+ * @author Simon Katz.
  */
 public class VocActivity extends LoadingInfoActivity {
     protected Voc5Client client;

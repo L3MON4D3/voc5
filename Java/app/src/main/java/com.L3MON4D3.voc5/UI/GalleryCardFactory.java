@@ -10,6 +10,10 @@ import android.util.Log;
 import com.L3MON4D3.voc5.Client.Vocab;
 import com.L3MON4D3.voc5.R;
 
+/**
+ * Used to instanciate GalleryCards either with or without Actions.
+ * @author Simon Katz.
+ */
 public class GalleryCardFactory {
     private LayoutInflater inf;
     private ViewGroup parent;
@@ -45,7 +49,7 @@ public class GalleryCardFactory {
     /**
      * Create new CardView with same Layout as GalleryCard.
      * @param voc Vocab associated with Card.
-     * @return CardView that looks like a GalleryCard, but isn't.
+     * @return CardView that looks like a GalleryCard, but has no functionality.
      */
     public CardView newCardNoFunctionality(Vocab voc) {
         CardView cv = (CardView) inf.inflate(R.layout.gallery_card, parent, false);

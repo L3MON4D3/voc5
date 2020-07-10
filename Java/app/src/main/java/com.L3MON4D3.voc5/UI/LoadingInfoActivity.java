@@ -14,6 +14,11 @@ import android.view.ViewGroup;
 
 import android.widget.Toast;
 
+/**
+ * Provides functionality to display a loading-Animation to subclasses.
+ * Can be customised using setLoadingInfoText and overriding undo/changeLayout.
+ * @author Simon Katz.
+ */
 public class LoadingInfoActivity extends AppCompatActivity {
     private ConstraintLayout loadingInfoParentLayout;
     private CardView loadingInfo;

@@ -14,6 +14,11 @@ import com.L3MON4D3.voc5.Client.Vocab;
 
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * A Card that is used in GalleryActivity and displays Information on one Vocab.
+ * Do not use Constructor in class, use GalleryCardFactory for obtaining an instance of GalleryCard.
+ * @author Simon Katz.
+ */
 public class GalleryCard extends CardView implements Comparable<GalleryCard> {
     private Vocab voc;
     private boolean displaysAnswer = false;
@@ -126,7 +131,12 @@ public class GalleryCard extends CardView implements Comparable<GalleryCard> {
         ((TextView) getChildAt(2)).setText(voc.getPhaseString());
     }
 
-    @Override
+    /**
+     * Compares Cards based on parentPosition.
+     * @param other Other GalleryCard.
+     * @return int, negative if this is less than other, positive if it is greater,
+     * 0 if equal.
+     */
     public int compareTo(GalleryCard other) {
         return this.parentPos - other.parentPos;
     }
