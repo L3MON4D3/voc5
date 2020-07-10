@@ -98,7 +98,7 @@ public class Pop extends AppCompatActivity {
                 se+=s1.charAt(0);
                 b.add(false);
             }else{
-                if (s1.charAt(0) == s2.charAt(0)) {
+                if (Character.toLowerCase(s1.charAt(0)) == Character.toLowerCase(s2.charAt(0)) ) {
                     b.add(true);
                     se+=s1.charAt(0);
                 }else{
@@ -118,7 +118,7 @@ public class Pop extends AppCompatActivity {
                 se+=s1.charAt(0);
                 return rekfindf(s1.substring(1,s1.length()), s2,k+1);
             }else{
-                if(s1.charAt(0)==s2.charAt(0)){
+                if(Character.toLowerCase(s1.charAt(0)) == Character.toLowerCase(s2.charAt(0)) ){
                     b.add(true);
                     se+=s1.charAt(0);
                     return (rekfindf(s1.substring(1,s1.length()), s2.substring(1,s2.length()),k));
@@ -151,7 +151,7 @@ public class Pop extends AppCompatActivity {
             }else if(s2.length()==0){
                 k++;
             }else{
-                if (s1.charAt(0) != s2.charAt(0)) {
+                if (Character.toLowerCase(s1.charAt(0)) != Character.toLowerCase(s2.charAt(0)) ) {
                     k++;
                 }
             }
@@ -162,7 +162,7 @@ public class Pop extends AppCompatActivity {
             }else if(s2.length()==0){
                 return rekfindf2(s1.substring(1,s1.length()), s2,k+1);
             }else{
-                if(s1.charAt(0)==s2.charAt(0)){
+                if(Character.toLowerCase(s1.charAt(0)) == Character.toLowerCase(s2.charAt(0)) ){
                     return (rekfindf2(s1.substring(1,s1.length()), s2.substring(1,s2.length()),k));
                 }else{
                     if((rekfindf2(s1, s2.substring(1,s2.length()),k))<(rekfindf2(s1.substring(1,s1.length()), s2,k))){
