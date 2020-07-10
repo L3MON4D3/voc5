@@ -78,7 +78,15 @@ public class LoadingInfoActivity extends AppCompatActivity {
      * Briefly shows a Toast that inform the user about a connection failure.
      */
     protected void showErrorToast() {
+        showErrorToast("Couldn't connect to Server");
+    }
+
+    /**
+     * Briefly shows a Toast that inform the user about a connection failure.
+     * @param msg Message to show to the user.
+     */
+    protected void showErrorToast(String msg) {
         stopLoading();
-        Toast.makeText(this, "Couldn't connect to Server", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
     }
 }
