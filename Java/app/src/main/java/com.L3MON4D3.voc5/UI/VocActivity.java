@@ -11,7 +11,9 @@ import com.L3MON4D3.voc5.Client.Voc5Client;
 import com.L3MON4D3.voc5.R;
 
 /**
- * 
+ * This class serves as a superclass for Classes that require a client.
+ * The client is saved over destruction and recreation of the Activity.
+ * If the Intent starting this Activity contains a "client"-extra it will be set.
  */
 public class VocActivity extends LoadingInfoActivity {
     protected Voc5Client client;
@@ -23,7 +25,7 @@ public class VocActivity extends LoadingInfoActivity {
 
         Bundle ex = getIntent().getExtras();
         if (savedInstanceState == null) {
-            if (ex != null) {
+            if (ex != null)
                 client = ex.getParcelable("client");
         } else {
             client = savedInstanceState.getParcelable("client");
