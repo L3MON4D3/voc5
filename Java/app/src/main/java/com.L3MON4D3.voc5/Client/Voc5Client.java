@@ -153,9 +153,7 @@ public class Voc5Client implements Parcelable {
 
     /**
      * Build Request to create a new Vocabulary.
-     * @param question Word in language A.
-     * @param answer Translation to language B.
-     * @param lang Name/Code of language B (EN,GER,...).
+     * @param voc Vocab to send to server.
      * @return Request that can be executed.
      */
     public Request newVocabRqst(Vocab voc) {

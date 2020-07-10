@@ -32,7 +32,6 @@ public class LoadingInfoActivity extends AppCompatActivity {
     /**
      * Sets loadingInfoParentLayout to layout cl, creates new loadingInfo.
      * @param cl ConstrainLayout.
-     * @param text Text that should be displayed once Loading starts.
      */
     protected void setLoadingInfoParentLayout(ConstraintLayout cl) {
         loadingInfoParentLayout = cl;
