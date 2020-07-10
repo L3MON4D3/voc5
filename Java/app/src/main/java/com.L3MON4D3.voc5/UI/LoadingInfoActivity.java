@@ -12,9 +12,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.widget.TextView;
 import android.view.ViewGroup;
 
+import android.widget.Toast;
+
 public class LoadingInfoActivity extends AppCompatActivity {
     private ConstraintLayout loadingInfoParentLayout;
     private CardView loadingInfo;
+    private boolean isLoading = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,16 +46,22 @@ public class LoadingInfoActivity extends AppCompatActivity {
      * Display Loading animation. MAKE SURE TO CALL setLoadingInfoParentLayout BEFORHAND.
      */
     protected void startLoading() {
-        loadingInfoParentLayout.addView(loadingInfo);
-        changeLayout();
+        if (!isLoading) {
+            loadingInfoParentLayout.addView(loadingInfo);
+            isLoading = true;
+            changeLayout();
+        }
     }
 
     /**
      * Remove Loading animation. MAKE SURE TO CALL setLoadingInfoParentLayout BEFORHAND.
      */
     protected void stopLoading() {
-        loadingInfoParentLayout.removeView(loadingInfo);
-        undoChangeLayout();
+        if (isLoading) {
+            loadingInfoParentLayout.removeView(loadingInfo);
+            isLoading = false;
+            undoChangeLayout();
+        }
     }
 
     /**
@@ -64,4 +73,12 @@ public class LoadingInfoActivity extends AppCompatActivity {
      * Called in stopLoading, override to revert changes to Layout eg enabling Buttons.
      */
     protected void undoChangeLayout() { }
+
+    /**
+     * Briefly shows a Toast that inform the user about a connection failure.
+     */
+    protected void showErrorToast() {
+        stopLoading();
+        Toast.makeText(this, "Couldn't connect to Server", Toast.LENGTH_LONG).show();
+    }
 }

@@ -47,9 +47,10 @@ public class LoginActivity extends LoadingInfoActivity {
 
     private Callback loginCallback = new Callback() {
         public void onFailure(Call call, IOException e) {
-            runOnUiThread(() -> stopLoading());
-            runOnUiThread(() -> setServerError());
-
+            runOnUiThread(() -> {
+                stopLoading();
+                setServerError();
+            });
         }
 
         public void onResponse(Call call, Response res) throws IOException {
@@ -201,7 +202,7 @@ public class LoginActivity extends LoadingInfoActivity {
     }
 
     public void setServerError(){
-        Toast.makeText(this, "server connection", Toast.LENGTH_SHORT).show();
+        showErrorToast();
         Drawable dr = getResources().getDrawable(R.drawable.ic_baseline_error_24);
         dr.setBounds(0,0,dr.getIntrinsicWidth(), dr.getIntrinsicHeight());
         serverET.setCompoundDrawables(null, null,dr,null);

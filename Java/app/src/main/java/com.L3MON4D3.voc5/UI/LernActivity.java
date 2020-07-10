@@ -184,13 +184,11 @@ public class LernActivity extends VocActivity {
     public void saveChanges(Vocab v){
         client.getOkClient().newCall(client.updateVocRqst(v)).enqueue(new Callback() {
             @Override
-            public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                Log.e("voc5:", e.getMessage());
+            public void onFailure(@NotNull Call call, @NotNull IOException e) { 
+                runOnUiThread(() -> showErrorToast());
             }
             @Override
-            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-                Log.e("voc5:", response.body().string());
-            }
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException { }
         });
         for(int i =0; i!=newPhases.length;i++){
             if(newPhases[i].first == v.getId()){

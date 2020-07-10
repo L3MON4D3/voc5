@@ -38,6 +38,7 @@ import okhttp3.Callback;
 import okhttp3.Response;
 
 import java.io.IOException;
+import android.widget.Toast;
 
 public class GalleryActivity extends VocActivity {
     private static final VocabComparator[] sortComps = new VocabComparator[] {
@@ -55,6 +56,8 @@ public class GalleryActivity extends VocActivity {
     private static final int EDIT_RESULT = 21;
     private static final int NEW_RESULT = 22;
     private static final int LEARN_RESULT = 45;
+
+    Runnable serverErrorRunnable = () -> runOnUiThread(() -> showErrorToast());
 
     private Thread updateThread = new Thread(() -> {
         while(true) {
@@ -78,7 +81,7 @@ public class GalleryActivity extends VocActivity {
                 runOnUiThread(() -> {
                     addVocsToGallery(oldVocs);
                 });
-            });
+            }, serverErrorRunnable);
         }
     });
 
@@ -166,7 +169,7 @@ public class GalleryActivity extends VocActivity {
                         searchSortGallery(allCards);
                         stopLoading();
                     });
-                });
+                }, serverErrorRunnable);
             } else {
                 fillAllAndCurrent(client.getVocabs());
                 setGalleryContentFromCurrent();
@@ -550,15 +553,17 @@ public class GalleryActivity extends VocActivity {
             //Gallery cards replace deleted galley cards therefore shift index from parents.
             gallery.removeViewAt(tmp.parentPos-i);
 
+            setLoadingInfoText("Deleting Vocab from Server");
+            startLoading();
             client.getOkClient().newCall(client.deleteVocRqst(tmpVoc)).enqueue(new Callback() {
                 @Override
                 public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                    Log.e("voc5:", e.getMessage());
+                    serverErrorRunnable.run();
                 }
 
                 @Override
                 public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-                    Log.e("voc5:", response.body().string());
+                    runOnUiThread(() -> stopLoading());
                 }
             });
         }
@@ -605,12 +610,16 @@ public class GalleryActivity extends VocActivity {
 
                 oldVocCard.refresh();
 
+                setLoadingInfoText("Uploading Changes.");
+                startLoading();
                 //update vocab on server
                 client.getOkClient().newCall(client.updateVocRqst(oldVoc)).enqueue(new Callback() {
                     public void onFailure(Call call, IOException e) {
+                        serverErrorRunnable.run();
                     }
 
                     public void onResponse(Call call, Response res) throws IOException {
+                        runOnUiThread(() -> stopLoading());
                     }
                 });
             }
@@ -665,7 +674,7 @@ public class GalleryActivity extends VocActivity {
                                 searchSortGallery(allCards);
                                 stopLoading();
                             });
-                        });
+                        }, serverErrorRunnable);
                     }
                 });
 

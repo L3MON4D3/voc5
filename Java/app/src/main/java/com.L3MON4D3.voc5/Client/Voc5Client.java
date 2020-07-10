@@ -199,9 +199,11 @@ public class Voc5Client implements Parcelable {
      * @param rnble Runnable, will be executed after vocabs has been populated.
      * Can be null, in that case nothing will be executed.
      */
-    public void loadVocs(Runnable rnble) {
+    public void loadVocs(Runnable rnble, Runnable errorRnble) {
         okClient.newCall(getVocsRqst()).enqueue(new Callback() {
-            public void onFailure(Call call, IOException e) { }
+            public void onFailure(Call call, IOException e) {
+                errorRnble.run();
+            }
 
             public void onResponse(Call call, Response res) throws IOException {
                 vocabs = gson.fromJson(res.body().string(), vocListType);
