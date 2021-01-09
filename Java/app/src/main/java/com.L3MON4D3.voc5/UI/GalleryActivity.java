@@ -555,6 +555,7 @@ public class GalleryActivity extends VocActivity {
 
             client.getVocabs().remove(tmpVoc);
             currentCards.remove(tmp);
+            allCards.remove(tmp);
             deselect(tmp);
             //Gallery cards replace deleted galley cards therefore shift index from parents.
             gallery.removeViewAt(tmp.parentPos-i);
